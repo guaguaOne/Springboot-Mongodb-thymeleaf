@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Class-Path: tomcat-embed-el-8.5.5.jar spring-data-mongodb-1.9.3.RELEAS
+ E.jar jedis-2.8.1.jar spring-context-4.3.3.RELEASE.jar spring-boot-st
+ arter-data-mongodb-1.4.1.RELEASE.jar spring-data-redis-1.7.3.RELEASE.
+ jar springfox-spring-web-2.2.2.jar spring-webmvc-4.3.3.RELEASE.jar sw
+ agger-annotations-1.5.3.jar springfox-schema-2.2.2.jar spring-boot-au
+ toconfigure-1.4.1.RELEASE.jar spring-plugin-core-1.2.0.RELEASE.jar sp
+ ring-tx-4.3.3.RELEASE.jar jul-to-slf4j-1.7.21.jar spring-expression-4
+ .3.3.RELEASE.jar mapstruct-1.0.0.CR1.jar spring-boot-starter-logging-
+ 1.4.1.RELEASE.jar spring-context-support-4.3.3.RELEASE.jar spring-hat
+ eoas-0.20.0.RELEASE.jar springfox-swagger-ui-2.2.2.jar jboss-logging-
+ 3.3.0.Final.jar commons-pool2-2.4.2.jar aspectjrt-1.8.9.jar logback-c
+ ore-1.1.7.jar snakeyaml-1.17.jar springfox-swagger2-2.2.2.jar spring-
+ beans-4.3.3.RELEASE.jar spring-plugin-metadata-1.2.0.RELEASE.jar mong
+ odb-driver-core-3.2.2.jar bson-3.2.2.jar spring-web-4.3.3.RELEASE.jar
+  mongodb-driver-3.2.2.jar jcl-over-slf4j-1.7.21.jar jackson-core-2.8.
+ 3.jar aspectjweaver-1.8.9.jar swagger-models-1.5.3.jar spring-boot-st
+ arter-redis-1.4.1.RELEASE.jar classmate-1.3.1.jar spring-data-commons
+ -1.12.3.RELEASE.jar tomcat-embed-websocket-8.5.5.jar spring-boot-1.4.
+ 1.RELEASE.jar spring-boot-starter-1.4.1.RELEASE.jar spring-core-4.3.3
+ .RELEASE.jar slf4j-api-1.7.21.jar springfox-swagger-common-2.2.2.jar 
+ tomcat-embed-core-8.5.5.jar jackson-annotations-2.8.3.jar jackson-dat
+ abind-2.8.3.jar validation-api-1.1.0.Final.jar spring-boot-starter-to
+ mcat-1.4.1.RELEASE.jar springfox-spi-2.2.2.jar guava-18.0.jar spring-
+ oxm-4.3.3.RELEASE.jar log4j-over-slf4j-1.7.21.jar logback-classic-1.1
+ .7.jar spring-data-keyvalue-1.1.3.RELEASE.jar spring-aop-4.3.3.RELEAS
+ E.jar spring-boot-starter-web-1.4.1.RELEASE.jar hibernate-validator-5
+ .2.4.Final.jar springfox-core-2.2.2.jar .
+Main-Class: com.tumei.DemoApplication
+
