@@ -17,8 +17,8 @@ public class NettyMessage {
     private byte[] payload;
 
     public void Encode(ByteBuf _buf) {
-        _buf.writeInt(msgType);
-        _buf.writeInt(msgSize);
+        _buf.writeIntLE(msgType);
+        _buf.writeIntLE(msgSize);
         if (payload != null) {
             _buf.writeBytes(payload, 0, msgSize); //
         }
@@ -26,8 +26,10 @@ public class NettyMessage {
 
     public static NettyMessage Decode(ByteBuf _buf) {
         NettyMessage msg = new NettyMessage();
-        msg.setMsgType(_buf.readInt());
-        msg.setMsgSize(_buf.readInt());
+        int msgType = _buf.readIntLE();
+        msg.setMsgType(msgType);
+        int msgSize = _buf.readIntLE();
+        msg.setMsgSize(msgSize);
         if (_buf.readableBytes() >= msg.msgSize) {
             msg.setPayload(new byte[msg.msgSize]);
             _buf.readBytes(msg.payload, 0, msg.msgSize);

@@ -1,4 +1,4 @@
-package com.tumei.io.protocol.rpc;
+package com.tumei.yxwd.rpc;
 
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
  * Created by Administrator on 2016/11/23 0023.
  */
 @ProtoAnnotation(
-        ProtoType = 1
+        ProtoType = 65538
 )
 @Component
-//@Scope("prototype")
+@Scope("prototype")
 public class Challenge extends BaseProtocol {
     private String Nonce;
 

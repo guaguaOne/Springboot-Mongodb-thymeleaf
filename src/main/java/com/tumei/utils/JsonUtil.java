@@ -1,7 +1,9 @@
 package com.tumei.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tumei.io.TcpServer;
 import com.tumei.io.protocol.BaseProtocol;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class JsonUtil {
         return mapper.writeValueAsBytes(protocol);
     }
 
-    public static BaseProtocol Unmarshal(byte[] data) throws IOException {
-        return mapper.readValue(data, BaseProtocol.class);
+    public static <T> T Unmarshal(byte[] data, Class<T> cls) throws IOException {
+        return mapper.readValue(data, cls);
     }
 }

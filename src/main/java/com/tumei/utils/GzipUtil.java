@@ -25,13 +25,17 @@ public class GzipUtil {
             return null;
         }
 
+        GZIPOutputStream  gzipOutputStream = null;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
-            GZIPOutputStream gzipOutputStream = new GZIPOutputStream(outputStream);
+            gzipOutputStream = new GZIPOutputStream(outputStream);
             gzipOutputStream.write(data);
+            gzipOutputStream.close();
+            outputStream.close();
         } catch (IOException ioe) {
             LogFactory.getLog(GzipUtil.class).error("解压缩失败:", ioe);
             return null;
+        } finally {
         }
         return outputStream.toByteArray();
     }

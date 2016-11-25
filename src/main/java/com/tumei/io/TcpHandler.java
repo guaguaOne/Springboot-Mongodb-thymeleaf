@@ -1,7 +1,5 @@
 package com.tumei.io;
 
-import com.tumei.io.protocol.rpc.Challenge;
-import com.tumei.utils.RandomUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.commons.logging.Log;
@@ -48,6 +46,7 @@ public class TcpHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        session.info("收到请求数据:");
         NettyMessage nm = null;
         try {
             nm = (NettyMessage) msg;

@@ -2,7 +2,7 @@ package com.tumei.io;
 
 import com.google.common.base.Strings;
 import com.tumei.RunnerBean;
-import com.tumei.game.GameConfig;
+import com.tumei.yxwd.YxwdConfig;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
 import io.netty.bootstrap.ServerBootstrap;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import sun.util.resources.cldr.sbp.CurrencyNames_sbp;
 
 import java.nio.ByteOrder;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class TcpServer implements ApplicationContextAware {
     private int backlog;
 
     @Autowired
-    private GameConfig gameConfig;
+    private YxwdConfig gameConfig;
 
     /**
      * 处理接入的线程组
@@ -84,7 +85,7 @@ public class TcpServer implements ApplicationContextAware {
     /**
      * 将协议的ID与协议的类名对应起来，便于查找获取对应的协议
      */
-    public HashMap<Integer, String> protocols = new HashMap<Integer, String>();
+    public HashMap<Integer, Class<? extends BaseProtocol> > protocols = new HashMap<Integer, Class<? extends BaseProtocol>> ();
 
     /**
      * 当前所有会话连接
@@ -110,7 +111,7 @@ public class TcpServer implements ApplicationContextAware {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         socketChannel.pipeline().addLast(
-                                new TcpDecoder(ByteOrder.BIG_ENDIAN, 65536, 4, 4, 0, 0, true)
+                                new TcpDecoder(ByteOrder.LITTLE_ENDIAN, 65536, 4, 4, 0, 0, true)
                         );
                         socketChannel.pipeline().addLast(
                                 new TcpEncoder()
@@ -162,16 +163,12 @@ public class TcpServer implements ApplicationContextAware {
      *              协议的类型ID
      * @return
      */
-    public BaseProtocol getProtocol(int _type) {
-        String name = protocols.get(_type);
-        if (Strings.isNullOrEmpty(name)) {
+    public Class<? extends BaseProtocol> getProtocol(int _type) {
+        Class<? extends BaseProtocol> bp = protocols.get(_type);
+        if (bp == null) {
             return null;
         }
-        Object object = ctx.getBean(name);
-        if (object == null) {
-            return null;
-        }
-        return (BaseProtocol) object;
+        return bp;
     }
     /**
      * 根据注入的带有ProtoAnnotation的协议，整理出对应的类型结构
@@ -188,7 +185,7 @@ public class TcpServer implements ApplicationContextAware {
 
             if (bp != null) {
                 log.info("注册协议， 类型:" + annotation.ProtoType() + " 协议名:" + bp.getClass().getName());
-                protocols.put(annotation.ProtoType(), name);
+                protocols.put(annotation.ProtoType(), bp.getClass());
             }
         }
     }

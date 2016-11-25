@@ -1,8 +1,10 @@
 package com.tumei.io;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.tumei.io.protocol.BaseProtocol;
-import com.tumei.io.protocol.rpc.Challenge;
+import com.tumei.utils.ErrCode;
+import com.tumei.yxwd.rpc.Challenge;
 import com.tumei.utils.GzipUtil;
 import com.tumei.utils.JsonUtil;
 import com.tumei.utils.RandomUtil;
@@ -10,6 +12,7 @@ import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -18,6 +21,10 @@ import java.util.UUID;
  * 会话表示一个tcp连接相关的内容
  */
 public class Session {
+    public static int Status_Logging = 1;
+    public static int Status_Logged = 2;
+    public static int Status_Logout = 3;
+
     /**
      * 是否压缩数据流
      */
@@ -31,9 +38,22 @@ public class Session {
     private String ID;
 
     /**
+     * 当前会话状态
+     */
+    private int Status;
+
+    /**
      * 对应的处理器上下文
      */
     private ChannelHandlerContext context;
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
+    }
 
     /**
      * 服务器
@@ -59,6 +79,7 @@ public class Session {
      *
      */
     public void MakeChallenge() {
+        log.info("make challenge");
         Challenge challenge = new Challenge();
         challenge.setNonce(RandomUtil.RandomDigest());
         send(challenge);
@@ -82,13 +103,22 @@ public class Session {
      * ChannelHandler回调，新的协议到来
      */
     public void OnReceive(NettyMessage nm) {
-        BaseProtocol bp = server.getProtocol(nm.getMsgType());
+
+        Class<? extends BaseProtocol> bp = server.getProtocol(nm.getMsgType());
         if (bp != null) {
-            // 将当前反序列化得到的具体类型push到Actor处理线程
-            bp.process(this);
+            try {
+                // 将当前反序列化得到的具体类型push到Actor处理线程
+                BaseProtocol protocol = JsonUtil.Unmarshal(nm.getPayload(), bp);
+                if (protocol != null) {
+                    protocol.process(this);
+                }
+            } catch (IOException e) {
+                error("协议[%d]反序列化失败", nm.getMsgType());
+            }
         } else {
             error("--- 注册的协议集合中，无法找到协议编号:" + nm.getMsgType());
         }
+
     }
 
     /**
@@ -125,6 +155,26 @@ public class Session {
         }
 
         return true;
+    }
+
+    /**
+     * 锁定会话进行登录，防止通知进行多次登录验证
+     * @param
+     *          _force 是否设定当前状态为登录状态
+     * @return
+     */
+    public int LoggingSession(boolean _force) {
+        if (Status == Status_Logging) {
+            return ErrCode.E_正在登录中.getCode();
+        } else if (Status == Status_Logged) {
+            return ErrCode.E_已经登录.getCode();
+        }
+
+        if (_force) {
+            Status = Status_Logging;
+        }
+
+        return ErrCode.E_OK.getCode();
     }
 
 

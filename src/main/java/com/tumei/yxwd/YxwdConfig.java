@@ -1,4 +1,4 @@
-package com.tumei.game;
+package com.tumei.yxwd;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
  * 游戏的特有配置
  */
 @Configuration
-@ConfigurationProperties(prefix = "game")
-public class GameConfig {
+@ConfigurationProperties(prefix = "yxwd")
+public class YxwdConfig {
     private String version;
 
     public String getVersion() {

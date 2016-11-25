@@ -16,14 +16,24 @@ public class BaseProtocol {
    private int msgType;
 
    protected void preProcess(Session session) {
-      session.debug(this.toString());
+      session.info(this.toString());
    }
+
+   protected void postProcess(Session session) { }
 
    /**
     * 协议接收后的处理逻辑
     *
     */
-   public void process(Session session) {}
+   public void process(Session session) {
+      preProcess(session);
+      onProcess(session);
+      postProcess(session);
+   }
+
+   public void onProcess(Session session) {
+
+   }
 
    /**
     * 获取当前协议的编号
