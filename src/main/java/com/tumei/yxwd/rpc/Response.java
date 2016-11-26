@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
         ProtoType = 65539
 )
 @Component
-@Scope("prototype")
 public class Response extends BaseProtocol {
     private int Id;
     private String Account;

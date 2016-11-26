@@ -1,7 +1,6 @@
 package com.tumei.io;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.utils.ErrCode;
 import com.tumei.yxwd.rpc.Challenge;
@@ -127,7 +126,7 @@ public class Session {
      */
     public boolean send(BaseProtocol proto) {
         NettyMessage nm = new NettyMessage();
-        nm.setMsgType(proto.getMsgType());
+        nm.setMsgType(proto.get__msgType());
 
         try {
             byte[] data = JsonUtil.Marshal(proto);

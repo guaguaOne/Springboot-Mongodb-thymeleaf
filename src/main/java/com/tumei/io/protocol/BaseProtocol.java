@@ -9,44 +9,52 @@ import com.tumei.io.Session;
 
 /**
  * 协议的基础类型
- *
  */
 public class BaseProtocol {
-   @JsonIgnore
-   private int msgType;
+    @JsonIgnore
+    private int __msgType;
 
-   protected void preProcess(Session session) {
-      session.info(this.toString());
-   }
+    /**
+     * 预处理
+     * @param session
+     */
+    protected void preProcess(Session session) {
+        session.info(this.toString());
+    }
 
-   protected void postProcess(Session session) { }
+    /**
+     * 后处理
+     * @param session
+     */
+    protected void postProcess(Session session) {
+    }
 
-   /**
-    * 协议接收后的处理逻辑
-    *
-    */
-   public void process(Session session) {
-      preProcess(session);
-      onProcess(session);
-      postProcess(session);
-   }
+    /**
+     * 协议接收后的处理逻辑
+     */
+    public void process(Session session) {
+        preProcess(session);
+        onProcess(session);
+        postProcess(session);
+    }
 
-   public void onProcess(Session session) {
+    public void onProcess(Session session) {
 
-   }
+    }
 
-   /**
-    * 获取当前协议的编号
-    * @return
-    */
-   public int getMsgType() {
-      if (msgType == 0) {
-         ProtoAnnotation annotation = getClass().getAnnotation(ProtoAnnotation.class);
-         if (annotation != null) {
-            msgType = annotation.ProtoType();
-         }
-      }
+    /**
+     * 获取当前协议的编号
+     *
+     * @return
+     */
+    public int get__msgType() {
+        if (__msgType == 0) {
+            ProtoAnnotation annotation = getClass().getAnnotation(ProtoAnnotation.class);
+            if (annotation != null) {
+                __msgType = annotation.ProtoType();
+            }
+        }
 
-      return msgType;
-   }
+        return __msgType;
+    }
 }

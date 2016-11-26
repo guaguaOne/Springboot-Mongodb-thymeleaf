@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
         ProtoType = 65538
 )
 @Component
-@Scope("prototype")
 public class Challenge extends BaseProtocol {
     private String Nonce;
 

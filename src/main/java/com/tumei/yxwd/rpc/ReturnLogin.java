@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
         ProtoType = 65544
 )
 @Component
-@Scope("prototype")
 public class ReturnLogin extends BaseProtocol {
     private String result;
     private int timestamp;

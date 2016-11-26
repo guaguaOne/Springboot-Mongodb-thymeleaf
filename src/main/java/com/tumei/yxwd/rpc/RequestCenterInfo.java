@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
         ProtoType = 16711683
 )
 @Component
-@Scope("prototype")
 public class RequestCenterInfo extends BaseProtocol {
     private short platform;
     private String account;
