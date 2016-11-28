@@ -14,6 +14,13 @@ public class BaseProtocol {
     @JsonIgnore
     private int __msgType;
 
+    /***
+     * golang 前端传送过来的多余数据
+     */
+    public int PROTOCOL_TYPE;
+    public int PROTOCOL_SIZE;
+    public int PROTOCOL_PRIO;
+
     /**
      * 预处理
      * @param session

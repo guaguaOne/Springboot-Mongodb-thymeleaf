@@ -1,9 +1,8 @@
 package com.tumei.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tumei.io.TcpServer;
 import com.tumei.io.protocol.BaseProtocol;
 
 import java.io.IOException;
@@ -13,6 +12,14 @@ import java.io.IOException;
  */
 public class JsonUtil {
     private static ObjectMapper mapper = new ObjectMapper();
+
+    /***
+     * 初始化配置
+     */
+    public static void init() {
+//        mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.ANY);
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
 
     /**
      * 将协议序列化成字节数组
@@ -24,6 +31,7 @@ public class JsonUtil {
     }
 
     public static <T> T Unmarshal(byte[] data, Class<T> cls) throws IOException {
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.readValue(data, cls);
     }
 }

@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 )
 @Component
 public class Response extends BaseProtocol {
-    private int Id;
-    private String Account;
-    private String Token;
-    private int Mode;
-    private String Sdk;
-    private String App;
-    private String Uin;
-    private String Sess;
+    public int Id;
+    public String Account;
+    public String Token;
+    public int Mode;
+    public String Sdk;
+    public String App;
+    public String Uin;
+    public String Sess;
 
     @Override
     public String toString() {
@@ -37,72 +37,7 @@ public class Response extends BaseProtocol {
                 '}';
     }
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getAccount() {
-        return Account;
-    }
-
-    public void setAccount(String account) {
-        Account = account;
-    }
-
-    public String getToken() {
-        return Token;
-    }
-
-    public void setToken(String token) {
-        Token = token;
-    }
-
-    public int getMode() {
-        return Mode;
-    }
-
-    public void setMode(int mode) {
-        Mode = mode;
-    }
-
-    public String getSdk() {
-        return Sdk;
-    }
-
-    public void setSdk(String sdk) {
-        Sdk = sdk;
-    }
-
-    public String getApp() {
-        return App;
-    }
-
-    public void setApp(String app) {
-        App = app;
-    }
-
-    public String getUin() {
-        return Uin;
-    }
-
-    public void setUin(String uin) {
-        Uin = uin;
-    }
-
-    public String getSess() {
-        return Sess;
-    }
-
-    public void setSess(String sess) {
-        Sess = sess;
-    }
-
     public Response() {}
-
 
     @Override
     public void onProcess(Session session) {
@@ -113,7 +48,7 @@ public class Response extends BaseProtocol {
         int status = session.LoggingSession(true);
         if (status == 0) {
 //            session.AttachUser();
-            rl.setZonename("测试协议");
+            rl.zonename = "测试协议";
             session.send(rl);
         }
     }

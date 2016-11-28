@@ -13,25 +13,13 @@ import org.springframework.stereotype.Component;
 )
 @Component
 public class Challenge extends BaseProtocol {
-    private String Nonce;
-
-    public String getNonce() {
-        return Nonce;
-    }
-
-    public void setNonce(String nonce) {
-        Nonce = nonce;
-    }
+    public String Nonce;
 
     @Override
     public String toString() {
         return "Challenge{" +
                 "Nonce='" + Nonce + '\'' +
                 '}';
-    }
-
-    public Challenge(String nonce) {
-        Nonce = nonce;
     }
 
     public Challenge() {}

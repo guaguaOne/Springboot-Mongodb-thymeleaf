@@ -2,6 +2,7 @@ package com.tumei.io;
 
 import com.google.common.base.Strings;
 import com.tumei.RunnerBean;
+import com.tumei.utils.JsonUtil;
 import com.tumei.yxwd.YxwdConfig;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
@@ -93,6 +94,7 @@ public class TcpServer implements ApplicationContextAware {
     private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
     public TcpServer() {
+        JsonUtil.init();
     }
 
     /**

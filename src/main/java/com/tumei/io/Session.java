@@ -7,6 +7,7 @@ import com.tumei.yxwd.rpc.Challenge;
 import com.tumei.utils.GzipUtil;
 import com.tumei.utils.JsonUtil;
 import com.tumei.utils.RandomUtil;
+import com.tumei.yxwd.rpc.RequestCenterInfo;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,6 +43,11 @@ public class Session {
     private int Status;
 
     /**
+     * 绑定的玩家信息
+     */
+    private Object Tag;
+
+    /**
      * 对应的处理器上下文
      */
     private ChannelHandlerContext context;
@@ -73,6 +79,23 @@ public class Session {
         context = ctx;
     }
 
+    public void Attach(Object _tag) {
+        Tag = _tag;
+    }
+
+    public void Detach() {
+        Tag = null;
+    }
+
+    /**
+     * 服务器主动关闭这个Session
+     */
+    public void Close() {
+        if (context != null) {
+            context.close();
+        }
+    }
+
     /**
      * 首次建立连接 服务器发送8bit 随机Challenge
      *
@@ -80,7 +103,7 @@ public class Session {
     public void MakeChallenge() {
         log.info("make challenge");
         Challenge challenge = new Challenge();
-        challenge.setNonce(RandomUtil.RandomDigest());
+        challenge.Nonce = RandomUtil.RandomDigest();
         send(challenge);
     }
 
@@ -107,12 +130,19 @@ public class Session {
         if (bp != null) {
             try {
                 // 将当前反序列化得到的具体类型push到Actor处理线程
-                BaseProtocol protocol = JsonUtil.Unmarshal(nm.getPayload(), bp);
+                byte[] data = nm.getPayload();
+                if (Compress) {
+                    data = GzipUtil.Decompress(data);
+                }
+
+//                String s = new String(data, "UTF-8");
+//                info("得到json:[%s]", s);
+                BaseProtocol protocol = JsonUtil.Unmarshal(data, RequestCenterInfo.class);
                 if (protocol != null) {
                     protocol.process(this);
                 }
             } catch (IOException e) {
-                error("协议[%d]反序列化失败", nm.getMsgType());
+                error("协议[%d]反序列化失败[%s]", nm.getMsgType(), e.getMessage());
             }
         } else {
             error("--- 注册的协议集合中，无法找到协议编号:" + nm.getMsgType());
