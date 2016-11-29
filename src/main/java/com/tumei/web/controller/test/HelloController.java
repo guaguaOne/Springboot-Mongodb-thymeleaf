@@ -1,6 +1,5 @@
 package com.tumei.web.controller.test;
 
-import com.tumei.web.Manager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

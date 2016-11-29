@@ -1,8 +1,6 @@
 package com.tumei.io;
 
-import com.google.common.base.Strings;
 import com.tumei.RunnerBean;
-import com.tumei.utils.JsonUtil;
 import com.tumei.yxwd.YxwdConfig;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
@@ -18,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import sun.util.resources.cldr.sbp.CurrencyNames_sbp;
 
 import java.nio.ByteOrder;
 import java.util.HashMap;
@@ -93,8 +90,10 @@ public class TcpServer implements ApplicationContextAware {
      */
     private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
+    /***
+     * Tcp服务器
+     */
     public TcpServer() {
-        JsonUtil.init();
     }
 
     /**
