@@ -88,6 +88,7 @@ public class Session {
     }
 
     /**
+     *
      * 服务器主动关闭这个Session
      */
     public void Close() {
