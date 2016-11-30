@@ -2,6 +2,7 @@ package com.tumei.yxwd;
 
 import com.mongodb.*;
 import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.boot.autoconfigure.session.SessionProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,22 +34,25 @@ public class YxwdConfig {
 
     @Bean(autowire = Autowire.BY_NAME, name = "centerMongoTemplate")
     public MongoTemplate CenterMongoTemplate() throws Exception {
-        UserCredentials uc = new UserCredentials("leon", "Fuckyou1");
-        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(new Mongo("115.159.205.176:27017"), "account", uc);
+        MongoURI uri = new MongoURI("mongodb://leon:Fuckyou1@115.159.205.176");
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, "account");
         return new MongoTemplate(factory);
     }
 
     @Bean(autowire = Autowire.BY_NAME, name = "gameMongoTemplate")
     public MongoTemplate GameMongoTemplate() throws Exception {
-        UserCredentials uc = new UserCredentials("leon", "Fuckyou1");
-        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(new Mongo("115.159.205.176:27017"), "y3", uc);
+        MongoURI uri = new MongoURI("mongodb://leon:Fuckyou1@115.159.205.176");
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, "y3");
         return new MongoTemplate(factory);
     }
 
     @Bean(autowire = Autowire.BY_NAME, name = "centerWebTemplate")
     public MongoTemplate CenterWebTemplate() throws Exception {
-        UserCredentials uc = new UserCredentials("leon", "Fuckyou1");
-        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(new Mongo("115.159.205.176:27017"), "account", uc);
+        MongoURI uri = new MongoURI("mongodb://leon:Fuckyou1@115.159.205.176");
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, "account");
         return new MongoTemplate(factory);
     }
 }
