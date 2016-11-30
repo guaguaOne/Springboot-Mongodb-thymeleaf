@@ -1,8 +1,12 @@
 package com.tumei;
 
+import com.mongodb.Mongo;
 import com.tumei.cache.CacheIt;
 import com.tumei.io.TcpServer;
 import com.tumei.utils.JsonUtil;
+import com.tumei.yxwd.YxwdConfig;
+import com.tumei.yxwd.centermodel.Loginer;
+import com.tumei.yxwd.centermodel.LoginerRepository;
 import com.tumei.yxwd.dbmodel.Item;
 import com.tumei.yxwd.dbmodel.ItemRepository;
 import com.tumei.yxwd.dbmodel.Role;
@@ -11,11 +15,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoClientFactoryBean;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,6 +41,9 @@ public class RunnerBean implements CommandLineRunner, ApplicationContextAware {
     @Autowired
     private ItemRepository repository;
 
+    @Autowired
+    private LoginerRepository repo;
+
     @Override
     public void run(String... strings) throws Exception {
         // 1. 初始化json序列化方案
@@ -44,6 +57,11 @@ public class RunnerBean implements CommandLineRunner, ApplicationContextAware {
         Item item = repository.findById(160020);
         if (item != null) {
             log.info("Item:" + item.name + " sceneid:" + item.sceneid[0]);
+        }
+
+        Loginer loginer = repo.findById(100001);
+        if (loginer != null) {
+            log.info("Loginer:" + loginer.account + " digest:" + loginer.digest);
         }
 
         // 3. 启动服务器
