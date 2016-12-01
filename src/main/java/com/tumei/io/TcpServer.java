@@ -1,7 +1,7 @@
 package com.tumei.io;
 
 import com.tumei.RunnerBean;
-import com.tumei.yxwd.YxwdConfig;
+import com.tumei.MongoTemplateConfig;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
 import io.netty.bootstrap.ServerBootstrap;
@@ -33,7 +33,7 @@ public class TcpServer implements ApplicationContextAware {
     private int backlog;
 
     @Autowired
-    private YxwdConfig gameConfig;
+    private MongoTemplateConfig gameConfig;
 
     /**
      * 处理接入的线程组
@@ -101,7 +101,7 @@ public class TcpServer implements ApplicationContextAware {
      * @return
      */
     public boolean startServer() {
-        log.info(String.format("开始监听地址:%s:%d, backlog:%d %s", host, port, backlog, gameConfig.getVersion()));
+        log.info(String.format("开始监听地址:%s:%d, backlog:%d", host, port, backlog));
 
         initProtocols();
 

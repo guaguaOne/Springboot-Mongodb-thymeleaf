@@ -13,8 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * Created by leon on 2016/11/5.
  */
-//@Configuration
-//@EnableSwagger2
+@Configuration
+@EnableSwagger2
 public class Swagger2 {
     @Bean
     public Docket createRestApi() {

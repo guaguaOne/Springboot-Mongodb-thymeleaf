@@ -1,10 +1,7 @@
 package com.tumei.yxwd.rpc;
 
-import com.tumei.io.Session;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
-import org.bson.codecs.UuidCodec;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,29 +12,28 @@ import org.springframework.stereotype.Component;
 )
 @Component
 public class ReturnLogin extends BaseProtocol {
-    public String result;
-    public int timestamp;
-    public String uuid;
-    public int rate;
-    public int zone;
-    public String zonename;
-    public String channelid;
-    public int pay;
+    public String Result;
+    public int Timestamp;
+    public String Uuid;
+    public int Rate;
+    public int Zone;
+    public String Zonename;
+    public String Channelid;
+    public int Pay;
 
     @Override
     public String toString() {
         return "ReturnLogin{" +
-                "result='" + result + '\'' +
-                ", timestamp=" + timestamp +
-                ", uuid='" + uuid + '\'' +
-                ", rate=" + rate +
-                ", zone=" + zone +
-                ", zonename='" + zonename + '\'' +
-                ", channelid='" + channelid + '\'' +
-                ", pay=" + pay +
+                "Result='" + Result + '\'' +
+                ", timestamp=" + Timestamp +
+                ", uuid='" + Uuid + '\'' +
+                ", rate=" + Rate +
+                ", zone=" + Zone +
+                ", zonename='" + Zonename + '\'' +
+                ", channelid='" + Channelid + '\'' +
+                ", pay=" + Pay +
                 '}';
     }
-
 
     public ReturnLogin() {}
 }

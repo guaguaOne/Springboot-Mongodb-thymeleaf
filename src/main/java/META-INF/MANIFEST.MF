@@ -26,5 +26,5 @@ Class-Path: tomcat-embed-el-8.5.5.jar spring-data-mongodb-1.9.3.RELEAS
  .7.jar spring-data-keyvalue-1.1.3.RELEASE.jar spring-aop-4.3.3.RELEAS
  E.jar spring-boot-starter-web-1.4.1.RELEASE.jar hibernate-validator-5
  .2.4.Final.jar springfox-core-2.2.2.jar .
-Main-Class: com.tumei.DemoApplication
+Main-Class: com.tumei.Entry
 

@@ -3,6 +3,8 @@ package com.tumei.yxwd.rpc;
 import com.tumei.io.Session;
 import com.tumei.io.protocol.BaseProtocol;
 import com.tumei.io.protocol.ProtoAnnotation;
+import com.tumei.yxwd.Game;
+import com.tumei.yxwd.GameUser;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -47,9 +49,22 @@ public class Response extends BaseProtocol {
 
         int status = session.LoggingSession(true);
         if (status == 0) {
-//            session.AttachUser();
-            rl.zonename = "测试协议";
+
+            // 通过客户端传递的参数决定使用何种方式进行登录的认证
+            // 0:默认自己的帐号系统, 10: Anysdk的统一登录方式
+
+            switch (this.Mode) {
+                case 0:
+                    break;
+                case 10:
+                    break;
+            }
+            // 登录成功后会话绑定角色
+            Game.getInstance().OnAddUser(100001L, session);
+            rl.Zonename = "测试协议";
             session.send(rl);
+        } else { // 当前状态不允许登录
+            session.warn("当前状态不允许登录: %s", status);
         }
     }
 }

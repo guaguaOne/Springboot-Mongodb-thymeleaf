@@ -1,31 +1,21 @@
 package com.tumei;
 
-import com.mongodb.Mongo;
-import com.tumei.cache.CacheIt;
 import com.tumei.io.TcpServer;
 import com.tumei.utils.JsonUtil;
-import com.tumei.yxwd.YxwdConfig;
+import com.tumei.yxwd.DataAccessor;
 import com.tumei.yxwd.centermodel.Loginer;
 import com.tumei.yxwd.centermodel.LoginerRepository;
 import com.tumei.yxwd.dbmodel.Item;
 import com.tumei.yxwd.dbmodel.ItemRepository;
 import com.tumei.yxwd.dbmodel.Role;
-import com.tumei.yxwd.dbmodel.RoleRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoClientFactoryBean;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -50,9 +40,13 @@ public class RunnerBean implements CommandLineRunner, ApplicationContextAware {
         JsonUtil.init();
 
         // 2. 启动缓存
-        CacheIt cacheIt = ctx.getBean(CacheIt.class);
-        cacheIt.Initialize(10, 10);
-        cacheIt.Test();
+        DataAccessor dao = ctx.getBean(DataAccessor.class);
+        dao.Initialize();
+
+        Role role = dao.findRole(100001L);
+        if (role != null) {
+            log.info("find role: " + role.nickname);
+        }
 
         Item item = repository.findById(160020);
         if (item != null) {

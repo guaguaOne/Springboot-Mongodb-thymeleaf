@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Created by Administrator on 2016/11/24 0024.
  *
  * 会话表示一个tcp连接相关的内容
+ *
  */
 public class Session {
     public static int Status_Logging = 1;
@@ -45,7 +45,7 @@ public class Session {
     /**
      * 绑定的玩家信息
      */
-    private Object Tag;
+    private IUser Tag;
 
     /**
      * 对应的处理器上下文
@@ -79,10 +79,17 @@ public class Session {
         context = ctx;
     }
 
-    public void Attach(Object _tag) {
+    /**
+     * 绑定
+     * @param _tag
+     */
+    public void Attach(IUser _tag) {
         Tag = _tag;
     }
 
+    /**
+     * 解除绑定
+     */
     public void Detach() {
         Tag = null;
     }
@@ -109,17 +116,23 @@ public class Session {
     }
 
     /**
-     * ChannelHandler回调 会话生成
+     * ChannelHandler回调 会话生成时，迅速返回一个16bit的随机数用于会话通信等.
      */
     public void OnAdd() {
         MakeChallenge();
     }
 
     /**
-     * ChannelHandler回调 会话结束
+     * ChannelHandler回调 会话结束时，如果会话认证通过，则有玩家信息，需要将玩家信息也退出
+     *
+     * 这个函数只会由网络层回调，所以他是线程安全的
      */
     public void OnDelete() {
         // 检查绑定的玩家帐号，进行对应的退出或者暂存工作
+        if (Tag != null) {
+            Tag._exit();
+            Tag = null;
+        }
     }
 
     /**
