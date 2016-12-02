@@ -137,7 +137,6 @@
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
-
         <!--hibernate 可以映射nosql mongo-->
         <!--<dependency>-->
             <!--<groupId>javax.cache</groupId>-->
