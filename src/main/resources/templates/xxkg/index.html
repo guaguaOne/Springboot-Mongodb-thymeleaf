@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8"/>
+	<title>矿工物语</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/style.css"/>
+	<link rel="stylesheet" href="../css/xxkg/index.css"/>
+	<script src="../js/jquery-1.10.2.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	
+</head>
+<body>
+	<div id="main">
+		<div class="container-fluit">
+			<div class="row">
+				<div class="col-xs-2 left">
+					<p>矿工物语</p>
+					<ul class="nav nav-pills nav-stacked">
+						<li class='active'><a href='index.html'>服务器录入</a></li>
+						<li><a href='noticechange.html'>公告修改</a></li>
+						<li><a href='sendemail.html'>邮件发送</a></li>
+						<li><a href='searchonfo.html'>查询信息</a></li>
+						<li><a href='orderwrite.html'>指令记录</a></li>
+						<li><a href='manymail.html'>多邮件发送</a></li>
+						<li><a href='sendmessage.html'>通知发送</a></li>
+						<li><a href='giftcreate.html'>礼包生成</a></li>
+						<li><a href='conditionsearch.html'>条件查询</a></li>
+					</ul>
+					<p class="back"><a href="/">首页</a></p>
+				</div>
+				<div class="col-xs-10 right">
+					<div class="server-enter show nav">
+						<div class="page-header">
+							<h1>服务器相关
+								<small>服务器地址录入及相关信息修改</small>
+							</h1>
+						</div>
+						<div class="container" id="server">
+							<div class="row">
+								<div class="col-xs-2">服务器ID</div>
+								<div class="col-xs-2">GM路径</div>
+								<div class="col-xs-2">登录账号</div>
+								<div class="col-xs-2">登录密码</div>
+								<div class="col-xs-2">服务器类型</div>
+								<div class="col-xs-2">操作</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-2" contenteditable="true">998</div>
+								<div class="col-xs-2" contenteditable="true">http://192.168.1.222:9527</div>
+								<div class="col-xs-2" contenteditable="true">123</div>
+								<div class="col-xs-2" contenteditable="true">20141001</div>
+								<div class="col-xs-2 server-type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
+								<div class="col-xs-2">修改/删除</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-2" contenteditable="true">998</div>
+								<div class="col-xs-2" contenteditable="true">http://192.168.1.222:9527</div>
+								<div class="col-xs-2" contenteditable="true">123</div>
+								<div class="col-xs-2" contenteditable="true">20141001</div>
+								<div class="col-xs-2 server-type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
+								<div class="col-xs-2">修改/删除</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-2" contenteditable="true">998</div>
+								<div class="col-xs-2" contenteditable="true">http://192.168.1.222:9527</div>
+								<div class="col-xs-2" contenteditable="true">123</div>
+								<div class="col-xs-2" contenteditable="true">20141001</div>
+								<div class="col-xs-2 server-type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
+								<div class="col-xs-2">修改/删除</div>
+							</div>
+						</div>
+						<button class="add btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#add-box">增加新记录</button>
+					</div>
+					<div class="modal fade" id="add-box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLable">
+										<ul class="nav nav-tabs">
+											<li><a href="">服务器ID</a></li>
+											<li><a href="">GM路径</a></li>
+											<li><a href="">登录账号</a></li>
+											<li><a href="">登录密码</a></li>
+											<li><a href="">服务器类型</a></li>
+										</ul>
+									</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-xs-2"><input class="form-control" type="text" placeholder="服务器id"/></div>
+										<div class="col-xs-2"><input class="form-control" type="text" placeholder="GM路径"/></div>
+										<div class="col-xs-2"><input class="form-control" type="text" placeholder="登录账号"/></div>
+										<div class="col-xs-2"><input class="form-control" type="text" placeholder="登录密码"/></div>
+										<div class="col-xs-4">
+											<select class="form-control">
+												<option value="">Game逻辑服务器</option>
+												<option value="">中心服务器</option>
+												<option value="">Hub服务器</option>
+												<option value="">矿区服务器</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/xxkg/index.js"></script>
+</body>
+</html>

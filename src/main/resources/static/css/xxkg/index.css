@@ -1,0 +1,60 @@
+body{
+	overflow-x: hidden;
+}
+#main .container-fluit .row>div.col-xs-10 .nav{
+	/*border: 1px solid yellow;*/
+	color: #fff;
+}
+/*服务器录入*/
+.container-fluit .row>div.col-xs-10 .server-enter small{
+	text-shadow: 0 0 5px #000;
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container .row{
+	text-align: center;
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container{
+	border-bottom: 1px solid #fff;
+	height: 400px;
+	overflow-y:scroll; 
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container .row{
+	margin-top: 15px;
+}
+.container-fluit .row>div.col-xs-10 .server-enter button.add{
+	margin-top: 10px;
+	margin-right:70px;
+}
+.modal-dialog{
+	margin-top: 200px;
+	margin-left: 40%;
+}
+.modal-header{
+	border-bottom: none;
+}
+.nav>li>a{
+	padding:10px 18px;
+}
+.modal-body .row>div{
+	/*border: 1px solid #333;*/
+}
+/*公告修改*/
+.container-fluit .row>div.col-xs-10 .notice-change .container .row>div{
+	border:1px solid yellow;
+}
+.container-fluit .row>div.col-xs-10 .notice-change .col-xs-8 .box{
+	width:600px;
+	height:400px;
+	border:1px solid #fff;
+}
+
+
+
+input{
+	width: 100%;
+}
+@media screen and (min-width:1200px){
+	.modal-content{
+		width:700px;
+	}
+}
+
