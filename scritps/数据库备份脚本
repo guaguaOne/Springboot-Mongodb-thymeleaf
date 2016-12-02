@@ -1,0 +1,45 @@
+#!/bin/bash
+sourcepath='/usr/bin'   #mongodump 地址
+targetpath='/data/backup'   #备份目录
+nowtime=$(date +%Y%m%d) # 日期
+
+start()
+{
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d account --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y3 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y31 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y32 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y33 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y34 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y35 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y36 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y37 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y38 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y40 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y41 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y42 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y43 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y44 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y45 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y46 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y47 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y48 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+  ${sourcepath}/mongodump -u yxwd -p fuckyou -d y49 --host 10.9.150.57 --port 27017 --out ${targetpath}/${nowtime}
+}
+execute()
+{
+  start
+  if [ $? -eq 0 ]
+  then
+    echo "back successfully!"
+  else
+    echo "back failure!"
+  fi
+}
+
+if [ ! -d "${targetpath}/${nowtime}/" ]
+then
+ mkdir ${targetpath}/${nowtime}
+fi
+execute
+echo "============== back end ${nowtime} =============="
