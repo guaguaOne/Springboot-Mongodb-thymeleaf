@@ -41,7 +41,6 @@ public class RunnerBean implements CommandLineRunner, ApplicationContextAware {
 
         // 2. 启动缓存
         DataAccessor dao = ctx.getBean(DataAccessor.class);
-        dao.Initialize();
 
         Role role = dao.findRole(100001L);
         if (role != null) {

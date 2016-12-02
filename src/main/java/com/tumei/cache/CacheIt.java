@@ -3,6 +3,7 @@ package com.tumei.cache;
 import com.google.common.cache.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.jni.Time;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,17 +22,18 @@ public class CacheIt {
     private Log log = LogFactory.getLog(CacheIt.class);
     private CacheBuilder<Object, Object> builder;
 
+    private ScheduledExecutorService ses;
     private List<LoadingCache> caches;
     /***
      * 初始化缓存管理器
      */
     public void Initialize(long initDealy, long delay) {
         builder = CacheBuilder.newBuilder()
-                .expireAfterAccess(1, TimeUnit.SECONDS).expireAfterWrite(4, TimeUnit.SECONDS);
+                .expireAfterAccess(initDealy, TimeUnit.SECONDS).expireAfterWrite(delay, TimeUnit.SECONDS);
         caches = new ArrayList<LoadingCache>();
 
         // 启动一个线程的定时器，定时刷新刷存
-        ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
+        ses = Executors.newScheduledThreadPool(1);
         ses.scheduleWithFixedDelay(
             new Runnable() {
                 @Override
@@ -39,6 +41,17 @@ public class CacheIt {
                     cleanUp(false);
                 }
             }, initDealy, delay, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 关闭定时器
+     */
+    public void Dispose() {
+        if (ses != null) {
+            ses.shutdownNow();
+        }
+        cleanUp(true); // 手动刷新
+        waitFlush(); // 等待运行完毕
     }
 
     /**
@@ -54,6 +67,13 @@ public class CacheIt {
                 cache.cleanUp();
             }
         }
+    }
+
+    /**
+     * 线程等待十秒后退出, 让接受到刷新消息的程序还得继续运行一段时间
+     */
+    public void waitFlush() {
+        Time.sleep(10000L);
     }
 
     /***
@@ -94,7 +114,6 @@ public class CacheIt {
                 }
         );
 
-        log.info("nifaksdfdsfkds");
         cache.put(1, "1123");
         try {
             cache.get(123);
