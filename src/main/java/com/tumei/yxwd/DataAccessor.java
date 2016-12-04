@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -24,15 +25,16 @@ import java.util.concurrent.ExecutionException;
  *
  */
 @Component
+@Order(90)
 @ConfigurationProperties(prefix = "dao")
 public class DataAccessor {
     private Log log = LogFactory.getLog(DataAccessor.class);
 
     @Autowired
+    private CacheIt cacheIt;
+    @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private CacheIt cacheIt;
     private LoadingCache<Integer, Role> roleLoadingCache;
 
     /**
@@ -48,13 +50,11 @@ public class DataAccessor {
     /**
      * 注册各种缓存与数据库的对应
      */
-    @PostConstruct
     public void Initialize() {
         log.info(String.format("*** 初始延迟:%s, 间隔延迟:%s", initdelay, delay));
         long delay1 = Long.parseLong(initdelay);
         long delay2 = Long.parseLong(delay);
         cacheIt.Initialize(delay1, delay2);
-
         roleLoadingCache = cacheIt.cached(
                 new CacheLoader<Integer, Role>() {
                     @Override
@@ -79,7 +79,6 @@ public class DataAccessor {
     /**
      * 系统退出或者关闭的时候需要调用，确保更新到数据库
      */
-    @PreDestroy
     public void Dispose() {
         log.error("------------ dispose dao.... -------------" + System.currentTimeMillis());
         cacheIt.Dispose(); // 关闭定时器

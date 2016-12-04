@@ -2,7 +2,12 @@ package com.tumei.yxwd;
 
 import com.tumei.Entry;
 import com.tumei.io.Session;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +18,27 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * 非Spring组件，游戏访问的中间层,管理所有的玩家
  */
+@Component
+@ConfigurationProperties(prefix = "game")
+@Order(value = 100)
 public class Game {
     private static Game instance;
-
     public static Game getInstance() {
         if (instance == null) {
-            instance = new Game();
+            instance = Entry.getApplicationContext().getBean(Game.class);
         }
         return instance;
     }
 
-    public Game() {
+    @Autowired
+    public Game(DataAccessor dao) {
         instance = this;
-        dao = Entry.getApplicationContext().getBean(DataAccessor.class);
+        this.dao = dao;
+        Initialize();
     }
 
+    private Log log = LogFactory.getLog(Game.class);
     private ConcurrentHashMap<Long, GameUser> users = new ConcurrentHashMap<Long, GameUser>();
-
     /**
      * 数据访问层
      */
@@ -40,7 +49,19 @@ public class Game {
      * @return
      */
     public boolean Initialize() {
+        dao.Initialize();
         return true;
+    }
+
+    /**
+     * 游戏退出的处理
+     */
+    public void Dispose() {
+        log.info(">>>>> Game.class 正在退出.");
+        if (dao != null) {
+            dao.Dispose();
+            dao = null;
+        }
     }
 
     /**
