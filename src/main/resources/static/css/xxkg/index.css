@@ -69,6 +69,20 @@ body{
 	border-radius:5px;
 	padding:5px;
 }
+/*邮件发送*/
+.container-fluit .row>div.col-xs-10{
+	position: relative;
+}
+.container-fluit .row>div.col-xs-10 .send-email{
+	border:1px solid #fff;
+	width:800px;
+	height: 600px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin-left: -400px;
+	margin-top:-300px;
+}
 
 
 input{

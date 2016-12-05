@@ -38,9 +38,14 @@ public class HelloController {
         return "xxkg/index";
     }
 
+    @RequestMapping("/xxkg/header")
+    public String header() {
+        return "xxkg/header";
+    }
+
     @RequestMapping("/xxkg/noticechange")
     public String xxkgnoticechange(ModelMap map) {
-        map.addAttribute("greet","hello");
+        map.addAttribute("greet","winter");
         return "xxkg/noticechange";
     }
 
