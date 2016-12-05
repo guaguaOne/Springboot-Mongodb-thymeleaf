@@ -72,19 +72,29 @@ body{
 /*邮件发送*/
 .container-fluit .row>div.col-xs-10{
 	position: relative;
+	color: #fff;
 }
 .container-fluit .row>div.col-xs-10 .send-email{
-	border:1px solid #fff;
+	/*border:1px solid #fff;*/
 	width:800px;
 	height: 600px;
 	position: absolute;
 	top:50%;
-	left:50%;
+	left:40%;
 	margin-left: -400px;
 	margin-top:-300px;
+	padding:10px;
 }
-
-
+.container-fluit .row>div.col-xs-10 .send-email lable{
+	text-align: right;
+	padding:5px 0;
+}
+/*信息查询*/
+.container-fluit .row>div.col-xs-10 .search-info{
+	border:1px solid #fff;
+	margin-top: 30px;
+	height:400px;
+}
 input{
 	width: 100%;
 }
