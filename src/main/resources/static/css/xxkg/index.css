@@ -1,0 +1,106 @@
+body{
+	overflow-x: hidden;
+}
+#main .container-fluit .row>div.col-xs-10 .nav{
+	/*border: 1px solid yellow;*/
+	color: #fff;
+}
+/*服务器录入*/
+.container-fluit .row>div.col-xs-10 .server-enter small{
+	text-shadow: 0 0 5px #000;
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container .row{
+	text-align: center;
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container{
+	border-bottom: 1px solid #fff;
+	height: 400px;
+	overflow-y:scroll; 
+}
+.container-fluit .row>div.col-xs-10 .server-enter .container .row{
+	margin-top: 15px;
+}
+.container-fluit .row>div.col-xs-10 .server-enter button.add{
+	margin-top: 10px;
+	margin-right:70px;
+}
+.modal-dialog{
+	margin-top: 200px;
+	margin-left: 40%;
+}
+.modal-header{
+	border-bottom: none;
+}
+.nav>li>a{
+	padding:10px 18px;
+}
+.modal-body .row>div{
+	/*border: 1px solid #333;*/
+}
+/*公告修改*/
+.container-fluit .row>div.col-xs-10 .notice-change .container .row>div{
+	/*border:1px solid yellow;*/
+}
+.container-fluit .row>div.col-xs-10 .notice-change .col-xs-8{
+	background-size: 100% 100%;
+	background: url("../../image/book.png");
+}
+.container-fluit .row>div.col-xs-10 .notice-change .col-xs-8 .box{
+	width: 80%;
+	height:600px;
+	margin-left:15%;
+	padding:25px 10px;
+	line-height: 30px;
+	font-size: larger;
+	font-weight:bolder;
+	/*border:1px solid #fff;*/
+}
+.container-fluit .row>div.col-xs-10 .notice-change .col-xs-8 .btn{
+	margin:10px 25px;
+}
+.container-fluit .row>div.col-xs-10 .notice-change .col-xs-4 .col-pre{
+	width:80%;
+	height: 100px;
+	border:2px solid #fff;
+	background: #bea272;
+	line-height: 25px;
+	font-weight:bolder;
+	margin-top:250px;
+	border-radius:5px;
+	padding:5px;
+}
+/*邮件发送*/
+.container-fluit .row>div.col-xs-10{
+	position: relative;
+	color: #fff;
+}
+.container-fluit .row>div.col-xs-10 .send-email{
+	/*border:1px solid #fff;*/
+	width:800px;
+	height: 600px;
+	position: absolute;
+	top:50%;
+	left:40%;
+	margin-left: -400px;
+	margin-top:-300px;
+	padding:10px;
+}
+.container-fluit .row>div.col-xs-10 .send-email lable{
+	text-align: right;
+	padding:5px 0;
+}
+/*信息查询*/
+.container-fluit .row>div.col-xs-10 .search-info{
+	border:1px solid #fff;
+	margin-top: 30px;
+	height:400px;
+}
+input{
+	width: 100%;
+}
+@media screen and (min-width:1200px){
+	.modal-content{
+		width:700px;
+	}
+}
+
