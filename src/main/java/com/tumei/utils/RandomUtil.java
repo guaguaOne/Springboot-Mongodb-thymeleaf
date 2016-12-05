@@ -7,12 +7,20 @@ import java.util.Random;
  * Created by Administrator on 2016/11/24 0024.
  */
 public class RandomUtil {
+    /**
+     * 随机数据
+     * @return
+     */
+    public static int getRandom() {
+        Random random = new Random();
+        return random.nextInt();
+    }
 
     /**
      * 获取16bit随机数
      * @return
      */
-    public static String RandomDigest() {
+    public static String randomDigest() {
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
 

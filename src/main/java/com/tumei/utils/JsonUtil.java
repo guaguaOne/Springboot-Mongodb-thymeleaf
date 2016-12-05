@@ -21,6 +21,10 @@ public class JsonUtil {
 //        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
+    public static ObjectMapper getMapper() {
+        return mapper;
+    }
+
     /**
      * 将协议序列化成字节数组
      * @param protocol
@@ -30,8 +34,14 @@ public class JsonUtil {
         return mapper.writeValueAsBytes(protocol);
     }
 
+
     public static <T> T Unmarshal(byte[] data, Class<T> cls) throws IOException {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.readValue(data, cls);
     }
+
+    public static String Serialize(Object object) throws JsonProcessingException {
+        return mapper.writeValueAsString(object);
+    }
+
 }

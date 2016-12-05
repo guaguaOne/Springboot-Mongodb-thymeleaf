@@ -160,7 +160,7 @@ public class TcpDecoder extends ByteToMessageDecoder {
     }
 
     /**
-     * Create a frame out of the {@link ByteBuf} and return it.
+     * create a frame out of the {@link ByteBuf} and return it.
      *
      * @param ctx
      *            the {@link ChannelHandlerContext} which this

@@ -111,7 +111,7 @@ public class Session {
     public void MakeChallenge() {
         log.info("make challenge");
         Challenge challenge = new Challenge();
-        challenge.Nonce = RandomUtil.RandomDigest();
+        challenge.Nonce = RandomUtil.randomDigest();
         send(challenge);
     }
 

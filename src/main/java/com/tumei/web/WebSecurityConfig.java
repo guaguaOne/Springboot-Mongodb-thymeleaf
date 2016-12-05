@@ -15,8 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 只对
+        http.antMatcher("/yxwd");
         http.authorizeRequests() // 定义哪些url需要被保护，哪些不需要
-                .antMatchers("/", "/home").permitAll() // / 和 /home是可以直接访问的
+                .antMatchers("/", "/home", "/logon_any").permitAll() // / 和 /home是可以直接访问的
                 .anyRequest().authenticated() // 其他都需要验证
                 .and()
                 .formLogin() .loginPage("/login")  // 需要用户登录的时候,路由到/login下
