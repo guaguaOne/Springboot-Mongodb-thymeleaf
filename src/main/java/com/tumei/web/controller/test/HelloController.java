@@ -39,7 +39,8 @@ public class HelloController {
     }
 
     @RequestMapping("/xxkg/noticechange")
-    public String xxkgnoticechange() {
+    public String xxkgnoticechange(ModelMap map) {
+        map.addAttribute("greet","hello");
         return "xxkg/noticechange";
     }
 
