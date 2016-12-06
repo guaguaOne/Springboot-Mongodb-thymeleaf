@@ -1,21 +1,21 @@
 package com.tumei.web;
 
 import com.tumei.utils.RandomUtil;
+import org.joda.time.DateTime;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Date;
 
 import static javax.xml.crypto.dsig.SignatureMethod.HMAC_SHA1;
 
 public class TokenInfo {
     private String account;
     private String token;
-    private Date time;
+    private DateTime time;
     private int zone;
     private String idfa;
 
-    public TokenInfo(String account, String token, Date time, int zone, String idfa) {
+    public TokenInfo(String account, String token, DateTime time, int zone, String idfa) {
         this.account = account;
         this.token = token;
         this.time = time;
@@ -24,7 +24,7 @@ public class TokenInfo {
     }
 
     public static TokenInfo create(String _account, String _digest, int _zone) {
-        String tn = String.format("%d-%d", new Date().getTime(), RandomUtil.getRandom());
+        String tn = String.format("%d-%d", DateTime.now(), RandomUtil.getRandom());
         Mac mac = null;
         try {
             mac = Mac.getInstance(HMAC_SHA1);
@@ -36,7 +36,7 @@ public class TokenInfo {
                 sb.append(byteToHexString(b));
             }
 
-            return new TokenInfo(_account, sb.toString(), new Date(), _zone, "");
+            return new TokenInfo(_account, sb.toString(), DateTime.now(), _zone, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,11 +68,11 @@ public class TokenInfo {
         this.token = token;
     }
 
-    public Date getTime() {
+    public DateTime getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(DateTime time) {
         this.time = time;
     }
 

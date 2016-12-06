@@ -94,9 +94,9 @@ public class DataAccessor {
     public Role findRole(Long id) {
         try {
             return roleLoadingCache.get(id.intValue());
-        } catch (ExecutionException e) {
-            return null;
+        } catch (Exception e) {
         }
+        return null;
     }
 
     /**

@@ -4,15 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.xml.internal.messaging.saaj.util.FinalArrayList;
 import com.tumei.utils.JsonUtil;
-import com.tumei.web.CenterWebDBRepos;
 import com.tumei.web.TokenPool;
 import com.tumei.web.model.*;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -116,109 +115,130 @@ public class AnysdkController {
     public @ResponseBody String Anysdk_Logon(HttpServletRequest request, HttpServletResponse response) {
         log.info("申请新的帐号ID:" + NextVal());
 
-        List<RouterBean> routerBeens = routerBeanRepository.findAll();
-        for (RouterBean bean : routerBeens) {
-            log.info("router: " + bean.toString());
+        Long id = NextVal();
+        AccountBean accountBean = new AccountBean(id, "hdfj33dk", DateTime.now(), 1, "fsdafs");
+        accountBean = accountBeanRepository.save(accountBean);
+        if (accountBean == null) {
+            log.error("插入失败");
         }
 
-        String clientVersion = "";
+        log.info("插入新数据:" + accountBean.toString());
+        return "";
 
-        try {
-            Map<String, String[]> params = request.getParameterMap();
-            if (!paramIsset(params)) {
-                return output(-1L, "参数不完整");
-            }
 
-            StringBuilder queryString = new StringBuilder();
-            for (String key : params.keySet()) {
-                String[] values = params.get(key);
-                for (int i = 0; i < values.length; i++) {
-                    String value = values[i];
-                    queryString.append(key).append("=").append(value).append("&");
-                }
-
-                if (key.equalsIgnoreCase("server_ext_for_login")) {
-                    try {
-                        clientVersion = URLDecoder.decode(values[0], "UTF-8");
-                    } catch (Exception e) {
-                        log.error("解析客户端传递的数据错误，无法获取版本信息", e);
-                    }
-                }
-            }
-
-            String query = queryString.substring(0, queryString.length() - 1);
-            URL url = new URL(loginCheckUrl);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("User-Agent", userAgent);
-            conn.setReadTimeout(timeOut);
-            conn.setConnectTimeout(connectTimeOut);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            writer.write(query);
-            writer.flush();
-            tryClose(writer);
-            tryClose(os);
-            conn.connect();
-
-            // 分析anysdk的认证返回值
-            InputStream is = conn.getInputStream();
-            String resp = stream2String(is);
-
-            log.info("anysdk认证返回结果:[" + resp + "]");
-            JsonNode tree = JsonUtil.getMapper().readTree(resp);
-            JsonNode status = tree.get("status");
-            if (status == null || !status.toString().equalsIgnoreCase("ok")) {
-                return output(-2L, "认证失败");
-            }
-
-            JsonNode common = tree.get("common");
-            if (common == null) {
-                return output(-3L, "认证失败");
-            }
-
-            String sdk = common.get("user_sdk").toString();
-            String channel = common.get("channel").toString();
-            String uin = common.get("uid").toString();
-            String sess = common.get("server_id").toString();
-            String acc = String.format("%s|%s", sdk, uin);
-
-            AccountBean accountBean = accountBeanRepository.findByAccount(acc);
-            // 帐号不存在时，主动帮助生成帐号
-            if (accountBean == null) {
-                // 获取当前应该路由的服务器
-                int zone = getServerID(acc, clientVersion);
-                log.info("当前客户端版本:" + clientVersion + ", 当前服务器id:" + zone);
-
-                if (zone == -1) { // 服务器正在维护中
-                    return output(-4L, "服务器正在维护中");
-                }
-
-                Long id = NextVal();
-                accountBean = new AccountBean(id, acc, new Date(), zone, channel);
-                accountBean = accountBeanRepository.insert(accountBean);
-                if (accountBean != null) {
-                    // 生成一个对应的Token,用于后续认证使用
-                    String token = pool.insertToken(id, acc, sess, zone, "");
-
-                    /**
-                     * 根据zone 获取当前服务器的地址, grpc服务会收到已经建立的连接
-                     */
-
-                    JsonNode ext = JsonNodeFactory.instance.textNode(String.format("%s|%s|%s", id, token, ""));
-                    ((ObjectNode)tree).set("ext", ext);
-                    log.info(tree.toString());
-                    return tree.toString();
-                }
-            }
-        } catch (Exception ex) {
-            log.error("收到anysdk登录请求回调,处理错误:", ex);
-        }
-        return output(-9L, "认证错误");
+//        List<RouterBean> routerBeens = routerBeanRepository.findAll();
+//        for (RouterBean bean : routerBeens) {
+//            log.info("router: " + bean.toString());
+//        }
+//
+//        String clientVersion = "";
+//
+//        try {
+//            Map<String, String[]> params = request.getParameterMap();
+//            if (!paramIsset(params)) {
+//                return output(-1L, "参数不完整");
+//            }
+//
+//            StringBuilder queryString = new StringBuilder();
+//            for (String key : params.keySet()) {
+//                String[] values = params.get(key);
+//                for (int i = 0; i < values.length; i++) {
+//                    String value = values[i];
+//                    queryString.append(key).append("=").append(value).append("&");
+//                }
+//
+//                if (key.equalsIgnoreCase("server_ext_for_login")) {
+//                    try {
+//                        clientVersion = URLDecoder.decode(values[0], "UTF-8");
+//                    } catch (Exception e) {
+//                        log.error("解析客户端传递的数据错误，无法获取版本信息", e);
+//                    }
+//                }
+//            }
+//
+//            String query = queryString.substring(0, queryString.length() - 1);
+//            URL url = new URL(loginCheckUrl);
+//
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setRequestProperty("User-Agent", userAgent);
+//            conn.setReadTimeout(timeOut);
+//            conn.setConnectTimeout(connectTimeOut);
+//            conn.setRequestMethod("POST");
+//            conn.setDoInput(true);
+//            conn.setDoOutput(true);
+//
+//            OutputStream os = conn.getOutputStream();
+//            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+//            writer.write(query);
+//            writer.flush();
+//            tryClose(writer);
+//            tryClose(os);
+//            conn.connect();
+//
+//            // 分析anysdk的认证返回值
+//            InputStream is = conn.getInputStream();
+//            String resp = stream2String(is);
+//
+//            log.info("anysdk认证返回结果:[" + resp + "]");
+//            JsonNode tree = JsonUtil.getMapper().readTree(resp);
+//            JsonNode status = tree.get("status");
+//            if (status == null || !status.toString().equalsIgnoreCase("ok")) {
+//                return output(-2L, "认证失败");
+//            }
+//
+//            JsonNode common = tree.get("common");
+//            if (common == null) {
+//                return output(-3L, "认证失败");
+//            }
+//
+//            String sdk = common.get("user_sdk").toString();
+//            String channel = common.get("channel").toString();
+//            String uin = common.get("uid").toString();
+//            String sess = common.get("server_id").toString();
+//            String acc = String.format("%s|%s", sdk, uin);
+//
+//            AccountBean accountBean = accountBeanRepository.findByAccount(acc);
+//            // 帐号不存在时，主动帮助生成帐号
+//            if (accountBean == null) {
+//                // 获取当前应该路由的服务器
+//                int zone = getServerID(acc, clientVersion);
+//                log.info("当前客户端版本:" + clientVersion + ", 当前服务器id:" + zone);
+//
+//                if (zone == -1) { // 服务器正在维护中
+//                    return output(-4L, "服务器正在维护中");
+//                }
+//
+//                Long id = NextVal();
+//                accountBean = new AccountBean(id, acc, new Date(), zone, channel);
+//                accountBean = accountBeanRepository.insert(accountBean);
+//                if (accountBean != null) {
+//                    // 生成一个对应的Token,用于后续认证使用
+//                    String token = pool.insertToken(id, acc, sess, zone, "");
+//
+//                    /**
+//                     * 根据zone 获取当前服务器的地址, grpc服务会收到已经建立的连接
+//                     */
+//
+//                    JsonNode ext = JsonNodeFactory.instance.textNode(String.format("%s|%s|%s", id, token, ""));
+//                    ((ObjectNode)tree).set("ext", ext);
+//                    log.info(tree.toString());
+//                    return tree.toString();
+//                }
+//            } else { // 帐号已经存在
+//                String token = pool.insertToken(accountBean.id, acc, sess, accountBean.zone, accountBean.idfa);
+//
+//                /**
+//                 * 根据zone 获取当前服务器的地址
+//                 */
+//                JsonNode ext = JsonNodeFactory.instance.textNode(String.format("%s|%s|%s", accountBean.id, token, ""));
+//                ((ObjectNode)tree).set("ext", ext);
+//                log.info(tree.toString());
+//                return tree.toString();
+//            }
+//        } catch (Exception ex) {
+//            log.error("收到anysdk登录请求回调,处理错误:", ex);
+//        }
+//        return output(-9L, "认证错误");
     }
 
     /**

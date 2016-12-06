@@ -2,6 +2,7 @@ package com.tumei.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,12 @@ import javax.annotation.PreDestroy;
 import java.util.*;
 
 /**
- * Created by Administrator on 2016/12/5 0005.
+ *  Token的管理器，负责创建，检查token，并定时清理已经超时的token.
+ *
+ *  TODO:
+ *  1. token能分应用，分不同的资源管理，当一个token创建的时候，带有可验证的资源范围，在检查的时候根据请求访问的资源给出结果.
+ *  2. token的超时可以细化到不同的资源的超时上
+ *
  */
 @Service
 public class TokenPool {
@@ -20,7 +26,7 @@ public class TokenPool {
 
     @PostConstruct
     public void Init() {
-        expire = 3600;
+        expire = 3600000;
         log.info("启动TokenPool池:" + expire);
     }
 
@@ -38,7 +44,7 @@ public class TokenPool {
     }
 
     private synchronized void expiredCheck() {
-        Date now = new Date();
+        DateTime now = DateTime.now();
         log.info("=== 检查当前超时Token." + now.toString());
         try {
             List<Long> expiredList = new ArrayList<Long>();
@@ -46,7 +52,7 @@ public class TokenPool {
             while (itr.hasNext()) {
                 Map.Entry<Long, TokenInfo> entry = (Map.Entry<Long, TokenInfo>)itr.next();
                 TokenInfo info = entry.getValue();
-                if (now.getTime() - info.getTime().getTime() >= expire) {
+                if (now.getMillis() - info.getTime().getMillis() >= expire) {
                     expiredList.add(entry.getKey());
                 }
             }
@@ -55,7 +61,7 @@ public class TokenPool {
                 tokens.remove(id);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("检查Token超时出现异常:" + ex.toString());
         }
     }
 
@@ -89,8 +95,7 @@ public class TokenPool {
             return -1;
         }
 
-        Date now = new Date();
-        if ((now.getTime() - val.getTime().getTime()) > expire) {
+        if ((DateTime.now().getMillis()- val.getTime().getMillis()) > expire) {
             tokens.remove(id);
             return 1;
         }
@@ -99,6 +104,7 @@ public class TokenPool {
             return -2;
         }
 
+        /* 没有必要在此处补填idfa */
         if (val.getIdfa() == null || val.getIdfa().isEmpty()) {
             // 修复idfa.
         }
