@@ -33,4 +33,55 @@ public class HelloController {
     public String login() {
         return "login";
     }
+
+    @RequestMapping("/xxkg/index")
+    public String xxkg() {
+        return "xxkg/index";
+    }
+
+//    @RequestMapping("/xxkg/header")
+//    public String header() {
+//        return "xxkg/header";
+//    }
+
+    @RequestMapping("/xxkg/noticechange")
+    public String xxkgnoticechange(ModelMap map) {
+        map.addAttribute("greet","winter");
+        return "xxkg/noticechange";
+    }
+
+    @RequestMapping("/xxkg/manymail")
+    public String xxkgmanymail() {
+        return "xxkg/manymail";
+    }
+
+    @RequestMapping("/xxkg/orderwrite")
+    public String xxkgorderwrite() {
+        return "xxkg/orderwrite";
+    }
+
+    @RequestMapping("/xxkg/searchinfo")
+    public String xxkgsearchinfo() {
+        return "xxkg/searchinfo";
+    }
+
+    @RequestMapping("/xxkg/sendemail")
+    public String xxkgsendemail() {
+        return "xxkg/sendemail";
+    }
+
+    @RequestMapping("/xxkg/sendmessage")
+    public String xxkgsendmessage() {
+        return "xxkg/sendmessage";
+    }
+
+    @RequestMapping("/xxkg/giftcreate")
+    public String xxkggiftcreate() {
+        return "xxkg/giftcreate";
+    }
+
+    @RequestMapping("/xxkg/conditionsearch")
+    public String xxkgconditionsearch() {
+        return "xxkg/conditionsearch";
+    }
 }

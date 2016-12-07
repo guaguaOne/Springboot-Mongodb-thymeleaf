@@ -8,34 +8,123 @@
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="stylesheet" href="../css/xxkg/index.css"/>
     <script src="../js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#main .container-fluit .row>div.col-xs-2.left ul li').eq(3).addClass('active');
+        })
+    </script>
 </head>
 <body>
 <div id="main">
     <div class="container-fluit">
         <div class="row">
-            <div class="col-xs-2 left">
-                <p>矿工物语</p>
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="index.html">服务器录入</a></li>
-                    <li><a href="noticechange.html">公告修改</a></li>
-                    <li><a href="sendemail.html">邮件发送</a></li>
-                    <li class="active"><a href="searchinfo.html">查询信息</a></li>
-                    <li><a href="orderwrite.html">指令记录</a></li>
-                    <li><a href="manymail.html">多邮件发送</a></li>
-                    <li><a href="sendmessage.html">通知发送</a></li>
-                    <li><a href="giftcreate.html">礼包生成</a></li>
-                    <li><a href="conditionsearch.html">条件查询</a></li>
-                </ul>
-                <p class="back"><a href="/"><span class="glyphicon glyphicon-chevron-left"></span>首页</a></p>
-            </div>
+            <div th:replace="xxkg/header :: copy">左边导航栏</div>
             <div class="col-xs-10 right">
                 <div class="search-info">
-
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="请输入昵称或ID..."/>
+                            </div>
+                            <button class="col-sm-2 control-lable btn btn-info">查找</button>
+                        </div>
+                    </form>
+                    <div class="show-result">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">磨人的小妖精</span>
+                                金币
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">43800</span>
+                                游戏经验
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">12</span>
+                                VIP等级
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">http://192.168.1.222:9527</span>
+                                所在服务器
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="user-action">
+                    <ol class="breadcrumb">
+                        <li><a href="">矿工物语</a></li>
+                        <li><a href="">查询信息</a></li>
+                        <li class="active">操作玩家行为</li>
+                    </ol>
+                    <div class="btn-group">
+                        <button class="btn btn-danger" data-target="#nosay" data-toggle="modal">禁言</button>
+                        <button class="btn btn-warning" data-target="#nologin" data-toggle="modal">禁止登陆</button>
+                        <button class="btn btn-info">解禁</button>
+                    </div>
+                    <ol class="breadcrumb" style="margin-top: 20px;">
+                        <li><a href="">矿工物语</a></li>
+                        <li><a href="">查询信息</a></li>
+                        <li class="active">增加玩家物品</li>
+                    </ol>
+                    <div class="good">物品 : <button class="btn btn-primary">点击选择物品</button>&nbsp;&nbsp;
+                        数量 : <input type="number" placeholder="请输入数量..."/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-success">添加</button>
+                    </div>
+                    <div class="hero">英雄 : <button class="btn btn-primary">点击选择英雄</button>&nbsp;&nbsp;
+                        数量 : <input type="number" placeholder="请输入数量..."/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-success">添加</button>
+                    </div>
+                </div>
+                <div id="nosay" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3>玩家禁言<small>(*禁言后玩家将不能在世界频道说话)</small></h3>
+                            </div>
+                            <div class="modal-body">
+                                <button class="btn btn-danger">禁言时间</button><input type="text" value="1"/>
+                                <select>
+                                    <option value="1">小时</option>
+                                    <option value="2">天</option>
+                                    <option value="3">月</option>
+                                    <option value="4">永久禁言</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nologin" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3>禁止玩家登陆<small> (*禁言后玩家将不能登陆游戏)</small></h3>
+                            </div>
+                            <div class="modal-body">
+                                <button class="btn btn-warning">禁言登陆时间</button><input type="text" value="1"/>
+                                <select>
+                                    <option value="1">小时</option>
+                                    <option value="2">天</option>
+                                    <option value="3">月</option>
+                                    <option value="4">永久禁言</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary">确认</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="../js/xxkg/noticechange.js"></script>
+<script src="../js/xxkg/searchinfo.js"></script>
 </body>
 </html>
