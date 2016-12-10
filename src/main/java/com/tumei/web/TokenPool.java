@@ -45,7 +45,7 @@ public class TokenPool {
 
     private synchronized void expiredCheck() {
         DateTime now = DateTime.now();
-        log.info("=== 检查当前超时Token." + now.toString());
+//        log.info("=== 检查当前超时Token." + now.toString());
         try {
             List<Long> expiredList = new ArrayList<Long>();
             Iterator itr = tokens.entrySet().iterator();

@@ -35,7 +35,10 @@ public class DataAccessor {
     @Autowired
     private RoleRepository roleRepository;
 
+    /********** 各种缓存接口 **********/
     private LoadingCache<Integer, Role> roleLoadingCache;
+
+    /********** END 各种缓存接口 **********/
 
     /**
      * 刷新的初始延迟
@@ -55,6 +58,7 @@ public class DataAccessor {
         long delay1 = Long.parseLong(initdelay);
         long delay2 = Long.parseLong(delay);
         cacheIt.Initialize(delay1, delay2);
+
         roleLoadingCache = cacheIt.cached(
                 new CacheLoader<Integer, Role>() {
                     @Override
@@ -63,16 +67,13 @@ public class DataAccessor {
                         return roleRepository.findById(s);
                     }
                 },
-                new RemovalListener<Integer, Role>() {
-                    @Override
-                    public void onRemoval(RemovalNotification<Integer, Role> removalNotification) {
-                        if (removalNotification.getCause() == RemovalCause.EXPIRED ||
-                                removalNotification.getCause() == RemovalCause.EXPLICIT) {
-                                log.info("on removal: " + removalNotification.getKey() + " >>>");
-                            roleRepository.save(removalNotification.getValue());
-                        }
-                    }
+                (RemovalNotification<Integer, Role> removalNotification) -> {
+                    if (removalNotification.getCause() == RemovalCause.EXPIRED ||
+                            removalNotification.getCause() == RemovalCause.EXPLICIT) {
+                            log.info("on removal: " + removalNotification.getKey() + " >>>");
+                        roleRepository.save(removalNotification.getValue());
                 }
+            }
         );
     }
 
@@ -95,6 +96,7 @@ public class DataAccessor {
         try {
             return roleLoadingCache.get(id.intValue());
         } catch (Exception e) {
+            log.error("Exception:", e);
         }
         return null;
     }

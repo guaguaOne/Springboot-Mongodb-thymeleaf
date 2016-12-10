@@ -1,9 +1,11 @@
 package com.tumei.cache;
 
 import com.google.common.cache.*;
+import com.tumei.web.params.RegisterAccount;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tomcat.jni.Time;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Administrator on 2016/11/29 0029.
  */
 @Component
+@Order(80)
 public class CacheIt {
     private Log log = LogFactory.getLog(CacheIt.class);
     private CacheBuilder<Object, Object> builder;
@@ -50,8 +53,10 @@ public class CacheIt {
         if (ses != null) {
             ses.shutdownNow();
         }
-        cleanUp(true); // 手动刷新
-        waitFlush(); // 等待运行完毕
+        // 超时设定为一个很大的值，不会自动超
+        builder.expireAfterAccess(1000000, TimeUnit.SECONDS).expireAfterWrite(1000000, TimeUnit.SECONDS);
+        // 手动超时
+        cleanUp(true);
     }
 
     /**
@@ -67,13 +72,6 @@ public class CacheIt {
                 cache.cleanUp();
             }
         }
-    }
-
-    /**
-     * 线程等待十秒后退出, 让接受到刷新消息的程序还得继续运行一段时间
-     */
-    public void waitFlush() {
-        Time.sleep(10000L);
     }
 
     /***
@@ -103,13 +101,10 @@ public class CacheIt {
                                                              return "haha";
                                                          }
                                                      },
-                new RemovalListener<Integer, String>() {
-                    @Override
-                    public void onRemoval(RemovalNotification<Integer, String> removalNotification) {
-                        if (removalNotification.getCause() == RemovalCause.EXPIRED ||
-                                removalNotification.getCause() == RemovalCause.EXPLICIT) {
-                            log.info("on removal: " + removalNotification.getKey() + " >>> " + removalNotification.getValue());
-                        }
+                (RemovalNotification<Integer, String> removalNotification) -> {
+                    if (removalNotification.getCause() == RemovalCause.EXPIRED ||
+                            removalNotification.getCause() == RemovalCause.EXPLICIT) {
+                        log.info("on removal: " + removalNotification.getKey() + " >>> " + removalNotification.getValue());
                     }
                 }
         );
