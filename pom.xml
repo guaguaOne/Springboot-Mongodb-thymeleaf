@@ -167,6 +167,11 @@
             <version>20.0</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.lognet</groupId>-->
+            <!--<artifactId>org.lognet:grpc-spring-boot-starter</artifactId>-->
+            <!--<version>0.0.7</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>io.grpc</groupId>
@@ -238,6 +243,11 @@
         </extensions>
 	</build>
     <repositories>
+        <!--<repository>-->
+            <!--<id>grpc</id>-->
+            <!--<name>grpc</name>-->
+            <!--<url>http://oss.jfrog.org/oss-snapshot-local</url>-->
+        <!--</repository>-->
         <repository>
             <id>spring-releases</id>
             <name>Spring Releases</name>
