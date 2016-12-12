@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
-//    @RequestMapping("/")
-//    public String index()
-//    {
-//        return "index";
-//    }
-//
-//    @PostMapping("/hello"  )
-//    public String hello(ModelMap map) {
-////        Manager.TestConfig(this);
-//
-//        map.addAttribute("host", "1dfdfs111");
-//
-//        return "hello";
-//    }
-//
-//    @RequestMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
+    @RequestMapping("/")
+    public String index()
+    {
+        return "index";
+    }
+
+    @PostMapping("/hello"  )
+    public String hello(ModelMap map) {
+//        Manager.TestConfig(this);
+
+        map.addAttribute("host", "1dfdfs111");
+
+        return "hello";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

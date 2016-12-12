@@ -1,22 +1,50 @@
 package com.tumei.web;
 
+import com.tumei.web.model.ROLE;
+import com.tumei.web.model.SecUserBean;
+import com.tumei.web.model.SecUserBeanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.SecurityContextConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Created by leon on 2016/11/5.
  */
 @Configuration
 @EnableWebSecurity // 开启安全校验
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
+    @Autowired
+    SecUserBeanRepository userBeanRepository;
+
+    @PostConstruct
+    public void dataInit() {
+        SecUserBean admin = new SecUserBean();
+        admin.setPasswd("leon");
+        admin.setAccount("leon");
+        admin.setRole(ROLE.ADIMN);
+        userBeanRepository.save(admin);
+    }
+
+    @Override
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new MongoUserDetailService();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 只对
-        http.antMatcher("/yxwd");
+        //http.antMatcher("/yxwd");
         http.authorizeRequests() // 定义哪些url需要被保护，哪些不需要
                 .antMatchers("/", "/home", "/logon_any").permitAll() // / 和 /home是可以直接访问的
                 .anyRequest().authenticated() // 其他都需要验证
@@ -30,6 +58,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("leon").password("fuckyou").roles("USER"); // 在内存中的定义一个角色的帐号密码
+        auth.userDetailsService(userDetailsService());
+//        auth.inMemoryAuthentication().withUser("leon").password("fuckyou").roles("USER"); // 在内存中的定义一个角色的帐号密码
     }
 }
