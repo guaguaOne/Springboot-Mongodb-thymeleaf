@@ -91,13 +91,69 @@ body{
 }
 /*信息查询*/
 .container-fluit .row>div.col-xs-10 .search-info{
-	border:1px solid #fff;
+	/*border:1px solid #fff;*/
 	margin-top: 30px;
-	height:400px;
+	height:auto;
+	width:700px;
 }
-input{
-	width: 100%;
+.container-fluit .row>div.col-xs-10 .search-info .show-result{
+	width:712px;
+	height:auto;
+	/*background: #000;*/
+	/*border:1px solid yellow;*/
 }
+.container-fluit .row>div.col-xs-10 .user-action{
+	width:713px;
+	height: auto;
+	/*border:1px solid yellow;*/
+	padding:10px 5px;
+	margin-top:10px;
+}
+.container-fluit .row>div.col-xs-10 .user-action small{
+	text-shadow: 0 0 2px #000;
+}
+.container-fluit .row>div.col-xs-10 .user-action input{
+	width:100px;
+	padding:4px;
+	border-radius:5px;
+	border:2px solid #999;
+	color: #333;
+}
+.container-fluit .row>div.col-xs-10 .user-action .hero{
+	margin-top:15px;
+}
+.breadcrumb>.active{
+	color: #fff;
+	text-shadow: 0 0 1px #000;
+}
+#nosay,#nologin{
+	color: #000;
+}
+#nosay .modal-body input,#nologin .modal-body input{
+	width:60px;
+	padding:4px 0;
+	margin-left:10px;
+}
+#nosay .modal-body select,#nologin .modal-body select{
+	width:100px;
+	padding:6px 0;
+}
+a{
+	color: #5bc0de;
+}
+.badge{
+	background: none;
+}
+.list-group-item{
+	background: none;
+	border:none;
+	border-bottom:1px dashed #999;
+}
+.breadcrumb{
+	background: none;
+	border:2px solid #2aabd2;
+}
+
 @media screen and (min-width:1200px){
 	.modal-content{
 		width:700px;
