@@ -1,5 +1,7 @@
-package com.tumei.web.controller.test;
+package com.tumei.web.controller;
 
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 2. Cache
  */
 @Controller
-public class HelloController {
+public class IndexController {
 
     @RequestMapping("/")
     public String index()
@@ -20,12 +22,10 @@ public class HelloController {
         return "index";
     }
 
-    @PostMapping("/hello"  )
+    @RequestMapping("/hello")
     public String hello(ModelMap map) {
-//        Manager.TestConfig(this);
-
-        map.addAttribute("host", "1dfdfs111");
-
+        SecurityContext sc = SecurityContextHolder.getContext();
+        map.addAttribute("account", sc.getAuthentication().getName());
         return "hello";
     }
 
@@ -33,4 +33,9 @@ public class HelloController {
     public String login() {
         return "login";
     }
+
+//    @RequestMapping("/logout")
+//    public String logout() {
+//        return "index";
+//    }
 }

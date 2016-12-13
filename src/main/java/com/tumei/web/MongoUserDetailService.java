@@ -2,6 +2,8 @@ package com.tumei.web;
 
 import com.tumei.web.model.SecUserBean;
 import com.tumei.web.model.SecUserBeanRepository;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +19,8 @@ import java.util.List;
  * Created by leon on 2016/12/12.
  */
 public class MongoUserDetailService implements UserDetailsService {
+    private Log log = LogFactory.getLog(MongoUserDetailService.class);
+
     @Autowired
     private SecUserBeanRepository secUserBeanRepository;
 
@@ -27,7 +31,10 @@ public class MongoUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("not found");
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(userBean.getRole().name()));
+
+        log.info(" 增加权限: " + userBean.getRole());
+
+        authorities.add(new SimpleGrantedAuthority(userBean.getRole()));
         return new User(userBean.getAccount(), userBean.getPasswd(), authorities);
     }
 }

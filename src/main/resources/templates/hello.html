@@ -5,6 +5,9 @@
     <title>Hello World!</title>
 </head>
 <body>
-<h1 th:text="${host}">Hello world!</h1>
+<h1 th:text="${account}">Hello World</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="注销"/>
+</form>
 </body>
 </html>
