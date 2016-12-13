@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
-import javax.jws.Oneway;
 
 /**
  * 英雄无敌 游戏的特有配置

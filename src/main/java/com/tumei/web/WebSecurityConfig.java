@@ -30,6 +30,9 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("leon").password("fuckyou").roles("USER"); // 在内存中的定义一个角色的帐号密码
+        auth.inMemoryAuthentication()
+                .withUser("leon")
+                .password("fuckyou")
+                .roles("USER"); // 在内存中的定义一个角色的帐号密码
     }
 }

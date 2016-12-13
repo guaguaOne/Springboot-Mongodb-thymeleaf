@@ -69,4 +69,6 @@ public class RunnerBean implements CommandLineRunner, ApplicationContextAware {
         ctx = (ConfigurableApplicationContext)applicationContext;
     }
 
+
+
 }

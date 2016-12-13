@@ -1,0 +1,41 @@
+server:
+    port: 8000
+    address: 0.0.0.0
+
+banner:
+    charset: UTF-8
+
+debug: false
+logging:
+    level:
+        com.tumei: DEBUG
+spring:
+    output:
+        ansi:
+            enabled: DETECT
+
+management:
+    port: 7777
+
+runner:
+    version: 2.2.3
+    name: 1.1.2
+
+io:
+    tcp:
+        host: 0.0.0.0
+        port: 5000
+        backlog: 101
+
+game:
+    version: 1.0.0
+
+db:
+    centerurl: mongodb://leon:Fuckyou1@115.159.205.176
+    centerdb: center
+    gameurl: mongodb://leon:Fuckyou1@115.159.205.176
+    gamedb: y3
+
+dao:
+    initdelay: 10
+    delay: 10

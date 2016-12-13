@@ -9,17 +9,19 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 @EnableScheduling
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class Entry {
     private static final Log log = LogFactory.getLog(Entry.class);
 
     private static ApplicationContext applicationContext;
 
     public static void main(String[] args) {
-        log.info("中文字体..");
+//        log.info("中文字体..");
         applicationContext = SpringApplication.run(Entry.class, args);
     }
 
