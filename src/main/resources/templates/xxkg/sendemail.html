@@ -20,33 +20,69 @@
         <div class="row">
             <div th:replace="xxkg/header :: copy">这里将要引入一个外部片段</div>
             <div class="col-xs-10 right">
-                <div class="send-email">
-                    <from class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <lable class="col-sm-2 control-lable">对方ID:</lable>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="12345;6789"/>
+                <div class="about-email">
+                    <div class="send-email">
+                        <from class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <lable class="col-sm-2 control-lable">对方ID:</lable>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="12345;6789"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <lable class="col-sm-2 control-lable">邮件标题:</lable>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="标题..."/>
+                            <div class="form-group">
+                                <lable class="col-sm-2 control-lable">邮件标题:</lable>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="标题..."/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <lable class="col-sm-2 control-lable">邮件内容:</lable>
-                            <div class="col-sm-10">
-                                <textarea cols="50" rows="20" class="form-control" placeholder="邮件内容..."></textarea>
+                            <div class="form-group">
+                                <lable class="col-sm-2 control-lable">邮件内容:</lable>
+                                <div class="col-sm-10">
+                                    <textarea cols="50" rows="20" class="form-control" placeholder="邮件内容..."></textarea>
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <lable class="col-sm-2 control-lable">附带奖励:</lable>
+                                <div class="col-sm-10">
+                                    <div class="form-control" id="put-result">
+                                    </div>
+                                </div>
+                            </div>
+                        </from>
+                        <button class="btn btn-info pull-right">发送</button>
+                        <p style="padding-left:130px;font-size: smaller;">*(若邮件为群发，则中间以分号隔开)</p>
+                    </div>
+                    <div class="search-awards">
+                        <div class="key">
+                            <input type="search" placeholder="请输入关键字..."/>
+                            <span class="glyphicon glyphicon-search"></span>
                         </div>
-                    </from>
-                    <button class="btn btn-info pull-right">发送</button>
-                    <p style="padding-left:130px;font-size: smaller;">*(若邮件为群发，则中间以分号隔开)</p>
+                        <div class="result">
+                            <ul class="list-group">
+                                <li class="list-group-item" alt="1">金币</li>
+                                <li class="list-group-item" alt="1">6级女神之泪</li>
+                                <li class="list-group-item" alt="1">2级恶魔之眼</li>
+                                <li class="list-group-item" alt="1">藏宝图</li>
+                                <li class="list-group-item" alt="1">蜡烛</li>
+                                <li class="list-group-item" alt="1">金币</li>
+                                <li class="list-group-item" alt="1">6级女神之泪</li>
+                                <li class="list-group-item" alt="1">2级恶魔之眼</li>
+                                <li class="list-group-item" alt="1">藏宝图</li>
+                                <li class="list-group-item" alt="1">蜡烛</li>
+                                <li class="list-group-item" alt="1">金币</li>
+                                <li class="list-group-item" alt="1">6级女神之泪</li>
+                                <li class="list-group-item" alt="1">2级恶魔之眼</li>
+                                <li class="list-group-item" alt="1">藏宝图</li>
+                                <li class="list-group-item" alt="1">蜡烛</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="../../static/js/xxkg/sendemail.js" th:src="@{../js/xxkg/sendemail.js}"></script>
 </body>
 </html>

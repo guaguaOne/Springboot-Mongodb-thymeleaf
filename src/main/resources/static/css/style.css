@@ -1,8 +1,57 @@
 ::-webkit-scrollbar{
 	width: 2px;
 }
+/*登录*/
+#login-register{
+	border:2px solid #333;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	/*background: url('../image/1.jpeg');*/
+	background-size: 100% 100%;
+}
+#login-register .row .col-xs-8{
+	/*border:1px solid yellow;*/
+	margin-top:40%;
+	width:600px;
+	padding:20px;
+}
+#login-register .row .col-xs-8 .form-group{
+	/*border:1px solid yellow;*/
+}
+#login-register .row .col-xs-8 .form-group lable{
+	/*border:1px solid green;*/
+	line-height:32px;
+	color: #fff;
+	text-shadow: 0 0 1px #000;
+	text-align: right;
+}
+#login-register .row .col-xs-8 .login,.register{
+	/*border:1px solid yellow;*/
+	text-align: center;
+	text-shadow: 0 0 1px #fff;
+}
+#login-register .row .col-xs-8 fieldset{
+	border:2px solid #3f9ad6;
+	padding:15px 50px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+#login-register .row .col-xs-8 fieldset legend{
+	border:0;
+	width:auto;
+}
+#login-register .row .col-xs-8 fieldset legend h2{
+	color: #3f9ad6;
+}
+
+
+
+
+
 #main{
-	border: 1px solid green;
+	/*border: 1px solid green;*/
 	padding:0;
 	position: absolute;
 	height: 100%;

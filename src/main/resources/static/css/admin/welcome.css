@@ -1,0 +1,18 @@
+#welcome{
+    margin-top:80px;
+    /*display: none;*/
+    /*border:1px solid red;*/
+}
+#welcome .info{
+    width:80%;
+    margin:0 auto;
+    /*border:1px solid green;*/
+}
+#welcome .info .page-header h2{
+    text-align: center;
+}
+#welcome .info section{
+    text-indent:3em;
+    line-height: 25px;
+    letter-spacing:2px;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/style.css}"/>
+    <script src="js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div id="admin">
+    <fieldset>
+        <legend><b>注册</b></legend>
+        <!--<form  role="form" class="form-horizontal" th:action="@{/management/register}" method="get">-->
+        <div class="form-group">
+            <label class="col-xs-2 control-lable">账号</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control account" name="account" placeholder="请输入账号..."/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-lable">密码</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control password" name="passwd" placeholder="请输入密码..."/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="form-group admin-login">
+            <button class="btn btn-info btn-block" type="submit">注册</button>
+            <small><a th:href="@{login.html}">(已有账号? 登录)</a></small>
+        </div>
+        <!--</form>-->
+        <div class="alert alert-success">注册成功!</div>
+        <div class="alert alert-danger">账号已被注册!</div>
+    </fieldset>
+</div>
+<script th:src="@{/js/admin/register.js}"></script>
+</body>
+</html>

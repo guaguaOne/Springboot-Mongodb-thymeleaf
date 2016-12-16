@@ -67,4 +67,5 @@ public class Response extends BaseProtocol {
             session.warn("当前状态不允许登录: %s", status);
         }
     }
+
 }

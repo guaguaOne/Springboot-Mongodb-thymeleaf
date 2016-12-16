@@ -1,0 +1,126 @@
+.clear{
+    clear: both;
+}
+#admin{
+    position: absolute;
+    top:50%;
+    width:100%;
+    height:500px;
+    margin-top:-250px;
+    border:1px solid #333;
+    background: url("../../image/3.png");
+    background-size: 100% 100%;
+}
+#admin fieldset{
+    width:600px;
+    margin:150px auto;
+    padding:20px 30px;
+    border:2px solid #5bc0de;
+    border-radius: 10px;
+}
+#admin fieldset legend{
+    width:auto;
+    border:0;
+    color: #5bc0de;
+    text-shadow: 0 0 1px #000;
+}
+#admin fieldset .form-group{
+    /*border:1px solid red;*/
+    padding:0;
+    width:400px;
+    margin: 10px auto;
+}
+#admin fieldset .form-group label{
+    line-height: 32px;
+    text-align: right;
+    color: #666;
+}
+#admin fieldset .admin-login{
+    /*border:1px solid red;*/
+    padding:0 15px 0 83px;
+    text-align: center;
+}
+#admin .alert{
+    position: absolute;
+    top:50%;
+    left:45%;
+    display: none;
+}
+/*用户信息*/
+#user{
+    /*border:1px solid red;*/
+    position: relative;
+}
+nav{
+    padding:0 20px;
+    /*border:1px solid red;*/
+}
+nav .navbar-header h2{
+    /*border:1px solid #333;*/
+}
+nav ul.nav{
+    margin-top:5px;
+}
+nav ul.nav li{
+    margin-right:10px;
+    /*border:1px solid mediumvioletred;*/
+}
+nav ul.nav li.face{
+    width:52px;
+    height:52px;
+    border-radius: 26px;
+    overflow: hidden;
+    border:1px solid #666;
+}
+nav ul.nav li.face a{
+     padding:0;
+ }
+#user nav ul.nav li.exit a{
+    padding:10px 0px;
+}
+#user .left{
+    position: absolute;
+    /*border:1px solid indianred;*/
+    width:260px;
+    top:80px;
+}
+#user .left h3{
+    padding-left:30px;
+}
+#user .left .list-group-item{
+    padding-left:30px;
+}
+#user .left .list-group-item:not(:first-child):hover{
+    background:#428bca;
+}
+#user .left .list-group-item:hover a{
+    color: #fff;
+}
+#user .left li.active a{
+    color: #fff;
+}
+#user .right{
+    position: absolute;
+    width:75%;
+    margin-left:270px;
+    /*border:1px solid red;*/
+}
+#user .right .breadcrumb{
+    margin-top:80px;
+    border:1px solid #4d90b4;
+}
+#user .user-list .pagination{/*分页*/
+
+}
+#user .user-detail{
+    /*display: none;*/
+}
+#user .user-detail .person{
+    /*border:1px solid #333;*/
+}
+#user .user-detail .person .person-info{
+    /*border:1px solid red;*/
+}
+#user .user-detail .person .add-pri div.checkbox{
+    margin:0 10px;
+}

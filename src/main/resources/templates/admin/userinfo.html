@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/welcome.css}"/>
+    <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<div th:replace="admin/nav :: nav"></div>
+<!--/*@thymesVar id="role" type="templates"*/-->
+<div id="user" th:if="${role==0}">
+    <div th:replace="admin/header :: header"></div>
+        <div class="right user-list">
+            <ol class="breadcrumb">
+                <li><a href="#">权限管理</a></li>
+                <li>当前注册用户</li>
+            </ol>
+            <ul class="list-group">
+                <li class="list-group-item" th:text="${name}"></li>
+                <!--/*@thymesVar id="test" type="templates"*/-->
+                <li class="list-group-item" th:text="${test}"></li>
+            </ul>
+            <ul class="pagination pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+        <div class="right user-detail hide">
+            <ol class="breadcrumb">
+                <li><a href="#">权限管理</a></li>
+                <li><a href="/admin/userinfo.html">当前注册用户</a></li>
+                <li class="curr">柴田</li>
+            </ol>
+            <div class="person">
+                <div class="page-header">
+                    <h4>用户信息</h4>
+                </div>
+                <div class="person-info">
+                    <ul class="list-group">
+                    </ul>
+                </div>
+                <div class="page-header">
+                    <h4>可用权限</h4>
+                </div>
+                <div class="add-pri form-inline form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/>ADMIN
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/>USER
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/>XXKG
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/>YXWD
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/>OWNER
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-primary pull-right">确定</button>
+            </div>
+        </div>
+
+</div>
+<div id="welcome" th:if="${role==1}">
+    <div class="info">
+        <div class="page-header">
+            <h2>公司简介</h2>
+        </div>
+        <section>
+            上海兔美游戏公司成立于XXXX年XX月，公司致力于精品手机游戏自研，公司核心团队有过多年游戏开发经验，成功主导多款游戏上线运营，
+            作为一个初创型的游戏公司，我们已完成了数百万的天使投资。目前投入市场手游有矿工物语、英雄无敌等，在本公司开发的游戏中，90%
+            以上的游戏下载量高达100万人次。
+        </section>
+        <section>
+            现在我们迫切的需要一些不安于现状，有奋斗精神的游戏人才加入我们，一起完成精品游戏，打造一流的游戏公司。
+            我们提供武汉有竞争力的薪资，并且给予初期加入团队的人员丰厚的项目分红，如果你热爱游戏，如果你不想被束缚，如果你有能力，有梦想，
+            请加入我们，一起奋斗吧！
+        </section>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/admin/userinfo.js}"></script>
+</body>
+</html>

@@ -7,13 +7,18 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  *
@@ -21,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
  *
  */
 @RestController
-@RequestMapping("/management")
+@RequestMapping({"/management"})
 public class WebController {
     private Log log = LogFactory.getLog(WebController.class);
 
@@ -51,7 +56,7 @@ public class WebController {
                     paramType = "query")
     })
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ReturnVal Register(@RequestParam String account, @RequestParam String passwd) {
+    public ReturnVal Register(@RequestParam String account, @RequestParam String passwd ) {
         log.info("注册帐号:" + account + ", " + passwd);
 
         // 对注册帐号函数进行保护，时间和IP间隔
@@ -78,11 +83,11 @@ public class WebController {
     @ApiImplicitParam(name = "page", value = "页数", required = true, dataType = "Long",
             paramType = "query", defaultValue = "0"),
     @ApiImplicitParam(name = "size", value = "每页显示的条目", required = true, dataType = "int",
-            paramType = "query", defaultValue = "15")
+            paramType = "query", defaultValue = "10")
     })
     @RequestMapping(value = "/getAccounts", method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public Page<SecUserBean> getAccounts(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "15") Integer size) {
+    public Page<SecUserBean> getAccounts(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "15") Integer size , ModelMap map) {
 //        SecurityContext sc = SecurityContextHolder.getContext();
 
         // 对注册帐号函数进行保护，时间和IP间隔
@@ -96,9 +101,9 @@ public class WebController {
             @ApiImplicitParam(name = "account", value = "帐号名", required = true, dataType = "String",
                     paramType = "query")
     })
-    @RequestMapping(value = "/getAccount", method = RequestMethod.GET)
+    @RequestMapping(value = {"/getAccount"}, method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public SecUserBean getAccount(@RequestParam(value = "account") String account) {
+    public SecUserBean getAccount(@RequestParam(value = "account") String account ) {
         return repository.findByAccount(account);
     }
 

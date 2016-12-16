@@ -66,11 +66,11 @@
                         <li><a href="">查询信息</a></li>
                         <li class="active">增加玩家物品</li>
                     </ol>
-                    <div class="good">物品 : <button class="btn btn-primary">点击选择物品</button>&nbsp;&nbsp;
+                    <div class="good">物品 : <button class="btn btn-primary name" data-target="#choose-good" data-toggle="modal">点击选择物品</button>&nbsp;&nbsp;
                         数量 : <input type="number" placeholder="请输入数量..."/>&nbsp;&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-success">添加</button>
                     </div>
-                    <div class="hero">英雄 : <button class="btn btn-primary">点击选择英雄</button>&nbsp;&nbsp;
+                    <div class="hero">英雄 : <button class="btn btn-primary name" data-target="#choose-hero" data-toggle="modal">点击选择英雄</button>&nbsp;&nbsp;
                         数量 : <input type="number" placeholder="请输入数量..."/>&nbsp;&nbsp;&nbsp;&nbsp;
                         <button class="btn btn-success">添加</button>
                     </div>
@@ -106,7 +106,7 @@
                                 <h3>禁止玩家登陆<small> (*禁言后玩家将不能登陆游戏)</small></h3>
                             </div>
                             <div class="modal-body">
-                                <button class="btn btn-warning">禁言登陆时间</button><input type="text" value="1"/>
+                                <button class="btn btn-warning">禁止登陆时间</button><input type="text" value="1"/>
                                 <select>
                                     <option value="1">小时</option>
                                     <option value="2">天</option>
@@ -117,6 +117,166 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                 <button type="button" class="btn btn-primary">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="choose-good" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div class="col-sm-2" style="line-height:30px;"><b>物品奖励</b></div>
+                                    <div class="col-sm-5"></div>
+                                    <div class="col-sm-5">
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <input type="text" placeholder="关键字..."/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-2"><p alt="1">金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="choose-hero" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div class="col-sm-2" style="line-height:30px;"><b>英雄奖励</b></div>
+                                    <div class="col-sm-5"></div>
+                                    <div class="col-sm-5">
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <input type="text" placeholder="关键字..."/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-2"><p alt="22">金币</p></div>
+                                    <div class="col-sm-2"><p alt="5">钻石</p></div>
+                                    <div class="col-sm-2"><p alt="12">水晶石</p></div>
+                                    <div class="col-sm-2"><p alt="24">鸡蛋</p></div>
+                                    <div class="col-sm-2"><p alt="54">巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p alt="32">奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p alt="54">金币</p></div>
+                                    <div class="col-sm-2"><p alt="32">钻石</p></div>
+                                    <div class="col-sm-2"><p alt="72">水晶石</p></div>
+                                    <div class="col-sm-2"><p alt="21">鸡蛋</p></div>
+                                    <div class="col-sm-2"><p alt="24">巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p alt="32">奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p alt="24">金币</p></div>
+                                    <div class="col-sm-2"><p alt="54">钻石</p></div>
+                                    <div class="col-sm-2"><p alt="76">水晶石</p></div>
+                                    <div class="col-sm-2"><p alt="87">鸡蛋</p></div>
+                                    <div class="col-sm-2"><p alt="45">巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p alt="65">奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p alt="62">金币</p></div>
+                                    <div class="col-sm-2"><p alt="29">钻石</p></div>
+                                    <div class="col-sm-2"><p alt="32">水晶石</p></div>
+                                    <div class="col-sm-2"><p alt="298">鸡蛋</p></div>
+                                    <div class="col-sm-2"><p alt="52">巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p alt="44">奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"><p>金币</p></div>
+                                    <div class="col-sm-2"><p>钻石</p></div>
+                                    <div class="col-sm-2"><p>水晶石</p></div>
+                                    <div class="col-sm-2"><p>鸡蛋</p></div>
+                                    <div class="col-sm-2"><p>巴拉拉能量</p></div>
+                                    <div class="col-sm-2"><p>奥特曼</p></div>
+                                </div>
                             </div>
                         </div>
                     </div>

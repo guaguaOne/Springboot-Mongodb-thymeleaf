@@ -1,6 +1,9 @@
 body{
 	overflow-x: hidden;
 }
+.clear{
+	clear: both;
+}
 #main .container-fluit .row>div.col-xs-10 .nav{
 	/*border: 1px solid yellow;*/
 	color: #fff;
@@ -15,7 +18,7 @@ body{
 .container-fluit .row>div.col-xs-10 .server-enter .container{
 	border-bottom: 1px solid #fff;
 	height: 400px;
-	overflow-y:scroll; 
+	overflow-y:scroll;
 }
 .container-fluit .row>div.col-xs-10 .server-enter .container .row{
 	margin-top: 15px;
@@ -26,7 +29,6 @@ body{
 }
 .modal-dialog{
 	margin-top: 200px;
-	margin-left: 40%;
 }
 .modal-header{
 	border-bottom: none;
@@ -74,20 +76,40 @@ body{
 	position: relative;
 	color: #fff;
 }
+.container-fluit .row>div.col-xs-10 .about-email{
+	/*border:1px solid yellow;*/
+	width:1012px;
+}
 .container-fluit .row>div.col-xs-10 .send-email{
-	/*border:1px solid #fff;*/
 	width:800px;
 	height: 600px;
-	position: absolute;
-	top:50%;
-	left:40%;
-	margin-left: -400px;
-	margin-top:-300px;
 	padding:10px;
+	margin-top:100px;
+	float: left;
+}
+.container-fluit .row>div.col-xs-10 .search-awards .result{
+	margin-top:10px;
+	height:475px;
+	overflow-y: scroll;
+	border:1px solid #999;
+}
+.container-fluit .row>div.col-xs-10 .search-awards .key{
+	border:1px solid #999;
+}
+.container-fluit .row>div.col-xs-10 .search-awards input{
+	color: #666;
 }
 .container-fluit .row>div.col-xs-10 .send-email lable{
 	text-align: right;
 	padding:5px 0;
+}
+.container-fluit .row>div.col-xs-10 .send-email textarea{
+	resize: none;
+}
+.container-fluit .row>div.col-xs-10 .search-awards{
+	width:200px;
+	float: right;
+	margin-top:110px;
 }
 /*信息查询*/
 .container-fluit .row>div.col-xs-10 .search-info{
@@ -126,7 +148,7 @@ body{
 	color: #fff;
 	text-shadow: 0 0 1px #000;
 }
-#nosay,#nologin{
+#nosay,#nologin,#choose-good,#choose-hero{
 	color: #000;
 }
 #nosay .modal-body input,#nologin .modal-body input{
@@ -138,6 +160,220 @@ body{
 	width:100px;
 	padding:6px 0;
 }
+#choose-good .modal-header,#choose-hero .modal-header{
+	padding-bottom:5px;
+	border-bottom:1px solid #ccc;
+}
+#choose-good .modal-body,#choose-hero .modal-body{
+	height:300px;
+	overflow-y: scroll;
+}
+#choose-good .row{
+	/*border:1px solid #333;*/
+}
+#choose-good .row input,#choose-hero .row input{
+	width:100%;
+	line-height: 25px;
+	text-indent: 5px;
+}
+#choose-good .row span.glyphicon,#choose-hero .row span.glyphicon{
+	/*border:1px solid green;*/
+	line-height: 30px;
+}
+#choose-good .row .col-sm-4,#choose-hero .row .col-sm-4{
+	padding-left:0px;
+}
+#choose-good .modal-body .row .col-sm-2,#choose-hero .modal-body .row .col-sm-2{
+	/*border:1px solid #333;*/
+	padding:0px 5px;
+}
+#choose-good .modal-body .row .col-sm-2 p,#choose-hero .modal-body .row .col-sm-2 p{
+	border:1px solid #2a6496;
+	color: #2a6496;
+	line-height: 35px;
+	text-align: center;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	cursor: pointer;
+}
+#choose-good .modal-body .row .col-sm-2 p:hover,#choose-hero .modal-body .row .col-sm-2 p:hover{
+	background: #007ab8;
+	color: #fff;
+}
+/*指令记录*/
+#order-write{
+	padding:20px 100px 20px 0;
+	height:600px;
+	/*border:1px solid yellow;*/
+}
+#order-write .row{
+	text-align: center;
+	/*border:1px solid yellow;*/
+}
+#order-write .row>div{
+	line-height:35px;
+}
+#order-write .nav>div{
+	line-height: 45px;
+	font-weight:bolder;
+	letter-spacing: 2px;
+	border-bottom:2px solid #fff;
+}
+#order-write .row:not(:first-child){
+	border-bottom:1px dashed #999;
+}
+.order-write-pagination{
+	padding-right:100px;
+}
+/*多邮件发送*/
+#about-mails{
+	/*border:1px solid yellow;*/
+	width:1012px;
+}
+#about-mails .many-email{
+	width:800px;
+	height: 600px;
+	padding:10px;
+	margin-top:100px;
+	float: left;
+}
+#about-mails .many-email lable{
+	text-align: right;
+	padding:5px 0;
+}
+#about-mails .many-email textarea{
+	resize: none;
+}
+/*多邮件发送*/
+#about-message{
+	/*border:1px solid yellow;*/
+}
+#about-message .page-body{
+	padding-bottom:50px;
+	border-bottom:1px solid #fff;
+}
+#about-message .page-body button{
+	margin: 0px 10px 10px 10px;
+}
+#about-message .page-body button.btn-danger{
+	margin-right:50px;
+}
+#about-message .btn-info.active{
+	background: #005982;
+}
+#about-message .row{
+	margin-top:30px;
+}
+#about-message .row>div{
+	/*border:1px solid greenyellow;*/
+}
+#about-message .row b{
+	line-height:30px;
+	letter-spacing: 2px;
+	padding:10px 0;
+	margin-top:5px;
+}
+#about-message .row textarea{
+	height:160px;
+	resize: none;
+}
+#about-message .row .input-group{
+	margin-top:8px;
+}
+#about-message .message-result{
+	margin-top:30px;
+	border:2px solid #999;
+	width:800px;
+	height:300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding-bottom:10px;
+}
+#about-message .message-result .row{
+	margin-top:0;
+	padding:5px 0;
+	border-bottom:1px dashed #fff;
+}
+#about-message .message-result .row>div{
+	/*border:1px solid indianred;*/
+	text-align: center;
+	line-height: 25px;
+	text-shadow: 0 0 1px #000;
+}
+/*礼包生成*/
+#about-gift{
+	width:1000px;
+}
+#about-gift .normal-gift,.bug-gift,.init-gift{
+	border:1px solid #fff;
+	margin-top:30px;
+}
+#about-gift .normal-gift .form-group,.bug-gift .form-group,.init-gift .form-group{
+	margin-top:10px;
+	/*border:1px solid yellow;*/
+}
+#about-gift .normal-gift .form-group lable,.bug-gift .form-group,.init-gift .form-group{
+	line-height:32px;
+	text-align: right;
+}
+#about-gift .normal-gift .search,.bug-gift .search,.init-gift .search{
+	/*border:1px solid #fff;*/
+	width:215px;
+	margin-top:10px;
+}
+#about-gift .normal-gift .search .search-box,.bug-gift .search .search-box,.init-gift .search .search-box{
+	border:1px solid #fff;
+	color: #333;
+}
+#about-gift .normal-gift .search .list-group,.bug-gift .search .list-group,.init-gift .search .list-group{
+	border:1px solid #fff;
+	height:310px;
+	overflow-y: scroll;
+	margin-top:8px;
+}
+#about-gift .normal-gift .form-group .put-box,.bug-gift .form-group .put-box,.init-gift .form-group .put-box{
+	height:200px;
+	overflow-y: scroll;
+}
+#about-gift .normal-gift .form-group .put-box .row:not(:first-child),.bug-gift .form-group .put-box .row:not(:first-child),.init-gift .form-group .put-box .row:not(:first-child){
+	border-bottom: 1px dashed #999;
+	line-height:30px;
+}
+#about-gift .normal-gift .form-group .put-box .row>div,.bug-gift .form-group .put-box .row>div,.init-gift .form-group .put-box .row>div{
+	text-align: center;
+}
+/*条件查询*/
+#about-search{
+	width:1000px;
+	/*border:1px solid yellow;*/
+}
+#about-search .list-group{
+	padding:20px 0;
+	/*border:1px solid yellow;*/
+	border-bottom:1px solid #fff;
+}
+#about-search .list-group .list-group-item button{
+	margin-right:20px;
+}
+#about-search .list-group .list-group-item input{
+	width:80px;
+	line-height:26px;
+	border:0px;
+	text-align: center;
+	background: transparent;
+	border-bottom:1px solid #fff;
+}
+#about-search .list-group .list-group-item small{
+	color: #999;
+}
+#about-search .show-result{
+	padding:0;
+	height:300px;
+	overflow-y: scroll;
+	border:2px solid #999;
+}
+	/**/
 a{
 	color: #5bc0de;
 }
