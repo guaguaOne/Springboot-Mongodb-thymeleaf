@@ -12,79 +12,34 @@
 </head>
 <body>
 <div th:replace="admin/nav :: nav"></div>
-<!--/*@thymesVar id="role" type="templates"*/-->
-<div id="user" th:if="${role==0}">
+<div id="user" th:if="${role=='ADMIN'}"><!--ADMIN显示-->
     <div th:replace="admin/header :: header"></div>
-        <div class="right user-list">
-            <ol class="breadcrumb">
-                <li><a href="#">权限管理</a></li>
-                <li>当前注册用户</li>
-            </ol>
-            <ul class="list-group">
-                <li class="list-group-item" th:text="${name}"></li>
-                <!--/*@thymesVar id="test" type="templates"*/-->
-                <li class="list-group-item" th:text="${test}"></li>
-            </ul>
-            <ul class="pagination pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
-        </div>
-        <div class="right user-detail hide">
-            <ol class="breadcrumb">
-                <li><a href="#">权限管理</a></li>
-                <li><a href="/admin/userinfo.html">当前注册用户</a></li>
-                <li class="curr">柴田</li>
-            </ol>
-            <div class="person">
-                <div class="page-header">
-                    <h4>用户信息</h4>
-                </div>
-                <div class="person-info">
-                    <ul class="list-group">
-                    </ul>
-                </div>
-                <div class="page-header">
-                    <h4>可用权限</h4>
-                </div>
-                <div class="add-pri form-inline form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/>ADMIN
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/>USER
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/>XXKG
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/>YXWD
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"/>OWNER
-                        </label>
-                    </div>
-                </div>
-                <button class="btn btn-primary pull-right">确定</button>
+    <div class="right user-list">
+        <ol class="breadcrumb">
+            <li><a href="#">权限管理</a></li>
+            <li>当前注册用户</li>
+        </ol>
+        <ul class="list-group">
+            <div th:each="list : ${list}">
+                <li class="list-group-item">
+                    <a href="#" class="account" th:text="${list.account}"></a>
+                    <a href="#">---创建于</a>
+                    <a href="#" th:text="${{list.createtime}}"></a>
+                </li>
             </div>
-        </div>
-
+        </ul>
+        <ul class="pagination pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
 </div>
-<div id="welcome" th:if="${role==1}">
+<div id="welcome" th:if="${role=='USER'}"><!--USER显示-->
     <div class="info">
         <div class="page-header">
             <h2>公司简介</h2>
@@ -101,6 +56,16 @@
         </section>
     </div>
 </div>
+<div id="xxkg" th:if="${role=='XXKG'}"><!--小小矿工-->
+    小小矿工
+</div>
+<div id="yxwd" th:if="${role=='YXWD'}"><!--英雄无敌-->
+    英雄无敌
+</div>
+<div id="owner" th:if="${role=='OWNER'}"><!--OWNER-->
+    OWNER
+</div>
+
 <script type="text/javascript" th:src="@{/js/admin/userinfo.js}"></script>
 </body>
 </html>

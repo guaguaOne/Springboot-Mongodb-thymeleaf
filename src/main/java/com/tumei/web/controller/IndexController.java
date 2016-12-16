@@ -1,24 +1,27 @@
 package com.tumei.web.controller;
-import com.google.gson.JsonObject;
+import com.tumei.web.controller.platform.WebController;
+import com.tumei.web.model.ROLE;
+import com.tumei.web.model.SecUserBean;
+import com.tumei.web.model.SecUserBeanRepository;
+import org.apache.catalina.Manager;
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import javax.servlet.http.HttpServlet;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
 
 /**
  * Created by leon on 2016/11/5.
@@ -28,38 +31,81 @@ import java.util.Scanner;
  */
 @Controller
 public class IndexController{
+    @Autowired
+    public SecUserBeanRepository repository;
 
-    @RequestMapping("/")
-    public String index(ModelMap map) throws IOException {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(ModelMap map,@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size ){
         SecurityContext sc = SecurityContextHolder.getContext();
         Authentication auth = sc.getAuthentication();
         String name=auth.getName();
-        Object principal=auth.getPrincipal();
         map.addAttribute("name",name);
-        if(principal instanceof UserDetails){
-            map.addAttribute("role",1);//授权
-        }else{
-            map.addAttribute("role",0);//普通
-        }
-
+        SecUserBean bean = repository.findByAccount(name);
+        String role=bean.getRole();
+        map.addAttribute("role",role);//授权
+        DateTime time=bean.getCreatetime();
+        map.addAttribute("createtime",time.toLocalDate());
+        //获取已经注册用户
+        Sort sort = new Sort(Sort.Direction.DESC, name);
+        Pageable pageable = new PageRequest(page, size, sort);
+        Page<SecUserBean> accounts= repository.findAll(pageable);
+        map.addAttribute("list",accounts);
         return "admin/userinfo";
     }
 
-
+    @RequestMapping(value = "/persondetial",method = RequestMethod.GET)
+    public String getAccount(@RequestParam(value = "account")String account,@RequestParam String curr,ModelMap map){
+        SecUserBean detial=repository.findByAccount(account);
+        map.addAttribute("name",curr);
+        map.addAttribute("detial",detial);
+        return "admin/persondetial";
+    }
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
+    //注册
+    @RequestMapping(value = "/newuser",method = RequestMethod.GET)
+    public String register(@RequestParam(value = "account") String account,@RequestParam(value = "passwd") String passwd,ModelMap map) {
+        SecUserBean bean = repository.findByAccount(account);
+        if (bean != null)
+        {
+            return "已经存在相同的帐号名.";
+        }
+        else
+        {
+            bean = new SecUserBean();
+            bean.setAccount(account);
+            bean.setPasswd(passwd);
+            bean.setRole(ROLE.USER);
+            bean.setCreatetime(DateTime.now());
+            repository.save(bean);
+            map.addAttribute("role","USER");
+            map.addAttribute("name",account);
+            return "login";
+        }
 
+    }
     @RequestMapping("/register")
     public String register() {
         return "register";
     }
 
-    @RequestMapping("/welcome")
-    public String welcome() {
-        return "welcome";
+    //增加权限
+    @RequestMapping(value = "/setAuth", method = RequestMethod.GET)
+    public String setAuth(@RequestParam String account,@RequestParam String curr, @RequestParam String auth,ModelMap map) {
+        SecUserBean userBean = repository.findByAccount(account);
+        if (userBean == null) {
+            return "指定的帐号不存在";
+        }
+        userBean.setRole(auth);
+        repository.save(userBean);
+        SecUserBean detial=repository.findByAccount(account);
+        map.addAttribute("detial",detial);
+        map.addAttribute("name",curr);
+        return "admin/persondetial";
     }
+
 
     @RequestMapping("/xxkg/index")
     public String xxkg() {

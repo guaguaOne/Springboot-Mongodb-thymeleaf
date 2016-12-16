@@ -1,0 +1,9 @@
+#person-detial{
+    width:80%;
+    margin:0 auto;
+    margin-top:120px;
+    /*border:1px solid #333;*/
+}
+#person-detial .person .add-pri .checkbox{
+    margin:0 10px;
+}

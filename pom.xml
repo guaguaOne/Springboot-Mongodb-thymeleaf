@@ -193,6 +193,10 @@
             <artifactId>grpc-stub</artifactId>
             <version>1.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
 
         <!--hibernate 可以映射nosql mongo-->
         <!--<dependency>-->
