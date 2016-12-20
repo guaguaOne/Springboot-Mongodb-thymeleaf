@@ -15,16 +15,23 @@
         <legend><b>注册</b></legend>
         <!--<form  role="form" class="form-horizontal" th:action="@{/management/register}" method="get">-->
         <div class="form-group">
-            <label class="col-xs-2 control-lable">账号</label>
-            <div class="col-xs-10">
+            <label class="col-xs-3 control-lable">账号</label>
+            <div class="col-xs-9">
                 <input type="text" class="form-control account" name="account" placeholder="请输入账号..."/>
             </div>
             <div class="clear"></div>
         </div>
         <div class="form-group">
-            <label class="col-xs-2 control-lable">密码</label>
-            <div class="col-xs-10">
+            <label class="col-xs-3 control-lable">密码</label>
+            <div class="col-xs-9">
                 <input type="text" class="form-control password" name="passwd" placeholder="请输入密码..."/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-lable">密码确认</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control passagin" name="passagin" placeholder="请再次输入密码..."/>
             </div>
             <div class="clear"></div>
         </div>
@@ -33,8 +40,8 @@
             <small><a th:href="@{login.html}">(已有账号? 登录)</a></small>
         </div>
         <!--</form>-->
-        <div class="alert alert-success">注册成功!</div>
         <div class="alert alert-danger">账号已被注册!</div>
+        <div class="alert alert-warning">两次密码不一致!</div>
     </fieldset>
 </div>
 <script th:src="@{/js/admin/register.js}"></script>

@@ -49,15 +49,20 @@ public class IndexController{
         Sort sort = new Sort(Sort.Direction.DESC, name);
         Pageable pageable = new PageRequest(page, size, sort);
         Page<SecUserBean> accounts= repository.findAll(pageable);
+        Iterable<SecUserBean> all=repository.findAll();
+        map.addAttribute("all",all);
         map.addAttribute("list",accounts);
         return "admin/userinfo";
     }
-
+    //用户详情
     @RequestMapping(value = "/persondetial",method = RequestMethod.GET)
     public String getAccount(@RequestParam(value = "account")String account,@RequestParam String curr,ModelMap map){
         SecUserBean detial=repository.findByAccount(account);
         map.addAttribute("name",curr);
         map.addAttribute("detial",detial);
+        //获取系统当前权限
+        ROLE[] role=ROLE.values();
+        map.addAttribute("role",role);
         return "admin/persondetial";
     }
     @RequestMapping("/login")
@@ -84,7 +89,6 @@ public class IndexController{
             map.addAttribute("name",account);
             return "login";
         }
-
     }
     @RequestMapping("/register")
     public String register() {
@@ -93,6 +97,7 @@ public class IndexController{
 
     //增加权限
     @RequestMapping(value = "/setAuth", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String setAuth(@RequestParam String account,@RequestParam String curr, @RequestParam String auth,ModelMap map) {
         SecUserBean userBean = repository.findByAccount(account);
         if (userBean == null) {
@@ -103,9 +108,19 @@ public class IndexController{
         SecUserBean detial=repository.findByAccount(account);
         map.addAttribute("detial",detial);
         map.addAttribute("name",curr);
+        ROLE[] role=ROLE.values();
+        map.addAttribute("role",role);
         return "admin/persondetial";
     }
 
+    //用户中心
+    @RequestMapping(value = "/usercenter",method = RequestMethod.GET)
+    public String userCenter(@RequestParam String curr,ModelMap map){
+        SecUserBean detial=repository.findByAccount(curr);
+        map.addAttribute("name",curr);
+        map.addAttribute("detial",detial);
+        return "usercenter";
+    }
 
     @RequestMapping("/xxkg/index")
     public String xxkg() {

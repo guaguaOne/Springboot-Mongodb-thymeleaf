@@ -47,29 +47,9 @@
                 <h4>可用权限</h4>
             </div>
             <div class="add-pri form-inline form-group">
-                <div class="checkbox">
+                <div class="checkbox" th:each="role : ${role}">
                     <label>
-                        <input type="checkbox" value="ADMIN"/>ADMIN
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="USER"/>USER
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="XXKG"/>XXKG
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="YXWD"/>YXWD
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="OWNER"/>OWNER
+                        <input type="checkbox" th:value="${role}" th:text="${role}"/>
                     </label>
                 </div>
             </div>

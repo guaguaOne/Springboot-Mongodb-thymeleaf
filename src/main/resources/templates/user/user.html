@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <title>兔美游戏后台权限管理</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/admin/style.css}"/>
-    <link rel="stylesheet" th:href="@{/css/admin/welcome.css}"/>
-    <script src="js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
-    <script src="js/bootstrap.min.js"></script>
-
 </head>
 <body>
-<div id="user">
-    <div th:replace="admin/nav :: nav"></div>
-</div>
-<div id="welcome">
+<div th:fragment="user">
     <div class="info">
         <div class="page-header">
             <h2>公司简介</h2>
@@ -31,6 +22,5 @@
         </section>
     </div>
 </div>
-<script th:src="@{/js/admin/welcome.js}"></script>
 </body>
 </html>

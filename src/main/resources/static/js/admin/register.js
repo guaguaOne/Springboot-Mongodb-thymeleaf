@@ -5,32 +5,28 @@ $(document).ready(function(){
     $('#admin button').click(function(){
         var account=$('#admin .form-group input.account').val();
         var password=$('#admin .form-group input.password').val();
-        location.href="http://localhost:8000/newuser?account="+account+"&passwd="+password;
-        // $.ajax({
-        //     type:'get',
-        //     url:'/management/register',
-        //     data:{
-        //         account:account,
-        //         passwd:password
-        //     },
-        //     success:function(msg){
-        //         console.log(msg);
-        //         if(msg.code==0){
-        //             $('#admin .alert-success').fadeIn(800,function(){
-        //                 $(this).fadeOut(1000,function(){
-        //                     location.href="/";
-        //                 });
-        //             })
-        //         }
-        //         if(msg.code==-1){
-        //             $('#admin .alert-danger').fadeIn(800,function(){
-        //                 $(this).fadeOut(1000);
-        //             })
-        //         }
-        //     },
-        //     error:function(msg){
-        //         console.log(msg);
-        //     }
-        // })
+        var passagin=$('#admin .form-group input.passagin').val();
+        if(password==passagin){
+
+            $.ajax({
+                type:'get',
+                url:'/newuser',
+                data:{
+                    account:account,
+                    passwd:password
+                },
+                success:function(msg){
+                    location.href="http://localhost:8000/newuser?account="+account+"&passwd="+password;
+                }
+            })
+        }else{
+            console.log(password);
+            console.log(passagin);
+            $('#admin .alert-warning').fadeIn();
+            setTimeout(function(){
+                $('#admin .alert-warning').fadeOut();
+            },1000);
+        }
+
     });
 })

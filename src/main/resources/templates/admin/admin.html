@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+</head>
+<body>
+<div th:fragment="admin">
+    <div th:replace="admin/header :: header"></div>
+    <div class="right user-list">
+        <ol class="breadcrumb">
+            <li><a href="#">权限管理</a></li>
+            <li>当前注册用户</li>
+        </ol>
+        <ul class="list-group">
+            <div th:each="list : ${list}">
+                <li class="list-group-item">
+                    <a href="#" class="account" th:text="${list.account}"></a>
+                    <a href="#">---创建于</a>
+                    <a href="#" th:text="${{list.createtime}}"></a>
+                </li>
+            </div>
+        </ul>
+        <ul class="pagination pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <!--<li th:each="all,allStat : ${all}"><a th:text="${allStat.count}"></a></li>-->
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

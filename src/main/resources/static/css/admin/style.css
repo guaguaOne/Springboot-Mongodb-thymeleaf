@@ -1,6 +1,9 @@
 .clear{
     clear: both;
 }
+#xxkg,#yxwd,#owner{
+    margin-top:100px;
+}
 #admin{
     position: absolute;
     top:50%;
@@ -34,6 +37,7 @@
     line-height: 32px;
     text-align: right;
     color: #666;
+    /*border:1px solid blue;*/
 }
 #admin fieldset .admin-login{
     /*border:1px solid red;*/
@@ -123,4 +127,12 @@ nav ul.nav li.face a{
 }
 #user .user-detail .person .add-pri div.checkbox{
     margin:0 10px;
+}
+
+/*用户中心*/
+#usercenter{
+    /*border:1px solid red;*/
+    width:80%;
+    margin:0 auto;
+    margin-top:100px;
 }

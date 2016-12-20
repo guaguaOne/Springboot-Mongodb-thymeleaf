@@ -12,60 +12,23 @@
 </head>
 <body>
 <div th:replace="admin/nav :: nav"></div>
-<div id="user" th:if="${role=='ADMIN'}"><!--ADMIN显示-->
-    <div th:replace="admin/header :: header"></div>
-    <div class="right user-list">
-        <ol class="breadcrumb">
-            <li><a href="#">权限管理</a></li>
-            <li>当前注册用户</li>
-        </ol>
-        <ul class="list-group">
-            <div th:each="list : ${list}">
-                <li class="list-group-item">
-                    <a href="#" class="account" th:text="${list.account}"></a>
-                    <a href="#">---创建于</a>
-                    <a href="#" th:text="${{list.createtime}}"></a>
-                </li>
-            </div>
-        </ul>
-        <ul class="pagination pull-right">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-    </div>
+<div id="user" th:if="${role.indexOf('ADMIN')>=0}"><!--ADMIN显示-->
+    <div th:replace="admin/admin :: admin"></div>
+    <!--<div th:text="${role.indexOf('USER')}"  style="margin-top: 80px;"></div>-->
 </div>
-<div id="welcome" th:if="${role=='USER'}"><!--USER显示-->
-    <div class="info">
-        <div class="page-header">
-            <h2>公司简介</h2>
-        </div>
-        <section>
-            上海兔美游戏公司成立于XXXX年XX月，公司致力于精品手机游戏自研，公司核心团队有过多年游戏开发经验，成功主导多款游戏上线运营，
-            作为一个初创型的游戏公司，我们已完成了数百万的天使投资。目前投入市场手游有矿工物语、英雄无敌等，在本公司开发的游戏中，90%
-            以上的游戏下载量高达100万人次。
-        </section>
-        <section>
-            现在我们迫切的需要一些不安于现状，有奋斗精神的游戏人才加入我们，一起完成精品游戏，打造一流的游戏公司。
-            我们提供武汉有竞争力的薪资，并且给予初期加入团队的人员丰厚的项目分红，如果你热爱游戏，如果你不想被束缚，如果你有能力，有梦想，
-            请加入我们，一起奋斗吧！
-        </section>
-    </div>
+<div id="welcome" th:if="${role.indexOf('USER')>=0}"><!--USER显示-->
+    <div th:replace="user/user :: user"></div>
 </div>
-<div id="xxkg" th:if="${role=='XXKG'}"><!--小小矿工-->
-    小小矿工
+<div id="xxkg" th:if="${role.indexOf('XXKG')>=0}"><!--小小矿工-->
+    <div th:replace="xxkg/xxkg :: xxkg"></div>
 </div>
-<div id="yxwd" th:if="${role=='YXWD'}"><!--英雄无敌-->
-    英雄无敌
+<div id="yxwd" th:if="${role.indexOf('YXWD')}>=0"><!--英雄无敌-->
+    <div th:replace="yxwd/yxwd :: yxwd"></div>
 </div>
-<div id="owner" th:if="${role=='OWNER'}"><!--OWNER-->
-    OWNER
+<div id="owner" th:if="${role.indexOf('OWNER')>=0}"><!--OWNER-->
+    <div th:replace="owner/owner :: owner"></div>
 </div>
-
 <script type="text/javascript" th:src="@{/js/admin/userinfo.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin/common.js}"></script>
 </body>
 </html>
