@@ -10,7 +10,7 @@
     width:100%;
     height:500px;
     margin-top:-250px;
-    border:1px solid #333;
+    /*border:1px solid #333;*/
     background: url("../../image/3.png");
     background-size: 100% 100%;
 }
@@ -34,7 +34,7 @@
     margin: 10px auto;
 }
 #admin fieldset .form-group label{
-    line-height: 32px;
+    line-height: 34px;
     text-align: right;
     color: #666;
     /*border:1px solid blue;*/
@@ -49,6 +49,18 @@
     top:50%;
     left:45%;
     display: none;
+}
+#admin fieldset .form-group div.face{
+    /*border:1px solid red;*/
+    text-align: center;
+}
+#admin fieldset .form-group div.face img.face{
+    width:80px;
+    height:80px;
+    border-radius: 40px;
+}
+#admin fieldset .form-group label.face{
+    padding-top:50px;
 }
 /*用户信息*/
 #user{

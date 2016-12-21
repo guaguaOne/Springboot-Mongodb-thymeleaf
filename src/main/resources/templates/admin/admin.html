@@ -22,14 +22,14 @@
             </div>
         </ul>
         <ul class="pagination pull-right">
-            <li><a href="#">&laquo;</a></li>
-            <!--<li th:each="all,allStat : ${all}"><a th:text="${allStat.count}"></a></li>-->
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            <!--<li><a href="#">&laquo;</a></li>-->
+            <!--总页:<li th:text="${list.totalPages}"></li>-->
+            <!--当前页:<li th:text="${list.number}"></li>-->
+            <!--每页:<li th:text="${list.size}"></li>-->
+            <li th:each="pageNo : ${#numbers.sequence(0, list.totalPages - 1)}" th:class="${pageNo==list.number}? 'active':''">
+                <a href="javascript:void(0);" th:text="${pageNo+1}"></a>
+            </li>
+            <!--<li><a href="#">&raquo;</a></li>-->
         </ul>
     </div>
 </div>

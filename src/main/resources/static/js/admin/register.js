@@ -7,7 +7,6 @@ $(document).ready(function(){
         var password=$('#admin .form-group input.password').val();
         var passagin=$('#admin .form-group input.passagin').val();
         if(password==passagin){
-
             $.ajax({
                 type:'get',
                 url:'/newuser',
@@ -27,6 +26,12 @@ $(document).ready(function(){
                 $('#admin .alert-warning').fadeOut();
             },1000);
         }
-
     });
+    //头像上传
+    $('#admin fieldset .form-group div.face img.face').click(function () {
+        $('#file_upload').click();
+    })
+    $('#file_upload').change(function(){
+
+    })
 })

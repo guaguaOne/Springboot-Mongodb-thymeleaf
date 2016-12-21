@@ -13,7 +13,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#server  .server-type').each(function(index,elem){
+    $('#xxkg .right .box .type').each(function(index,elem){
         $(this).on('hide.bs.popover', function () {
             var text=$(this).next().find('div.popover-content').find('select').val();
             text=parseInt(text);
@@ -26,5 +26,34 @@ $(document).ready(function(){
             }
 
         })
+    })
+
+    //新增服务器
+    $('#add button.ok').click(function(){
+        var id=$('#add input.id').val();
+        var gm=$('#add input.gm').val();
+        var account=$('#add input.account').val();
+        var pass=$('#add input.pass').val();
+        var type=$('#add select.type').val();
+        $.ajax({
+            type:'post',
+            url:'/xxkg/inputserver',
+            data:{
+                id:id,
+                gm:gm,
+                account:account,
+                pass:pass,
+                type:type
+            },
+            success:function(msg){
+                console.log('成功');
+                $('#add').fadeOut();
+            }
+        })
+        // console.log(id);
+        // console.log(gm);
+        // console.log(account);
+        // console.log(pass);
+        // console.log(type);
     })
 })

@@ -107,10 +107,10 @@ public class WebController {
         return repository.findByAccount(account);
     }
 
-
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @ApiOperation(value = "获取系统当前的所有权限", notes = "")
     @RequestMapping(value = "/getPrivileges", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+
     public ROLE[] getPrivileges() {
         return ROLE.values();
     }

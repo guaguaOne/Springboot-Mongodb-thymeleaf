@@ -1,8 +1,7 @@
 server:
     port: 8000
     address: 0.0.0.0
-    session:
-        timeout: 5000
+
 
 banner:
     charset: UTF-8
@@ -24,19 +23,7 @@ spring:
         mode: HTML5
         prefix: classpath:/templates/
         suffix: .html
-    redis:
-        database: 0
-        host: 192.168.1.222
-        port: 6379
-        password:
-        pool:
-            max-active: 8
-            max-wait: -1
-            max-idle: 8
-            min-idle: 0
-            timeout: 0
-    session:
-        store-type: redis
+
 
 
 management:
