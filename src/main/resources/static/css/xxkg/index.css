@@ -105,8 +105,34 @@ nav ul.nav li.face a{
 	/*border:1px solid green;*/
 /*}*/
 /*公告修改*/
-
-/*邮件发送*/
+#xxkg .right .about-xxkg{
+	/*border:1px solid red;*/
+}
+#xxkg .right .about-xxkg .row .col-xs-8{
+	padding:0;
+}
+#xxkg .right .about-xxkg .row>div{
+	/*border:1px solid red;*/
+}
+#xxkg .right .about-xxkg .row .notice{
+	height:350px;
+	text-align: left;
+	border:1px solid #999;
+	border-radius: 5px;
+	padding:10px;
+}
+#xxkg .right .about-xxkg .row .pick-color{
+	width:40px;
+	height:40px;
+}
+#xxkg .right .about-xxkg .row .tip{
+	line-height:40px;
+	/*border:1px solid green;*/
+}
+#xxkg .right .about-xxkg .row button{
+	margin-top:255px;
+}
+	/*邮件发送*/
 
 /*信息查询*/
 

@@ -31,45 +31,18 @@
 			<div class="col-xs-2">操作</div>
 		</div>
 		<div class="box">
-			<div class="row">
-				<div class="col-xs-2">998</div>
-				<div class="col-xs-2" contenteditable="true">http://192.168.1.222:12003</div>
-				<div class="col-xs-2" contenteditable="true">nian</div>
-				<div class="col-xs-2" contenteditable="true">2014123</div>
-				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
-				<div class="col-xs-2"><span>修改/删除</span></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-2">998</div>
-				<div class="col-xs-2" contenteditable="true">http://192.168.1.222:12003</div>
-				<div class="col-xs-2" contenteditable="true">nian</div>
-				<div class="col-xs-2" contenteditable="true">2014123</div>
-				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
-				<div class="col-xs-2"><span>修改/删除</span></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-2" contenteditable="true">998</div>
-				<div class="col-xs-2" contenteditable="true">http://192.168.1.222:12003</div>
-				<div class="col-xs-2" contenteditable="true">nian</div>
-				<div class="col-xs-2" contenteditable="true">2014123</div>
-				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
-				<div class="col-xs-2"><span>修改/删除</span></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-2">998</div>
-				<div class="col-xs-2" contenteditable="true">http://192.168.1.222:12003</div>
-				<div class="col-xs-2" contenteditable="true">nian</div>
-				<div class="col-xs-2" contenteditable="true">2014123</div>
-				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
-				<div class="col-xs-2"><span>修改/删除</span></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-2">998</div>
-				<div class="col-xs-2" contenteditable="true">http://192.168.1.222:12003</div>
-				<div class="col-xs-2" contenteditable="true">nian</div>
-				<div class="col-xs-2" contenteditable="true">2014123</div>
-				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom">Game逻辑服务器</div>
-				<div class="col-xs-2"><span>修改/删除</span></div>
+			<div class="row" th:each="se : ${server}" th:switch="${se.type}">
+				<div class="col-xs-2 id" th:text="${se.serId}">998</div>
+				<div class="col-xs-2 gm" contenteditable="true" th:text="${se.gm}">http://192.168.1.222:12003</div>
+				<div class="col-xs-2 account" contenteditable="true" th:text="${se.account}">nian</div>
+				<div class="col-xs-2 pass" contenteditable="true" th:text="${se.pass}">2014123</div>
+				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom" th:case="1" alt="1">Game逻辑服务器</div>
+				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom" th:case="2" alt="2">中心服务器</div>
+				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom" th:case="3" alt="3">Hub服务器</div>
+				<div class="col-xs-2 type" data-toggle="popover" data-target="body" data-placement="bottom" th:case="4" alt="4">矿区服务器</div>
+				<div class="col-xs-2">
+					<span class="edit" th:alt="${se.serId}">修改</span>/<span class="delete" th:alt="${se.serId}" data-toggle="modal" data-target="#delete">删除</span>
+				</div>
 			</div>
 		</div>
 		<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#add">增加</button>
@@ -112,6 +85,19 @@
 							</select>
 						</div>
 					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary ok">确定</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<div id="delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2>确定删除服务器?</h2>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

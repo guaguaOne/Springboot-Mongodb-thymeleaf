@@ -18,10 +18,10 @@ $(document).ready(function(){
             var text=$(this).next().find('div.popover-content').find('select').val();
             text=parseInt(text);
             switch(text){
-                case 1: $(this).text('Game逻辑服务器'); break;
-                case 2: $(this).text('中心服务器'); break;
-                case 3: $(this).text('Hub服务器'); break;
-                case 4: $(this).text('矿区服务器'); break;
+                case 1: $(this).text('Game逻辑服务器');$(this).attr("alt",1); break;
+                case 2: $(this).text('中心服务器');$(this).attr("alt",2); break;
+                case 3: $(this).text('Hub服务器');$(this).attr("alt",3); break;
+                case 4: $(this).text('矿区服务器');$(this).attr("alt",4); break;
                 default:break;
             }
 
@@ -47,13 +47,59 @@ $(document).ready(function(){
             },
             success:function(msg){
                 console.log('成功');
-                $('#add').fadeOut();
+                location.reload();
+                $('#add').fadeOut(500);
             }
         })
-        // console.log(id);
-        // console.log(gm);
-        // console.log(account);
-        // console.log(pass);
-        // console.log(type);
+    })
+
+    //修改服务器
+    $('#xxkg .right .box span.edit').each(function(index,elem){
+        $(this).click(function(){
+            var id=$(this).attr("alt");
+            var gm=$(this).parent().siblings("div.gm").text();
+            var account=$(this).parent().siblings("div.account").text();
+            var pass=$(this).parent().siblings("div.pass").text();
+            var type=$(this).parent().siblings("div.type").attr('alt');
+            console.log(id,gm,account,pass,type);
+            $.ajax({
+                type:'post',
+                url:'/xxkg/changeserver',
+                data:{
+                    id:id,
+                    gm:gm,
+                    account:account,
+                    pass:pass,
+                    type:type
+                },
+                success:function(msg){
+                    // console.log(msg);
+                    console.log("成功！");
+                }
+            })
+        })
+    })
+
+    //删除服务器
+    $('#xxkg .right .box span.delete').each(function(index,elem){
+        $(this).click(function(){
+            $(this).css("color","red");
+            var id=$(this).attr("alt");
+            $('#delete button.ok').click(function(){
+                console.log(id);
+                $.ajax({
+                    type:"get",
+                    url:"/xxkg/deleteserver",
+                    data:{
+                        id:id
+                    },
+                    success:function (msg) {
+                        // console.log(msg);
+                        $(elem).css("color","#666");
+                        location.reload();
+                    }
+                })
+            })
+        })
     })
 })

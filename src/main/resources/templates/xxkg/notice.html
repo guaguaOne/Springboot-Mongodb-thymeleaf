@@ -7,7 +7,11 @@
     <link rel="stylesheet" th:href="@{/css/xxkg/index.css}"/>
     <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
     <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-
+    <script>
+        $(document).ready(function(){
+            $('#xxkg .left .list-group-item').eq(2).addClass('active');
+        })
+    </script>
 </head>
 <body>
 <div th:replace="xxkg/nav :: nav"></div>
@@ -18,9 +22,23 @@
             <li><a th:href="@{/}">首页</a></li>
             <li>小小矿工</li>
         </ol>
-        公告修改
+        <p>中心服务器GM路径 : <span th:text="${zx.gm}"></span></p>
+        <div class="about-xxkg">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="notice" contenteditable="true" th:utext="${json}">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="color" class="pick-color pull-left"/>
+                    <span class="tip pull-left">&nbsp;&nbsp;&lt;&lt;点击选择颜色</span>
+                    <br/><br/><br/>
+                    <button class="btn btn-primary pull-left">修改</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/xxkg/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/xxkg/notice.js}"></script>
 </body>
 </html>
