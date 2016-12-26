@@ -20,7 +20,8 @@
     <div class="right">
         <ol class="breadcrumb">
             <li><a th:href="@{/}">首页</a></li>
-            <li>小小矿工</li>
+            <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
+            <li>游戏公告</li>
         </ol>
         <p>中心服务器GM路径 : <span th:text="${zx.gm}"></span></p>
         <div class="about-xxkg">

@@ -26,6 +26,11 @@ public class MongoTemplateConfig {
      */
     private String gameurl;
     private String gamedb;
+    /**
+    * 物品数据库连接与名字
+    * */
+    private String goodsurl;
+    private String goodsdb;
 
     public String getCenterurl() {
         return centerurl;
@@ -57,6 +62,29 @@ public class MongoTemplateConfig {
 
     public void setGamedb(String gamedb) {
         this.gamedb = gamedb;
+    }
+
+    public String getGoodsurl() {
+        return goodsurl;
+    }
+
+    public void setGoodsurl(String goodsurl) {
+        this.goodsurl = goodsurl;
+    }
+
+    public String getGoodsdb() {
+        return goodsdb;
+    }
+
+    public void setGoodsdb(String goodsdb) {
+        this.goodsdb = goodsdb;
+    }
+    @Bean(autowire = Autowire.BY_NAME, name = "goodsMongoTemplate")
+    public MongoTemplate GoodsMongoTemplate() throws Exception {
+        MongoURI uri = new MongoURI(goodsurl);
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, goodsdb);
+        return new MongoTemplate(factory);
     }
 
     @Bean(autowire = Autowire.BY_NAME, name = "centerMongoTemplate")

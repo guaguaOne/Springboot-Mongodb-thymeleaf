@@ -1,5 +1,6 @@
 package com.tumei.web.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -31,4 +32,5 @@ public class ServerBean {
     public Integer getSerId(){return serId;}
     public void setSerId(Integer id){this.serId=id;}
     public ServerBean(){}
+
 }

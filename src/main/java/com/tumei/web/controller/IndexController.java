@@ -1,15 +1,17 @@
 package com.tumei.web.controller;
+import com.mongodb.*;
 import com.tumei.web.model.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
-import java.io.*;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -44,6 +48,8 @@ public class IndexController {
     public SecUserBeanRepository repository;
     @Autowired
     public ServerBeanRepository server;
+    @Autowired
+    public GoodsBeanRepository goods;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, @RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -195,11 +201,11 @@ public class IndexController {
         ServerBean bean=server.findByType(2);//中心服务器
         map.addAttribute("zx",bean);
         String url=bean.gm;
-        url+="/getdeclare/";
 //        String url="http://192.168.1.222:12003/getdeclare/";
         String para=content;
         if(para==null){//获得
-            String re=doGet(url,para);
+            url+="/getdeclare/";
+            String re=doGet(url);
             re=URLDecoder.decode(re);
             re=re.substring(1,re.length()-1);
             //匹配\\n
@@ -207,7 +213,7 @@ public class IndexController {
             Pattern pat2 = Pattern.compile(regex2);
             Matcher matcher2 = pat2.matcher(re);
             while (matcher2.find()) {
-                re = re.replaceAll(regex2,"<br/>");
+                re = re.replaceAll(regex2,"<br>");
             }
             //匹配\
             String regex = "\\\\";
@@ -216,9 +222,6 @@ public class IndexController {
             while (matcher.find()) {
                 re = re.replaceAll(regex,"");
             }
-//            String ll="既然你诚心诚意地问了！<br/>我就 <font color=#999>大发慈悲</font> 的告诉你！<br/>为了防止被破坏！<br/>护世界的和平！<br/>贯彻的邪恶！<br/>可爱又迷人的反派角色！<br/>我们是穿梭箭队，<br/>白洞，<br/>白明天<br/>在等着我们！就，<br/>喵~";
-//            map.addAttribute("re",ll);
-
             JSONObject val=new JSONObject(re);
             String html=val.getString("val");
             //匹配<color=
@@ -237,8 +240,10 @@ public class IndexController {
             }
             map.addAttribute("json",html);
         }else{//发送
-            String re=doGet(url,para);
-            map.addAttribute("re",re);
+            url+="/moddeclare/"+para;
+            System.out.println("--------------------------------------");
+            System.out.println("url:"+url);
+            String re=doGet(url);
         }
         return "xxkg/notice";
     }
@@ -247,6 +252,35 @@ public class IndexController {
     @RequestMapping(value = "/xxkg/email", method = RequestMethod.GET)
     public String xxkgemail(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
+        Mongo m=new Mongo("192.168.1.109",27017);
+        DB db=m.getDB("tmconf");
+        DBCollection collection=db.getCollection("Items");
+        BasicDBObject obj=new BasicDBObject();
+        DBCursor cursor = collection.find(obj);
+        List<DBObject> list=cursor.toArray();
+        map.addAttribute("goods",list);
+        System.out.println(db);
+//        List<GoodsBean> bean = goods.findAll();
+//        map.addAttribute("test",bean);
+        return "xxkg/email";
+    }
+    //邮件发送
+    @RequestMapping(value = "/sendemail",method = RequestMethod.POST)
+    public String sendemails(@RequestParam String id,String serverid,String title,String content,String awards){
+        Integer serid=Integer.parseInt(serverid);
+        ServerBean bean=server.findBySerId(serid);
+        String url=bean.getGm();
+        String sec=bean.getPass();
+        url=url+"/mail?id="+id+"&title="+title+"&content="+content+"&sec="+sec+"&awards="+awards;
+//        String regex = "|";
+//        Pattern pat = Pattern.compile(regex);
+//        Matcher matcher = pat.matcher(url);
+//        while (matcher.find()) {
+//            url = url.replaceAll(regex,"%124");
+//        }
+//        String re=doGet(url);
+//        System.out.println("---------------------------------------------");
+//        System.out.println(re);
         return "xxkg/email";
     }
 
@@ -288,10 +322,10 @@ public class IndexController {
         return "xxkg/limite";
     }
 
-    public String doGet(String url,String para) {
+    public String doGet(String url) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            // 创建httpget.http://192.168.1.222:12003/getdeclare/
+            // 创建http
             HttpGet httpget = new HttpGet(url);
             System.out.println("executing request " + httpget.getURI());
             // 执行get请求.
@@ -302,12 +336,8 @@ public class IndexController {
                 System.out.println("--------------------------------------");
                 // 打印响应状态
                 System.out.println(response.getStatusLine());
-                if (para==null) {//获得公告
-                    String re=EntityUtils.toString(entity);
-                    return re;
-                }else{//修改公告
-
-                }
+                String re=EntityUtils.toString(entity);
+                return re;
             } finally {
                 response.close();
             }

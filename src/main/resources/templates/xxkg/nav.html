@@ -6,13 +6,13 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" th:fragment="nav">
-    <div class="navbar-header">
+    <div class="navbar-header pull-left">
         <h2>兔美游戏</h2>
     </div>
     <ul class="nav navbar-nav pull-right">
-        <li class="face"><a href="#"><img th:src="@{/image/face.png}" alt=""/></a></li>
-        <li class="name"><a href="#" th:text="${name}">黑泽</a></li>
-        <li class="exit"><a th:href="@{/login}"><img th:src="@{/image/exit.png}" alt=""/></a></li>
+        <li class="exit pull-right"><a th:href="@{/login}"><img th:src="@{/image/exit.png}" alt=""/></a></li>
+        <li class="name pull-right"><a href="#" th:text="${name}">黑泽</a></li>
+        <li class="face pull-right"><a href="#"><img th:src="@{/image/face.png}" alt=""/></a></li>
     </ul>
 </nav>
 </body>

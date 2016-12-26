@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/xxkg/index.css}"/>
+    <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#xxkg .left .list-group-item').eq(3).addClass('active');
+        })
+    </script>
+</head>
+<body>
+<div th:replace="xxkg/nav :: nav"></div>
+<div id="xxkg">
+    <div th:replace="xxkg/header :: header"></div>
+    <div class="right">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
+            <li>邮件发送</li>
+        </ol>
+        <div class="about-xxkg">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="form-group">
+                        <lable class="col-xs-2 control-lable">收件人</lable>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control id" placeholder="群发以分号隔开..."/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-group">
+                        <lable class="col-xs-2 control-lable">标题</lable>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control title" placeholder="邮件标题..."/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-group">
+                        <lable class="col-xs-2 control-lable">内容</lable>
+                        <div class="col-xs-10">
+                            <textarea class="form-control content" rows="15"></textarea>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-group forward">
+                        <lable class="col-xs-2 control-lable">奖励</lable>
+                        <div class="col-xs-10">
+                            <div type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="search">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="search" class="search"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xxkg-result">
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="good : ${goods}" th:alt="${good.key}" th:text="${good.good}">1</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary pull-left email">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/xxkg/email.js}"></script>
+</body>
+</html>

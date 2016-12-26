@@ -12,17 +12,26 @@ nav ul.nav{
 	margin-top:5px;
 }
 nav ul.nav li{
-	margin-right:10px;
-}
-nav ul.nav li.face{
 	width:52px;
 	height:52px;
+	/*border:1px solid green;*/
+}
+nav ul.nav li a{
+	line-height: 26px;
+}
+nav ul.nav li.face{
 	border-radius: 26px;
 	overflow: hidden;
 	border:1px solid #666;
 }
 nav ul.nav li.face a{
 	padding:0;
+}
+textarea{
+	resize: none;
+}
+.clear{
+	clear: both;
 }
 /*服务器录入*/
 #xxkg{
@@ -120,6 +129,7 @@ nav ul.nav li.face a{
 	border:1px solid #999;
 	border-radius: 5px;
 	padding:10px;
+	overflow-y: scroll;
 }
 #xxkg .right .about-xxkg .row .pick-color{
 	width:40px;
@@ -133,7 +143,53 @@ nav ul.nav li.face a{
 	margin-top:255px;
 }
 	/*邮件发送*/
-
+#xxkg .right .about-xxkg .row lable{
+	text-align: right;
+	line-height: 32px;
+}
+#xxkg .right .about-xxkg .row .form-group{
+	/*border:1px solid green;*/
+}
+#xxkg .right .about-xxkg .row .forward{
+	/*border:1px solid green;*/
+}
+#xxkg .right .about-xxkg .row .forward .col-xs-10 .form-control{
+	text-align: left;
+}
+#xxkg .right .about-xxkg .row .forward .col-xs-10 .form-control span.good-number{
+	padding:0 5px;
+	color:#0068b7;
+	border:1px solid #0068b7;
+	border-radius:3px;
+}
+#xxkg .right .about-xxkg .row .search{
+	/*border:1px solid red;*/
+	line-height: 30px;
+	border:1px solid #ccc;
+}
+#xxkg .right .about-xxkg .row .search span{
+	margin-left:5px;
+	line-height: 34px;
+}
+#xxkg .right .about-xxkg .row .search input{
+	width:100%;
+}
+#xxkg .right .about-xxkg .row .search .col-xs-10{
+	padding:0;
+}
+#xxkg .right .about-xxkg .row .search .col-xs-2{
+	padding-left:0px;
+}
+#xxkg .right .about-xxkg .row .xxkg-result{
+	margin-top:10px;
+	height: 365px;
+	overflow-y: scroll;
+	border:1px solid #ccc;
+	border-radius: 4px;
+}
+#xxkg .right .about-xxkg .row button.email{
+	margin-top:15px;
+}
 /*信息查询*/
 
 /*指令记录*/
