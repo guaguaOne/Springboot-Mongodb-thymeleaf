@@ -47,8 +47,10 @@ db:
     centerdb: center
     gameurl: mongodb://leon:Fuckyou1@115.159.205.176
     gamedb: y3
-    goodsurl: mongodb://192.168.1.109
-    goodsdb: tmconf
+    xxkgconfurl: mongodb://192.168.1.109
+    xxkgconfdb: tmconf
+    xxkgcenterurl: mongodb://192.168.1.109
+    xxkgcenterdb: center
 dao:
     initdelay: 10
     delay: 10

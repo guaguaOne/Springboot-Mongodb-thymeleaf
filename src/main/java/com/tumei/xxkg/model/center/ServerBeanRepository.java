@@ -1,4 +1,4 @@
-package com.tumei.web.model;
+package com.tumei.xxkg.model.center;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

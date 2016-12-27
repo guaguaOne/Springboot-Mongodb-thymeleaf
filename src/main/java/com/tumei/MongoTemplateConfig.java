@@ -29,8 +29,15 @@ public class MongoTemplateConfig {
     /**
     * 物品数据库连接与名字
     * */
-    private String goodsurl;
-    private String goodsdb;
+    private String xxkgconfurl;
+    private String xxkgconfdb;
+
+    /**
+     * 小小矿工center
+     *
+     */
+    private String xxkgcenterurl;
+    private String xxkgcenterdb;
 
     public String getCenterurl() {
         return centerurl;
@@ -64,26 +71,43 @@ public class MongoTemplateConfig {
         this.gamedb = gamedb;
     }
 
-    public String getGoodsurl() {
-        return goodsurl;
+    public String getXxkgconfurl() {
+        return xxkgconfurl;
     }
 
-    public void setGoodsurl(String goodsurl) {
-        this.goodsurl = goodsurl;
+    public void setXxkgconfurl(String xxkgconfurl) {
+        this.xxkgconfurl = xxkgconfurl;
     }
 
-    public String getGoodsdb() {
-        return goodsdb;
+    public String getXxkgconfdb() {
+        return xxkgconfdb;
     }
 
-    public void setGoodsdb(String goodsdb) {
-        this.goodsdb = goodsdb;
+    public void setXxkgconfdb(String xxkgconfdb) {
+        this.xxkgconfdb = xxkgconfdb;
     }
-    @Bean(autowire = Autowire.BY_NAME, name = "goodsMongoTemplate")
-    public MongoTemplate GoodsMongoTemplate() throws Exception {
-        MongoURI uri = new MongoURI(goodsurl);
+
+    public void setXxkgcenterdb(String xxkgcenterdb) {
+        this.xxkgcenterdb = xxkgcenterdb;
+    }
+
+    public String getXxkgcenterurl() {
+        return xxkgcenterurl;
+    }
+
+    public void setXxkgcenterurl(String xxkgcenterurl) {
+        this.xxkgcenterurl = xxkgcenterurl;
+    }
+
+    public String getXxkgcenterdb() {
+        return xxkgcenterdb;
+    }
+
+    @Bean(autowire = Autowire.BY_NAME, name = "xxkgtmconfMongoTemplate")
+    public MongoTemplate XxkgtmconfMongoTemplate() throws Exception {
+        MongoURI uri = new MongoURI(xxkgconfurl);
         Mongo mongo = new Mongo(uri);
-        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, goodsdb);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, xxkgconfdb);
         return new MongoTemplate(factory);
     }
 
@@ -100,6 +124,14 @@ public class MongoTemplateConfig {
         MongoURI uri = new MongoURI(gameurl);
         Mongo mongo = new Mongo(uri);
         SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, gamedb);
+        return new MongoTemplate(factory);
+    }
+
+    @Bean(autowire = Autowire.BY_NAME, name = "xxkgcenterMongoTemplate")
+    public MongoTemplate XxkgcenterMongoTemplate() throws Exception {
+        MongoURI uri = new MongoURI(xxkgcenterurl);
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, xxkgcenterdb);
         return new MongoTemplate(factory);
     }
 }

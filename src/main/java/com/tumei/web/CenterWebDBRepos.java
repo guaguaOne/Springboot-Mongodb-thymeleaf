@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * 游戏的特有配置
  */
 @Configuration
-@EnableMongoRepositories(basePackages = "com.tumei.web", mongoTemplateRef = "centerMongoTemplate")
+@EnableMongoRepositories(basePackages = "com.tumei.web.model", mongoTemplateRef = "centerMongoTemplate")
 public class CenterWebDBRepos {
 }

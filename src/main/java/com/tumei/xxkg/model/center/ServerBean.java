@@ -1,10 +1,7 @@
-package com.tumei.web.model;
+package com.tumei.xxkg.model.center;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Collection;
 
 /**
  * Created by niannian on 2016/12/21.
