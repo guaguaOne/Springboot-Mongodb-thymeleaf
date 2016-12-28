@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-switch.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/xxkg/index.css}"/>
+    <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap-switch.min.js}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#xxkg .left .list-group-item').eq(4).addClass('active');
+        })
+    </script>
+</head>
+<body>
+<div th:replace="xxkg/nav :: nav"></div>
+<div id="xxkg">
+    <div th:replace="xxkg/header :: header"></div>
+    <div class="right">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
+            <li>信息查询</li>
+        </ol>
+        <div class="about-xxkg">
+            <div class="info">
+                <div class="row">
+                    <div class="col-xs-4 user-info">
+                        <div class="condition">
+                            <div class="row">
+                                <form th:action="@{/userinfo}" method="post">
+                                    <div class="col-xs-8">
+                                        <input name="nickname" type="text" class="form-control" placeholder="ID或昵称..."/>
+                                        <input name="name" type="hidden" th:value="${name}"/>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button class="btn btn-primary info-search" type="submit">查询</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="result">
+                            <ul class="list-group">
+                                <li class="list-group-item" th:text="'ID：'+${ro.id}">名字：萌萌哒</li>
+                                <li class="list-group-item" th:text="'昵称：'+${ro.nickname}">名字：萌萌哒</li>
+                                <li class="list-group-item" th:text="'等级：'+${ro.level}">等级:18</li>
+                                <li class="list-group-item" th:text="'VIP等级：'+${ro.vip}">VIP等级:12</li>
+                                <li class="list-group-item" th:text="'VIP经验：'+${ro.vipexp}">VIP经验:15</li>
+                                <li class="list-group-item" th:text="'账号：'+${ac.account}">账号:nian</li>
+                                <li class="list-group-item" th:text="'创建日期：'+${{ro.createtime}}">创建日期:2016-12-27</li>
+                                <li class="list-group-item" th:text="'上次登录：'+${{ro.logtime}}">上次登录:2016-11-16</li>
+                                <li class="list-group-item" th:text="'总游戏时间：'+${ro.totaltime}">总游戏时间:10652</li>
+                                <li class="list-group-item" th:text="'icon：'+${ro.icon}">icon:30015</li>
+                                <li class="list-group-item" th:text="'皮肤：'+${ro.skin}">皮肤:36</li>
+                                <li class="list-group-item" th:text="'新手步骤：'+${ro.newbie}">新手步骤:120</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 action-info">
+                        <div class="panel panel-primary no">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <input type="checkbox" name="my-checkbox" data-size="small" data-on-color="info" data-off-color="info" data-on-text="禁言" data-off-text="禁止登陆"/>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <input type="hidden" name="flag" class="flag" value="0"/>
+                                禁止时长:
+                                <select>
+                                    <option value="1">一天</option>
+                                    <option value="3">三天</option>
+                                    <option value="0">永久禁言</option>
+                                </select>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-danger" type="submit">确定</button>
+                                <button class="btn btn-success">解禁</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    增加物品
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <h3><span class="good-name">金币</span><span class="good-number" contenteditable="true">100</span></h3>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-danger btn-block">确定</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    增加英雄
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <h3><span class="hero-name">佐助</span></h3>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-danger btn-block">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 search-info">
+                        <div class="panel panel-primary search-good">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input type="text" class="form-control" placeholder="搜索物品..."/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item" th:each="good : ${goods}" th:alt="${good.key}" th:text="${good.good}">1</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary search-hero">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input type="text" class="form-control" placeholder="搜索英雄..."/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item" th:each="hero : ${heros}" th:alt="${hero.key}" th:text="${hero.name}">1</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/xxkg/info.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin/common.js}"></script>
+</body>
+</html>

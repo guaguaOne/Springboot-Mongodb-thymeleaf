@@ -191,28 +191,78 @@ textarea{
 	margin-top:15px;
 }
 /*信息查询*/
-
+#xxkg .right .about-xxkg .info{
+	border:1px solid green;
+}
+#xxkg .right .about-xxkg .info .row{
+	/*text-align: left;*/
+}
+#xxkg .right .about-xxkg .info .row>div{
+	/*border:1px solid #666;*/
+}
+#xxkg .right .about-xxkg .info .condition{
+	/*border:1px solid #ccc;*/
+	border-radius: 4px;
+}
+#xxkg .right .about-xxkg .info .condition button.info-search{
+	margin-top:0;
+	width:100%;
+}
+#xxkg .right .about-xxkg .info .condition .col-xs-4{
+	padding-left:10px;
+	padding-right: 0;
+ }
+#xxkg .right .about-xxkg .info .result{
+	margin-top:10px;
+	height:auto;/*495px*/
+	text-align: left;
+	/*overflow-y: scroll;*/
+	/*border:1px solid #ccc;*/
+	/*border-radius: 4px;*/
+}
+#xxkg .right .about-xxkg .info .panel-footer{
+	padding:5px;
+}
+#xxkg .right .about-xxkg .info .panel-footer button{
+	margin-top:0;
+}
+#xxkg .right .about-xxkg .info .action-info div.no .panel-heading{
+	padding:5px 15px;
+}
+#xxkg .right .about-xxkg .info .action-info .panel-body{
+	padding:17px 15px;
+}
+/*物品*/
+#xxkg .right .about-xxkg .info .panel-body span.good-number{
+	padding:0 5px;
+	color: #fff;
+	background: #f0ad4e;
+	border-radius: 4px;
+}
+/*英雄*/
+#xxkg .right .about-xxkg .info .search-info .panel-heading{
+	padding:5px 15px;
+}
+#xxkg .right .about-xxkg .info .search-info .search-good span.glyphicon{
+	margin-top:8px;
+}
+#xxkg .right .about-xxkg .info .search-info .search-hero span.glyphicon{
+	margin-top:8px;
+}
+#xxkg .right .about-xxkg .info .search-info .search-good .panel-body{
+	height:217px;
+	padding:5px;
+	overflow-y: scroll;
+}
+#xxkg .right .about-xxkg .info .search-info .search-hero .panel-body{
+	height:207px;
+	padding:5px;
+	overflow-y: scroll;
+}
 /*指令记录*/
 
 /*多邮件发送*/
-#about-mails{
-	/*border:1px solid yellow;*/
-	width:1012px;
-}
-#about-mails .many-email{
-	width:800px;
-	height: 600px;
-	padding:10px;
-	margin-top:100px;
-	float: left;
-}
-#about-mails .many-email lable{
-	text-align: right;
-	padding:5px 0;
-}
-#about-mails .many-email textarea{
-	resize: none;
-}
+
 /*多邮件发送*/
 
 /*礼包生成*/

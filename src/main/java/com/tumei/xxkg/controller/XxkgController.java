@@ -1,9 +1,12 @@
 package com.tumei.xxkg.controller;
 
+import com.tumei.xxkg.model.center.*;
+import com.tumei.xxkg.model.tm3.RoleBean;
+import com.tumei.xxkg.model.tm3.RoleBeanRepository;
 import com.tumei.xxkg.model.tmconf.GoodsBean;
 import com.tumei.xxkg.model.tmconf.GoodsBeanRepository;
-import com.tumei.xxkg.model.center.ServerBean;
-import com.tumei.xxkg.model.center.ServerBeanRepository;
+import com.tumei.xxkg.model.tmconf.HerosBean;
+import com.tumei.xxkg.model.tmconf.HerosBeanRepository;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -22,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +40,12 @@ public class XxkgController {
     public ServerBeanRepository server;
     @Autowired
     public GoodsBeanRepository good;
+    @Autowired
+    public RoleBeanRepository role;
+    @Autowired
+    public XxkgaccountBeanRepository account;
+    @Autowired
+    public HerosBeanRepository hero;
 
     //小小矿工首页
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
@@ -166,6 +177,50 @@ public class XxkgController {
     @RequestMapping(value = "/xxkg/info", method = RequestMethod.GET)
     public String xxkginfo(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
+        Map m=new HashMap();
+        m.put("id",666);
+        m.put("nickname","宝宝金水");
+        m.put("level",1);
+        m.put("vip",1);
+        m.put("vipexp","120");
+        m.put("createtime","2016-12-12");
+        m.put("logtime","2016-12-12");
+        m.put("totaltime","100");
+        m.put("icon",34);
+        m.put("skin",12);
+        m.put("newbie","320");
+        Map a=new HashMap();
+        a.put("account","xxx");
+        map.addAttribute("ro",m);
+        map.addAttribute("ac",a);
+        List<GoodsBean> bean = good.findAll();
+        map.addAttribute("goods",bean);
+        List<HerosBean> he=hero.findAll();
+        map.addAttribute("heros",he);
+        return "xxkg/info";
+    }
+    //玩家信息查询
+    @RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+    public String userinfo(@RequestParam String nickname,String name, ModelMap map) {
+        try{
+            Long id=Long.parseLong(nickname);
+            RoleBean bean=role.findById(id);
+            map.addAttribute("ro",bean);
+            XxkgaccountBean acc=account.findById(id);
+            map.addAttribute("ac",acc);
+        }catch(Exception e){
+            RoleBean bean=role.findByNickname(nickname);
+            System.out.println("id:"+bean.id);
+            map.addAttribute("ro",bean);
+            Long id=bean.id;
+            XxkgaccountBean acc=account.findById(id);
+            map.addAttribute("ac",acc);
+        }
+        map.addAttribute("name",name);
+        List<GoodsBean> bean = good.findAll();
+        map.addAttribute("goods",bean);
+        List<HerosBean> he=hero.findAll();
+        map.addAttribute("heros",he);
         return "xxkg/info";
     }
 

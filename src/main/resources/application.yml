@@ -51,6 +51,8 @@ db:
     xxkgconfdb: tmconf
     xxkgcenterurl: mongodb://192.168.1.109
     xxkgcenterdb: center
+    xxkgtm3url: mongodb://192.168.1.109
+    xxkgtm3db: tm3
 dao:
     initdelay: 10
     delay: 10

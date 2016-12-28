@@ -16,8 +16,7 @@
             <div th:each="list : ${list}">
                 <li class="list-group-item">
                     <a href="#" class="account" th:text="${list.account}"></a>
-                    <a href="#">---创建于</a>
-                    <a href="#" th:text="${{list.createtime}}"></a>
+                    <a href="#" th:text="'创建于'+${{list.createtime}}"></a>
                 </li>
             </div>
         </ul>
