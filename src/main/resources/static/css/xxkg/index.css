@@ -192,7 +192,7 @@ textarea{
 }
 /*信息查询*/
 #xxkg .right .about-xxkg .info{
-	border:1px solid green;
+	/*border:1px solid green;*/
 }
 #xxkg .right .about-xxkg .info .row{
 	/*text-align: left;*/
@@ -216,9 +216,6 @@ textarea{
 	margin-top:10px;
 	height:auto;/*495px*/
 	text-align: left;
-	/*overflow-y: scroll;*/
-	/*border:1px solid #ccc;*/
-	/*border-radius: 4px;*/
 }
 #xxkg .right .about-xxkg .info .panel-footer{
 	padding:5px;
@@ -262,40 +259,59 @@ textarea{
 /*指令记录*/
 
 /*多邮件发送*/
-
-/*多邮件发送*/
-
+#xxkg .right .write{
+	/*border:1px solid red;*/
+}
+#xxkg .right .write .row>div{
+	/*border:1px solid green;*/
+}
+#xxkg .right .write .col-xs-8 .form-group label{
+	/*border:1px solid blue;*/
+	line-height: 32px;
+	font-weight: normal;
+	text-align: right;
+	letter-spacing: 1px;
+	color: #666;
+}
+#xxkg .right .write .col-xs-8 .awards .form-control{
+	text-align: left;
+}
+#xxkg .right .write .col-xs-8 .awards span.good-number{
+	padding:0 5px;
+	border-radius:4px;
+	border:1px solid #428bca;
+	color: #428bca;
+}
+#xxkg .right .write .row .search{
+	/*border:1px solid red;*/
+	line-height: 30px;
+	border:1px solid #ccc;
+}
+#xxkg .right .write .row .search span{
+	margin-left:5px;
+	line-height: 34px;
+}
+#xxkg .right .write .row .search input{
+	width:100%;
+}
+#xxkg .right .write .row .search .col-xs-10{
+	padding:0;
+}
+#xxkg .right .write .row .search .col-xs-2{
+	padding-left:0px;
+	color: #fff;
+	background: #428bca;
+}
+#xxkg .right .write .row .xxkg-result{
+	margin-top:10px;
+	height: 400px;
+	overflow-y: scroll;
+	border:1px solid #ccc;
+	border-radius: 4px;
+}
 /*礼包生成*/
 
 /*条件查询*/
-#about-search{
-	width:1000px;
-	/*border:1px solid yellow;*/
-}
-#about-search .list-group{
-	padding:20px 0;
-	/*border:1px solid yellow;*/
-	border-bottom:1px solid #fff;
-}
-#about-search .list-group .list-group-item button{
-	margin-right:20px;
-}
-#about-search .list-group .list-group-item input{
-	width:80px;
-	line-height:26px;
-	border:0px;
-	text-align: center;
-	background: transparent;
-	border-bottom:1px solid #fff;
-}
-#about-search .list-group .list-group-item small{
-	color: #999;
-}
-#about-search .show-result{
-	padding:0;
-	height:300px;
-	overflow-y: scroll;
-	border:2px solid #999;
-}
+
 
 

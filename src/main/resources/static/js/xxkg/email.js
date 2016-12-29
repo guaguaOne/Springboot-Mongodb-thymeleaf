@@ -59,21 +59,7 @@ $(document).ready(function(){
                 var li=$("<li class='list-group-item' alt='"+key+"'>"+name+"</li>");
                 $('#xxkg .right .about-xxkg .row .xxkg-result ul').append(li);
             }
-            // var name=$(this).text();
-            // var key=$(this).attr("alt");
-            // if((name.indexOf(val)!=-1)||(key.indexOf(val)!=-1)){
-            //     var irr={
-            //         "key":key,
-            //         "name":name
-            //     };
-            //     temp.push(irr);
-            // }
         }
-        // $('#xxkg .right .about-xxkg .row .xxkg-result ul').html("");
-        // for(var i=0;i<temp.length;i++){
-        //     var li=$("<li class='list-group-item' alt='"+temp[i].key+"'>"+temp[i].name+"</li>");
-        //     $('#xxkg .right .about-xxkg .row .xxkg-result ul').append(li);
-        // }
         comm();
     })
 

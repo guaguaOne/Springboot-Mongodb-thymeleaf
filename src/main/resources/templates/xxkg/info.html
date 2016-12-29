@@ -67,43 +67,46 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <input type="hidden" name="flag" class="flag" value="0"/>
+                                <input type="hidden" class="id" th:value="${ro.id}"/>
+                                <input type="hidden" class="name" th:value="${ro.nickname}"/>
                                 禁止时长:
-                                <select>
+                                <select class="time">
                                     <option value="1">一天</option>
                                     <option value="3">三天</option>
                                     <option value="0">永久禁言</option>
                                 </select>
                             </div>
                             <div class="panel-footer">
-                                <button class="btn btn-danger" type="submit">确定</button>
-                                <button class="btn btn-success">解禁</button>
+                                <button class="btn btn-danger ok">确定</button>
+                                <button class="btn btn-success no">解禁</button>
                             </div>
                         </div>
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary goods">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
                                     增加物品
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <h3><span class="good-name">金币</span><span class="good-number" contenteditable="true">100</span></h3>
+                                <input type="hidden" class="id" th:value="${ro.id}"/>
+                                <h3><span class="good-name" alt="20">钻石</span><span class="good-number" contenteditable="true">10</span></h3>
                             </div>
                             <div class="panel-footer">
-                                <button class="btn btn-danger btn-block">确定</button>
+                                <button class="btn btn-danger btn-block ok">确定</button>
                             </div>
                         </div>
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary hero">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
                                     增加英雄
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <h3><span class="hero-name">佐助</span></h3>
+                                <input type="hidden" class="id" th:value="${ro.id}"/>
+                                <h3><span class="hero-name" alt="30023">小埋</span></h3>
                             </div>
                             <div class="panel-footer">
-                                <button class="btn btn-danger btn-block">确定</button>
+                                <button class="btn btn-danger btn-block ok">确定</button>
                             </div>
                         </div>
                     </div>

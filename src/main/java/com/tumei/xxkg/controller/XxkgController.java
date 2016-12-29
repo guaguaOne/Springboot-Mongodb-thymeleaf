@@ -1,6 +1,8 @@
 package com.tumei.xxkg.controller;
 
 import com.tumei.xxkg.model.center.*;
+import com.tumei.xxkg.model.tm3.EmailsBean;
+import com.tumei.xxkg.model.tm3.EmailsBeanRepository;
 import com.tumei.xxkg.model.tm3.RoleBean;
 import com.tumei.xxkg.model.tm3.RoleBeanRepository;
 import com.tumei.xxkg.model.tmconf.GoodsBean;
@@ -15,6 +17,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -46,6 +50,8 @@ public class XxkgController {
     public XxkgaccountBeanRepository account;
     @Autowired
     public HerosBeanRepository hero;
+    @Autowired
+    public EmailsBeanRepository email;
 
     //小小矿工首页
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
@@ -224,6 +230,75 @@ public class XxkgController {
         return "xxkg/info";
     }
 
+    //禁言,解禁
+    @ResponseBody
+    @RequestMapping(value = "/nosay",method = RequestMethod.POST)
+    public String nosay(@RequestParam Integer flag,Integer time,Integer action,Integer serid,String name){
+        Long curr=System.currentTimeMillis();
+        Long times;
+        String re;
+        ServerBean bean=server.findBySerId(serid);
+        String sec=bean.getPass();
+        String url=bean.getGm();
+        switch (time){
+            case 1: times=curr+24*60*60;break;
+            case 3: times=curr+3*24*60*60;break;
+            case 0: times=curr+365*24*60*60;break;
+            default: times=curr-1000;break;
+        }
+        if(action==0){
+            //禁言,禁止登陆
+            url=url+"/nosay?flag="+flag+"&name="+name+"&sec="+sec+"&time="+times;
+            System.out.println("url:"+url);
+            re=doGet(url);
+            System.out.println("ok return:"+re);
+        }else{//解禁
+            url=url+"/nosay?flag="+flag+"&name="+name+"&sec="+sec+"&time="+times;
+            System.out.println("url:"+url);
+            re=doGet(url);
+            System.out.println("no return:"+re);
+        }
+        return re;
+    }
+
+    //增加物品
+    @ResponseBody
+    @RequestMapping(value = "/additem",method = RequestMethod.POST)
+    public String additem(@RequestParam Long id,Integer serid,Integer key,Integer val){
+        ServerBean bean=server.findBySerId(serid);
+        String sec=bean.getPass();
+        String url=bean.getGm();
+        url=url+"/additem?id="+id+"&sec="+sec+"&key="+key+"&val="+val;
+        String re=doGet(url);
+        System.out.println("additem:"+re);
+        return re;
+    }
+    //物品搜索
+    @ResponseBody
+    @RequestMapping(value = "/goods",method = RequestMethod.POST)
+    public List<GoodsBean> goods(){
+        List<GoodsBean> go=good.findAll();
+        return go;
+    }
+    //英雄搜索
+    @ResponseBody
+    @RequestMapping(value = "/hero",method = RequestMethod.POST)
+    public List<HerosBean> heros(){
+        List<HerosBean> he=hero.findAll();
+        return he;
+    }
+    //增加英雄
+    @ResponseBody
+    @RequestMapping(value = "/addhero",method = RequestMethod.POST)
+    public String addhero(@RequestParam Long id,Integer serid,Integer key){
+        ServerBean bean=server.findBySerId(serid);
+        String sec=bean.getPass();
+        String url=bean.getGm();
+        url=url+"/addhero?id="+id+"&sec="+sec+"&key="+key;
+        String re=doGet(url);
+        System.out.println("addhero:"+re);
+        return re;
+    }
     //指令记录
     @RequestMapping(value = "/xxkg/write", method = RequestMethod.GET)
     public String xxkgwrite(@RequestParam String account, ModelMap map) {
@@ -234,24 +309,55 @@ public class XxkgController {
     //邮件群发
     @RequestMapping(value = "/xxkg/emails", method = RequestMethod.GET)
     public String emails(@RequestParam String account, ModelMap map) {
+        map.addAttribute("name", account);
+        List<GoodsBean> bean=good.findAll();
+        map.addAttribute("go",bean);
+        return "xxkg/emails";
+    }
+    //发邮件
+    @RequestMapping(value = "/emails",method = RequestMethod.POST)
+    public String emails(@RequestParam String account,String title, String content, String awards, DateTime create,DateTime end,Integer level,Integer vip,ModelMap map){
+        System.out.println("-------------------");
+        System.out.println("create:"+create);
+        System.out.println("date:"+end);
+        System.out.println("awards:"+awards);
+        Long id=System.currentTimeMillis();
+        Integer flag=1;
+        EmailsBean em=new EmailsBean();
+        em.setId(id);
+        em.setTitle(title);
+        em.setContent(content);
+        em.setAwards(awards);
+        em.setCreate(create);
+        em.setDate(end);
+        em.setLevel(level);
+        em.setVip(vip);
+        em.setFlag(1);
+        email.save(em);
+        List<GoodsBean> bean=good.findAll();
+        map.addAttribute("go",bean);
+        map.addAttribute("name",account);
         return "xxkg/emails";
     }
 
     //通知发送
     @RequestMapping(value = "/xxkg/infomation", method = RequestMethod.GET)
     public String xxkginfomation(@RequestParam String account, ModelMap map) {
+        map.addAttribute("name", account);
         return "xxkg/infomation";
     }
 
     //礼包
     @RequestMapping(value = "/xxkg/gift", method = RequestMethod.GET)
     public String xxkggift(@RequestParam String account, ModelMap map) {
+        map.addAttribute("name", account);
         return "xxkg/gift";
     }
 
     //条件查询
     @RequestMapping(value = "/xxkg/limite", method = RequestMethod.GET)
     public String xxkglimite(@RequestParam String account, ModelMap map) {
+        map.addAttribute("name", account);
         return "xxkg/limite";
     }
 
