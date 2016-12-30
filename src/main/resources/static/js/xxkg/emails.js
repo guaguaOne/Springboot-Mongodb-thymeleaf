@@ -28,17 +28,17 @@ $(document).ready(function(){
                                 }else{
                                     var award=$('<span class="item"><span class="good-name" alt="'+k+'">'+ai+'</span><span class="good-number" contenteditable="true">12</span></span>');
                                     $('#xxkg .right .write .col-xs-8 .awards .form-control').append(award);
-                                    var arr=[];
-                                    var awards='';
-                                    $('#xxkg .right .write .col-xs-8 .awards .form-control span.item span').each(function(index,elem){
-                                        if($(this).attr("alt")){
-                                            arr.push($(this).attr("alt"));
-                                        }else{
-                                            arr.push($(this).text());
-                                        }
-                                        awards=arr.join(",");
-                                    })
-                                    $('#xxkg .right .write .col-xs-8 .awards input.awards').val(awards);
+                                    // var arr=[];
+                                    // var awards='';
+                                    // $('#xxkg .right .write .col-xs-8 .awards .form-control span.item span').each(function(index,elem){
+                                    //     if($(this).attr("alt")){
+                                    //         arr.push($(this).attr("alt"));
+                                    //     }else{
+                                    //         arr.push($(this).text());
+                                    //     }
+                                    //     awards=arr.join(",");
+                                    // })
+                                    // $('#xxkg .right .write .col-xs-8 .awards input.awards').val(awards);
                                     $('#xxkg .right .write .col-xs-8 .awards .form-control span.good-name').each(function(index,elem){
                                         $(this).click(function(){
                                             $(this).parent(".item").remove();
@@ -62,16 +62,16 @@ $(document).ready(function(){
                 var key=$(elem).attr("alt");
                 var award=$('<span class="item"><span class="good-name" alt="'+key+'">'+name+'</span><span class="good-number" contenteditable="true">12</span></span>');
                 $('#xxkg .right .write .col-xs-8 .awards .form-control').append(award);
-                var arr=[];
-                var awards='';
-                $('#xxkg .right .write .col-xs-8 .awards .form-control span.item span').each(function(index,elem){
-                    if($(this).attr("alt")){
-                        arr.push($(this).attr("alt"));
-                    }else{
-                        arr.push($(this).text());
-                    }
-                    awards=arr.join(",");
-                })
+                // var arr=[];
+                // var awards='';
+                // $('#xxkg .right .write .col-xs-8 .awards .form-control span.item span').each(function(index,elem){
+                //     if($(this).attr("alt")){
+                //         arr.push($(this).attr("alt"));
+                //     }else{
+                //         arr.push($(this).text());
+                //     }
+                //     awards=arr.join(",");
+                // })
                 // $('#xxkg .right .write .col-xs-8 .awards input.awards').val(awards);
                 $('#xxkg .right .write .col-xs-8 .awards .form-control span.good-name').each(function(index,elem){
                     $(this).click(function(){
@@ -85,7 +85,9 @@ $(document).ready(function(){
         var title=$('#xxkg .right .write .col-xs-8 input[name="title"]').val();
         var content=$('#xxkg .right .write .col-xs-8 textarea[name="content"]').val();
         var create=$('#xxkg .right .write .col-xs-8 input[name="create"]').val();
+        // create=create+" 00:00:00";
         var end=$('#xxkg .right .write .col-xs-8 input[name="end"]').val();
+        // end=end+" 00:00:00";
         var level=$('#xxkg .right .write .col-xs-8 input[name="level"]').val();
         var vip=$('#xxkg .right .write .col-xs-8 input[name="vip"]').val();
         var arr=[];
@@ -98,9 +100,24 @@ $(document).ready(function(){
             }
             awards=arr.join(",");
         })
-        console.log(title,content,awards,create,end,level,vip);
+        // console.log(title,content,awards,create,end,level,vip);
+        console.log("create:"+create);
+        console.log("end:"+end);
         $.ajax({
-
+            type:'post',
+            url:'/emails',
+            data:{
+                title:title,
+                content:content,
+                awards:awards,
+                create:create,
+                end:end,
+                level:level,
+                vip:vip
+            },
+            success:function(msg){
+                console.log(msg);
+            }
         })
 
     })

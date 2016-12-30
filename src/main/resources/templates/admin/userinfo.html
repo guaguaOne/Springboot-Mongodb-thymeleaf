@@ -28,7 +28,6 @@
 <div id="owner" th:if="${role.indexOf('OWNER')>=0}"><!--OWNER-->
     <div th:replace="owner/owner :: owner"></div>
 </div>
-<script type="text/javascript" th:src="@{/js/admin/userinfo.js}"></script>
-<script type="text/javascript" th:src="@{/js/admin/common.js}"></script>
+<script th:src="@{/js/admin/deleteuser.js}"></script>
 </body>
 </html>

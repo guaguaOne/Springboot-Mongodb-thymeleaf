@@ -14,47 +14,49 @@
 <div id="admin">
     <fieldset style="margin-top: 60px;">
         <legend><b>注册</b></legend>
-        <div class="form-group">
-            <label class="col-xs-3 control-lable face">头像</label>
-            <div class="col-xs-9">
-                <div class="face">
-                    <img class="face" th:src="@{/image/face.png}" alt=""/>
-                    <input type="file" id="file_upload" name="file_upload" multiple="true" style="display: none;"/>
-                    <div id="queue"></div>
+        <form th:action="@{/newuser}" method="get">
+            <div class="form-group">
+                <label class="col-xs-3 control-lable face">头像</label>
+                <div class="col-xs-9">
+                    <div class="face">
+                        <img class="face" th:src="@{/image/face.png}" alt=""/>
+                        <input type="file" id="file_upload" name="file_upload" multiple="true" style="display: none;"/>
+                        <div id="queue"></div>
+                    </div>
                 </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <div class="form-group">
-            <label class="col-xs-3 control-lable">账号</label>
-            <div class="col-xs-9">
-                <input type="text" class="form-control account" name="account" placeholder="请输入账号..."/>
+            <div class="form-group">
+                <label class="col-xs-3 control-lable">账号</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control account" name="account" placeholder="请输入账号..."/>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <div class="form-group">
-            <label class="col-xs-3 control-lable">密码</label>
-            <div class="col-xs-9">
-                <input type="text" class="form-control password" name="passwd" placeholder="请输入密码..."/>
+            <div class="form-group">
+                <label class="col-xs-3 control-lable">密码</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control password" name="passwd" placeholder="请输入密码..."/>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <div class="form-group">
-            <label class="col-xs-3 control-lable">密码确认</label>
-            <div class="col-xs-9">
-                <input type="text" class="form-control passagin" name="passagin" placeholder="请再次输入密码..."/>
+            <div class="form-group">
+                <label class="col-xs-3 control-lable">密码确认</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control passagin" name="passagin" placeholder="请再次输入密码..."/>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <div class="form-group admin-login">
-            <button class="btn btn-info btn-block" type="submit">注册</button>
-            <small><a th:href="@{login.html}">(已有账号? 登录)</a></small>
-        </div>
+            <div class="form-group admin-login">
+                <button class="btn btn-info btn-block" type="submit">注册</button>
+                <small><a th:href="@{login.html}">(已有账号? 登录)</a></small>
+            </div>
+        </form>
         <div class="alert alert-danger">账号已被注册!</div>
         <div class="alert alert-warning">两次密码不一致!</div>
     </fieldset>
 </div>
 <script th:src="@{/js/jquery.uploadifive.min.js}"></script>
-<script th:src="@{/js/admin/register.js}"></script>
+<!--<script th:src="@{/js/admin/register.js}"></script>-->
 </body>
 </html>

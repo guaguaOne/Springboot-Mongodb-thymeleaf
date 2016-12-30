@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 /**
  * Created by niannian on 2016/12/29.
  */

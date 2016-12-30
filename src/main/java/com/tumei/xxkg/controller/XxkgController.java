@@ -18,6 +18,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
+import org.joda.time.Instant;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +32,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,8 +171,9 @@ public class XxkgController {
         return "xxkg/email";
     }
     //邮件发送
+    @ResponseBody
     @RequestMapping(value = "/sendemail",method = RequestMethod.POST)
-    public String sendemails(@RequestParam String id,String serverid,String title,String content,String awards){
+    public void sendemails(@RequestParam String id,String serverid,String title,String content,String awards){
         Integer serid=Integer.parseInt(serverid);
         ServerBean bean=server.findBySerId(serid);
         String url=bean.getGm();
@@ -177,7 +184,6 @@ public class XxkgController {
         String re=doGet(url);
         System.out.println("---------------------------------------------");
         System.out.println(re);
-        return "xxkg/email";
     }
     //信息查询
     @RequestMapping(value = "/xxkg/info", method = RequestMethod.GET)
@@ -315,12 +321,12 @@ public class XxkgController {
         return "xxkg/emails";
     }
     //发邮件
+    @ResponseBody
     @RequestMapping(value = "/emails",method = RequestMethod.POST)
-    public String emails(@RequestParam String account,String title, String content, String awards, DateTime create,DateTime end,Integer level,Integer vip,ModelMap map){
+    public String emails(@RequestParam String title, String content, String awards, String create,String end,Integer level,Integer vip){
         System.out.println("-------------------");
         System.out.println("create:"+create);
         System.out.println("date:"+end);
-        System.out.println("awards:"+awards);
         Long id=System.currentTimeMillis();
         Integer flag=1;
         EmailsBean em=new EmailsBean();
@@ -328,16 +334,13 @@ public class XxkgController {
         em.setTitle(title);
         em.setContent(content);
         em.setAwards(awards);
-        em.setCreate(create);
-        em.setDate(end);
+        em.setCreate(DateTime.now());
+//            em.setDate(end);
         em.setLevel(level);
         em.setVip(vip);
-        em.setFlag(1);
+        em.setFlag(flag);
         email.save(em);
-        List<GoodsBean> bean=good.findAll();
-        map.addAttribute("go",bean);
-        map.addAttribute("name",account);
-        return "xxkg/emails";
+        return "ok";
     }
 
     //通知发送

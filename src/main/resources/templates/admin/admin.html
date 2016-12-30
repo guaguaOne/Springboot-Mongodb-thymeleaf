@@ -12,11 +12,12 @@
             <li><a href="#">权限管理</a></li>
             <li>当前注册用户</li>
         </ol>
-        <ul class="list-group">
+        <ul class="list-group" id="delete">
             <div th:each="list : ${list}">
                 <li class="list-group-item">
                     <a href="#" class="account" th:text="${list.account}"></a>
-                    <a href="#" th:text="'创建于'+${{list.createtime}}"></a>
+                    <a th:href="@{/persondetial?account=}+${list.account}+'&amp;curr='+${name}" th:text="'创建于'+${{list.createtime}}"></a>
+                    <a href="#" class="pull-right delete" th:alt="${list.account}"><span class="glyphicon glyphicon-remove"></span></a>
                 </li>
             </div>
         </ul>
@@ -26,7 +27,7 @@
             <!--当前页:<li th:text="${list.number}"></li>-->
             <!--每页:<li th:text="${list.size}"></li>-->
             <li th:each="pageNo : ${#numbers.sequence(0, list.totalPages - 1)}" th:class="${pageNo==list.number}? 'active':''">
-                <a href="javascript:void(0);" th:text="${pageNo+1}"></a>
+                <a th:href="@{/?page=}+${pageNo}+'&amp;size=10'" th:text="${pageNo+1}"></a>
             </li>
             <!--<li><a href="#">&raquo;</a></li>-->
         </ul>

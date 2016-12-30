@@ -46,17 +46,20 @@
             <div class="page-header">
                 <h4>可用权限</h4>
             </div>
-            <div class="add-pri form-inline form-group">
-                <div class="checkbox" th:each="role : ${role}">
-                    <label>
-                        <input type="checkbox" th:value="${role}" th:text="${role}"/>
-                    </label>
+            <form th:action="@{/setAuth}" method="get">
+                <input type="hidden" name="account" th:value="${detial.account}"/>
+                <input type="hidden" name="curr" th:value="${name}"/>
+                <div class="add-pri form-inline form-group">
+                    <div class="checkbox" th:each="role : ${role}">
+                        <label>
+                            <input type="checkbox" name="auth" th:value="${role}" th:text="${role}"/>
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <button class="btn btn-primary pull-right">确定</button>
+                <button class="btn btn-primary pull-right" type="submit">确定</button>
+            </form>
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/admin/persondetial.js}"></script>
 </body>
 </html>
