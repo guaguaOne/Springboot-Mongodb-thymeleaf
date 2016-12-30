@@ -34,7 +34,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -103,6 +106,7 @@ public class IndexController {
         if(bean != null) {
             return "register";
         }else{
+            TimeZone.getTimeZone("UTC");
             bean = new SecUserBean();
             bean.setAccount(account);
             bean.setPasswd(passwd);

@@ -17,10 +17,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Instant;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,12 +30,11 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static io.swagger.models.properties.PropertyBuilder.PropertyId.FORMAT;
 
 /**
  * Created by niannian on 2016/12/27.
@@ -324,22 +319,29 @@ public class XxkgController {
     @ResponseBody
     @RequestMapping(value = "/emails",method = RequestMethod.POST)
     public String emails(@RequestParam String title, String content, String awards, String create,String end,Integer level,Integer vip){
-        System.out.println("-------------------");
-        System.out.println("create:"+create);
-        System.out.println("date:"+end);
-        Long id=System.currentTimeMillis();
-        Integer flag=1;
-        EmailsBean em=new EmailsBean();
-        em.setId(id);
-        em.setTitle(title);
-        em.setContent(content);
-        em.setAwards(awards);
-        em.setCreate(DateTime.now());
-//            em.setDate(end);
-        em.setLevel(level);
-        em.setVip(vip);
-        em.setFlag(flag);
-        email.save(em);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date cr = sdf.parse(create);
+            Date en= sdf.parse(end);
+            Long id=System.currentTimeMillis();
+            Integer flag=1;
+            EmailsBean em=new EmailsBean();
+            em.setId(id);
+            em.setTitle(title);
+            em.setContent(content);
+            em.setAwards(awards);
+            em.setCreate(cr);
+            em.setDate(en);
+            em.setLevel(level);
+            em.setVip(vip);
+            em.setFlag(flag);
+            email.save(em);
+            System.out.println("-------------------");
+            System.out.println(cr);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
         return "ok";
     }
 
