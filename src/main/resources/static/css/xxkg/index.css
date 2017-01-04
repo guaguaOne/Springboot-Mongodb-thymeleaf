@@ -309,6 +309,51 @@ textarea{
 	border:1px solid #ccc;
 	border-radius: 4px;
 }
+/*通知发送*/
+#xxkg .right .message div.panel-body{
+	/*border:1px solid red;*/
+	padding:15px 0;
+}
+#xxkg .right .message div.panel-body div.checkbox{
+	/*border:1px solid green;*/
+	margin:0 10px;
+}
+#xxkg .right .message div.panel-heading span{
+	/*color: #428bca;*/
+	margin-top:-7px;
+}
+#xxkg .right .message div.panel-body button{
+	margin-top:0;
+}
+#xxkg .right .message .mess-box div.panel-body{
+	height:280px;
+	overflow-y: scroll;
+}
+#msg{
+	padding-top:200px;
+}
+#msg textarea{
+	width:100%;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+#msg .modal-body .col-xs-6{
+	/*border:1px solid green;*/
+	padding:0;
+}
+#msg .modal-body div.times{
+	/*border:1px solid red;*/
+}
+#msg .modal-body div.row{
+	margin:0;
+}
+#msg .modal-body p{
+	margin-top:10px;
+}
+#msg .modal-body input{
+	width:100%;
+	line-height:24px;
+}
 /*礼包生成*/
 
 /*条件查询*/

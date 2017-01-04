@@ -96,7 +96,9 @@ $(document).ready(function(){
                     success:function (msg) {
                         // console.log(msg);
                         $(elem).css("color","#666");
-                        location.reload();
+                        // location.reload();
+                        $(elem).parent(".col-xs-2").parent(".row").remove();
+                        $('#delete').fadeOut(100);
                     }
                 })
             })

@@ -26,15 +26,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static io.swagger.models.properties.PropertyBuilder.PropertyId.FORMAT;
 
 /**
  * Created by niannian on 2016/12/27.
@@ -53,6 +51,8 @@ public class XxkgController {
     public HerosBeanRepository hero;
     @Autowired
     public EmailsBeanRepository email;
+    @Autowired
+    public SendnoticeBeanRepository notice;
 
     //小小矿工首页
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
@@ -107,9 +107,9 @@ public class XxkgController {
     @RequestMapping(value = "/xxkg/notice", method = RequestMethod.GET)
     public String xxkgnotice(@RequestParam String account,String content, ModelMap map) {
         map.addAttribute("name", account);
-        ServerBean bean=server.findByType(2);//中心服务器
+        List<ServerBean> bean=server.findByType(2);//中心服务器
         map.addAttribute("zx",bean);
-        String url=bean.gm;
+        String url=bean.get(0).gm;
 //        String url="http://192.168.1.222:12003/getdeclare/";
         String para=content;
         if(para==null){//获得
@@ -346,12 +346,101 @@ public class XxkgController {
     }
 
     //通知发送
-    @RequestMapping(value = "/xxkg/infomation", method = RequestMethod.GET)
-    public String xxkginfomation(@RequestParam String account, ModelMap map) {
+    @RequestMapping(value = "/xxkg/message", method = RequestMethod.GET)
+    public String xxkgmessage(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
-        return "xxkg/infomation";
+        List<ServerBean> bean=server.findByType(1);
+        map.addAttribute("se",bean);
+        List<SendnoticeBean> sn=notice.findAll();
+        map.addAttribute("sn",sn);
+        return "xxkg/message";
     }
 
+    //通知发送，刷新服务器配置
+    @ResponseBody
+    @RequestMapping(value = "/refresh",method = RequestMethod.POST)
+    public String refresh(@RequestParam String serid){
+        System.out.println("-------------------------------");
+        System.out.println("serid:"+serid);
+        String[] arr=serid.split(",");
+        Integer len=arr.length;
+        try{
+            for(Integer i=0;i<len;i++) {
+                Integer serverid = Integer.parseInt(arr[i]);
+                System.out.println("serverid:" + serverid);
+                ServerBean bean = server.findBySerId(serverid);
+                String sec = bean.pass;
+                String url = bean.gm;
+                url = url + "/refresh?sec=" + sec;
+                String re = doGet(url);
+            }
+            return "ok";
+        }catch (Exception e){
+            return "error";
+        }
+    }
+
+    //通知发送，发送通知
+    @ResponseBody
+    @RequestMapping(value = "/notify",method = RequestMethod.POST)
+    public String notify(@RequestParam String msg,String serid,Long times,Integer counts,String today,Long id) throws InterruptedException {
+        String[] arr=serid.split(",");
+        Integer len=arr.length;
+        Integer coun=0;
+        Long iid=id;
+        SendnoticeBean be=new SendnoticeBean();
+//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        Date da= null;
+//        try {
+//            da = sdf.parse(today);
+//        } catch (java.text.ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Date da=new Date();
+        be.setId(iid);
+        be.setDate(today);
+        be.setContent(msg);
+        be.setCount(counts);
+        be.setTimes(times);
+        be.setStatu(1);
+        notice.save(be);
+        do {
+            for(Integer i=0;i<len;i++) {
+                Integer serverid = Integer.parseInt(arr[i]);
+                ServerBean bean = server.findBySerId(serverid);
+                String sec = bean.pass;
+                String url = bean.gm;
+                url = url + "/notify?sec=" + sec+"&msg="+msg;
+                String re = doGet(url);
+                System.out.println("re="+re);
+            }
+            System.out.println("count="+coun);
+            FileWriter fw= null;
+//            try {
+//                fw = new FileWriter("doctemp/notice.txt");
+//                fw.write(msg);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            coun++;
+            Thread.sleep(times*1000);
+        }while(coun<counts);
+//        System.out.println("iid="+iid);
+        SendnoticeBean f=notice.findById(iid);
+        f.setStatu(2);
+        notice.save(f);
+        return "ok";
+    }
+
+    //通知发送，删除记录
+    @ResponseBody
+    @RequestMapping(value = "/notice/delete")
+    public String noticedel(@RequestParam Long id){
+        SendnoticeBean bean=notice.findById(id);
+        notice.delete(bean);
+        return "ok";
+    }
     //礼包
     @RequestMapping(value = "/xxkg/gift", method = RequestMethod.GET)
     public String xxkggift(@RequestParam String account, ModelMap map) {

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface ServerBeanRepository extends MongoRepository<ServerBean,Long> {
     ServerBean findBySerId(Integer id);
-    ServerBean findByType(Integer type);
+//    ServerBean findByType(Integer type);
+    List<ServerBean> findByType(Integer type);
     List <ServerBean> findAll();
 }

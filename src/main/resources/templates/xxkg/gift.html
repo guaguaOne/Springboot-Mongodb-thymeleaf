@@ -9,7 +9,7 @@
     <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script>
         $(document).ready(function(){
-            $('#xxkg .left .list-group-item').eq(2).addClass('active');
+            $('#xxkg .left .list-group-item').eq(8).addClass('active');
         })
     </script>
 </head>
@@ -21,25 +21,13 @@
         <ol class="breadcrumb">
             <li><a th:href="@{/}">首页</a></li>
             <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
-            <li>游戏公告</li>
+            <li>礼包生成</li>
         </ol>
-        <p>中心服务器GM路径 : <span th:each="z : ${zx}" th:text="${z.gm}"></span></p>
-        <div class="about-xxkg">
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="notice" contenteditable="true" th:utext="${json}">
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <input type="color" class="pick-color pull-left"/>
-                    <span class="tip pull-left">&nbsp;&nbsp;&lt;&lt;点击选择颜色</span>
-                    <br/><br/><br/>
-                    <button class="btn btn-primary pull-left">修改</button>
-                </div>
-            </div>
+        <div id="gift">
+            gift
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/xxkg/notice.js}"></script>
+<script type="text/javascript" th:src="@{/js/xxkg/message.js}"></script>
 </body>
 </html>

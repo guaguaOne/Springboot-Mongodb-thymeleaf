@@ -13,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,8 +52,6 @@ import java.util.regex.Pattern;
 public class IndexController {
     @Autowired
     public SecUserBeanRepository repository;
-//    @Autowired
-//    public ServerBeanRepository server;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, @RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -63,8 +62,8 @@ public class IndexController {
         SecUserBean bean = repository.findByAccount(name);
         String role = bean.getRole();
         map.addAttribute("role", role);//授权
-        DateTime time = bean.getCreatetime();
-        map.addAttribute("createtime", time.toLocalDate());
+//        DateTime time = bean.getCreatetime();
+//        map.addAttribute("createtime", time);
         //获取已经注册用户
         Sort sort = new Sort(Sort.Direction.DESC, name);
         Pageable pageable = new PageRequest(page, size, sort);
@@ -106,7 +105,6 @@ public class IndexController {
         if(bean != null) {
             return "register";
         }else{
-            TimeZone.getTimeZone("UTC");
             bean = new SecUserBean();
             bean.setAccount(account);
             bean.setPasswd(passwd);
