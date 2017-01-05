@@ -312,7 +312,7 @@ textarea{
 /*通知发送*/
 #xxkg .right .message div.panel-body{
 	/*border:1px solid red;*/
-	padding:15px 0;
+	padding:15px;
 }
 #xxkg .right .message div.panel-body div.checkbox{
 	/*border:1px solid green;*/
@@ -355,7 +355,91 @@ textarea{
 	line-height:24px;
 }
 /*礼包生成*/
-
+#gift .row .col-xs-8{
+	padding:0;
+	/*border:1px solid red;*/
+}
+#gift .row .col-xs-8 .panel-body>div{
+	/*border:1px solid green;*/
+	padding:0;
+}
+#gift .panel-body .row .col-xs-6 .row{
+	margin-top:10px;
+}
+#gift .panel-body .col-xs-4{
+	line-height:34px;
+}
+#normal-gift .normal-box,#bug-gift .bug-box,#init-gift .init-box{
+	border:1px solid #ccc;
+	padding:5px;
+	height:150px;
+	overflow-y: scroll;
+	border-radius:5px;
+}
+#normal-gift .normal-box ul li,#bug-gift .bug-box ul li,#init-gift .init-box ul li{
+	padding:0;
+	border-left:none;
+	border-right:none;
+	border-radius: 0;
+}
+#init-awards,#bug-awards,#normal-awards{
+	padding-top:200px;
+}
+#init-awards .modal-header{
+	/*border:1px solid red;*/
+}
+#init-awards .modal-header input,#bug-awards .modal-header input,#normal-awards .modal-header input{
+	padding:5px;
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+#init-awards .modal-header span,#bug-awards .modal-header span,#normal-awards .modal-header span{
+	margin-top:7px;
+	margin-left:5px;
+	font-size: larger;
+	color: #357ebd;
+	/*border:1px solid green;*/
+}
+#init-awards .modal-header h2,#bug-awards .modal-header h2,#normal-awards .modal-header h2{
+	display: inline;
+}
+#init-awards .modal-body,#bug-awards .modal-body,#normal-awards .modal-body{
+	height:200px;
+	overflow-y: scroll;
+}
+#init-awards .modal-body .row,#bug-awards .modal-body .row,#normal-awards .modal-body .row{
+	margin-top:8px;
+}
+#init-awards .modal-body>div,#bug-awards .modal-body>div,#normal-awards .modal-body>div{
+	/*border:1px solid red;*/
+	/*text-align: center;*/
+	margin:3px 0;
+	color: #333;
+}
+#init-awards .modal-footer div.sel,#bug-awards .modal-footer div.sel,#normal-awards .modal-footer div.sel{
+	/*border:1px solid red;*/
+	padding:3px;
+	width:430px;
+	text-align: left;
+}
+#init-awards .modal-footer span.number,#bug-awards .modal-footer span.number,#normal-awards .modal-footer span.number{
+	border:1px solid #357ebd;
+	padding:0 5px;
+	margin:0 3px;
+	border-radius: 5px;
+}
+#normal-gift div.form-control{
+	padding:15px 0;
+	height:auto;
+}
+#bug-gift div.form-control{
+	padding:15px 0;
+	height:auto;
+}
+#init-gift div.form-control{
+	padding:15px 0;
+	height:auto;
+}
 /*条件查询*/
 
 

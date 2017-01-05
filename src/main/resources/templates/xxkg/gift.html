@@ -24,10 +24,247 @@
             <li>礼包生成</li>
         </ol>
         <div id="gift">
-            gift
+            <div class="panel-group" id="gift-collapse">
+                <div class="panel panel-default normal-gift">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#normal-gift" data-toggle="collapse" data-parent="#gift-collapse">普通礼包</a>
+                        </h4>
+                    </div>
+                    <div id="normal-gift" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="hidden" class="awards" value="20,1"/>
+                                    <div class="row date">
+                                        <div class="col-xs-4">截止时间</div>
+                                        <div class="col-xs-8">
+                                            <input type="date" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row num">
+                                        <div class="col-xs-4">数量</div>
+                                        <div class="col-xs-8">
+                                            <input type="number" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">奖励</div>
+                                        <div class="col-xs-8">
+                                            <div class="form-control" data-toggle="modal" data-target="#normal-awards">钻石1</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4"></div>
+                                        <div class="col-xs-8">
+                                            <button class="btn btn-block btn-primary">生成</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row" style="margin-top: 0;">
+                                        <div class="col-xs-4">CODE</div>
+                                        <div class="col-xs-4">MODE</div>
+                                        <div class="col-xs-4">NOW</div>
+                                    </div>
+                                    <div class="normal-box">
+                                        <ul class="list-group">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default bug-gift">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#bug-gift" data-toggle="collapse" data-parent="#gift-collapse">BUG礼包</a>
+                        </h4>
+                    </div>
+                    <div id="bug-gift" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="hidden" class="awards" value="20,1"/>
+                                    <div class="row date">
+                                        <div class="col-xs-4">截止时间</div>
+                                        <div class="col-xs-8">
+                                            <input type="date" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row num">
+                                        <div class="col-xs-4">数量</div>
+                                        <div class="col-xs-8">
+                                            <input type="number" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">奖励</div>
+                                        <div class="col-xs-8">
+                                            <div class="form-control" data-toggle="modal" data-target="#bug-awards">钻石1</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4"></div>
+                                        <div class="col-xs-8">
+                                            <button class="btn btn-block btn-primary">生成</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row" style="margin-top: 0;">
+                                        <div class="col-xs-4">CODE</div>
+                                        <div class="col-xs-4">MODE</div>
+                                        <div class="col-xs-4">NOW</div>
+                                    </div>
+                                    <div class="bug-box">
+                                        <ul class="list-group">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default init-gift">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#init-gift" data-toggle="collapse" data-parent="#gift-collapse">初始化礼包</a>
+                        </h4>
+                    </div>
+                    <div id="init-gift" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="hidden" class="awards" value="20,1"/>
+                                    <div class="row date">
+                                        <div class="col-xs-4">截止时间</div>
+                                        <div class="col-xs-8">
+                                            <input type="date" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row num">
+                                        <div class="col-xs-4">数量</div>
+                                        <div class="col-xs-8">
+                                            <input type="number" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">奖励</div>
+                                        <div class="col-xs-8">
+                                            <div class="form-control" data-toggle="modal" data-target="#init-awards">钻石1</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4"></div>
+                                        <div class="col-xs-8">
+                                            <button class="btn btn-block btn-primary">生成</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row" style="margin-top: 0;">
+                                        <div class="col-xs-4">文件</div>
+                                        <div class="col-xs-4">创建时间</div>
+                                        <div class="col-xs-4">操作</div>
+                                    </div>
+                                    <div class="init-box">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" th:each="do : ${doc}">
+                                                <div class="col-xs-4" th:text="${do.docname}">123.doc</div>
+                                                <div class="col-xs-4" th:text="${#dates.format(do.createtime,'yyyy-MM-dd')}">2017-1-4</div>
+                                                <div class="col-xs-4">
+                                                    <span class="delete" th:alt="${do.id}">删除</span>/<span class="download"><a
+                                                        th:href="${do.url}">下载</a></span></div>
+                                                <div class="clear"></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/xxkg/message.js}"></script>
+<div class="modal fade" id="init-awards" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>物品奖励</h2>
+                <span class="glyphicon glyphicon-search pull-right"></span>
+                <input type="text" class="pull-right" placeholder="请输入关键字..."/>
+                <div class="clear"></div>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-4" th:each="aw : ${aw}" th:alt="${aw.key}" th:text="${aw.good}">1</div>
+            </div>
+            <div class="modal-footer">
+                <span class="pull-left">
+                    <div class="sel">
+                        <font color="#357ebd">已选中物品:</font>
+                    </div>
+                </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ok">确定</button>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="bug-awards" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>物品奖励</h2>
+                <span class="glyphicon glyphicon-search pull-right"></span>
+                <input type="text" class="pull-right" placeholder="请输入关键字..."/>
+                <div class="clear"></div>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-4" th:each="aw : ${aw}" th:alt="${aw.key}" th:text="${aw.good}">1</div>
+            </div>
+            <div class="modal-footer">
+                <span class="pull-left">
+                    <div class="sel">
+                        <font color="#357ebd">已选中物品:</font>
+                    </div>
+                </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ok">确定</button>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="normal-awards" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>物品奖励</h2>
+                <span class="glyphicon glyphicon-search pull-right"></span>
+                <input type="text" class="pull-right" placeholder="请输入关键字..."/>
+                <div class="clear"></div>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-4" th:each="aw : ${aw}" th:alt="${aw.key}" th:text="${aw.good}">1</div>
+            </div>
+            <div class="modal-footer">
+                <span class="pull-left">
+                    <div class="sel">
+                        <font color="#357ebd">已选中物品:</font>
+                    </div>
+                </span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ok">确定</button>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/xxkg/gift.js}"></script>
 </body>
 </html>

@@ -50,8 +50,8 @@
                                 <li class="list-group-item" th:text="'VIP等级：'+${ro.vip}">VIP等级:12</li>
                                 <li class="list-group-item" th:text="'VIP经验：'+${ro.vipexp}">VIP经验:15</li>
                                 <li class="list-group-item" th:text="'账号：'+${ac.account}">账号:nian</li>
-                                <li class="list-group-item" th:text="'创建日期：'+${{ro.createtime}}">创建日期:2016-12-27</li>
-                                <li class="list-group-item" th:text="'上次登录：'+${{ro.logtime}}">上次登录:2016-11-16</li>
+                                <li class="list-group-item" th:text="'创建日期：'+${#dates.format(ro.createtime,'yyyy-MM-dd HH:mm:ss')}">创建日期:2016-12-27</li>
+                                <li class="list-group-item" th:text="'上次登录：'+${#dates.format(ro.logtime,'yyyy-MM-dd HH:mm:ss')}">上次登录:2016-11-16</li>
                                 <li class="list-group-item" th:text="'总游戏时间：'+${ro.totaltime}">总游戏时间:10652</li>
                                 <li class="list-group-item" th:text="'icon：'+${ro.icon}">icon:30015</li>
                                 <li class="list-group-item" th:text="'皮肤：'+${ro.skin}">皮肤:36</li>

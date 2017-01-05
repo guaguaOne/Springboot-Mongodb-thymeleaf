@@ -1,10 +1,7 @@
 package com.tumei.xxkg.controller;
 
 import com.tumei.xxkg.model.center.*;
-import com.tumei.xxkg.model.tm3.EmailsBean;
-import com.tumei.xxkg.model.tm3.EmailsBeanRepository;
-import com.tumei.xxkg.model.tm3.RoleBean;
-import com.tumei.xxkg.model.tm3.RoleBeanRepository;
+import com.tumei.xxkg.model.tm3.*;
 import com.tumei.xxkg.model.tmconf.GoodsBean;
 import com.tumei.xxkg.model.tmconf.GoodsBeanRepository;
 import com.tumei.xxkg.model.tmconf.HerosBean;
@@ -21,13 +18,9 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -53,6 +46,10 @@ public class XxkgController {
     public EmailsBeanRepository email;
     @Autowired
     public SendnoticeBeanRepository notice;
+    @Autowired
+    public GiftsBeanRepository gift;
+    @Autowired
+    public DocBeanRepository doc;
 
     //小小矿工首页
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
@@ -441,11 +438,94 @@ public class XxkgController {
         notice.delete(bean);
         return "ok";
     }
+
     //礼包
     @RequestMapping(value = "/xxkg/gift", method = RequestMethod.GET)
     public String xxkggift(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
+        List<GoodsBean> go=good.findAll();
+        map.addAttribute("aw",go);
+        List<DocBean> bean=doc.findAll();
+        map.addAttribute("doc",bean);
         return "xxkg/gift";
+    }
+
+    //生成礼包
+    @ResponseBody
+    @RequestMapping(value = "/creategift",method = RequestMethod.POST)
+    public ArrayList creategift(@RequestParam String mode,String expire,Integer num,String awards){
+        System.out.println("------------------------");
+//        System.out.println("awards="+awards);
+        String[] aw=awards.split(",");
+//        System.out.println("arr="+Arrays.toString(aw));
+        Integer len=aw.length;
+        ArrayList temp=new ArrayList();
+        for(Integer i=0;i<len;i=i+2){
+            ArrayList a=new ArrayList();
+            a.add(Integer.parseInt(aw[i]));
+            a.add(Integer.parseInt(aw[i+1]));
+            temp.add(a);
+        }
+//        System.out.println("temp="+temp);
+        ArrayList co=new ArrayList();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date ex = sdf.parse(expire);
+            for(Integer i=0;i<num;i++){
+                GiftsBean bean=new GiftsBean();
+                String code=randNum(8);
+//                System.out.println("code="+code);
+                co.add(code);
+                bean.setAwards(temp);
+                bean.setCode(code);
+                bean.setMode(mode);
+                bean.setExpire(ex);
+                gift.save(bean);
+            }
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return co;
+    }
+
+    //生成文档
+    @ResponseBody
+    @RequestMapping(value = "/doc",method = RequestMethod.POST)
+    public String doc(@RequestParam String code,String name,String createtime,Long id){
+        System.out.println("code^_^="+code);
+        String[] aw=code.split(",");
+        String dir=System.getProperty("user.dir")+"\\doctemp\\"+name+".txt";
+        System.out.println("dir="+dir);
+        File f=new File(dir);
+        if(!f.getParentFile().exists()){
+            f.getParentFile().mkdirs();
+        }
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date cr = sdf.parse(createtime);
+            FileWriter fw=new FileWriter(f,true);
+            BufferedWriter bw=new BufferedWriter(fw);
+            Integer len=aw.length;
+            for(Integer j=0;j<len;j++){
+                bw.write(aw[j]+"\n");
+                bw.flush();
+            }
+            bw.close();
+            fw.close();
+            DocBean d=new DocBean();
+            d.setDocname(name+".txt");
+            d.setUrl(dir);
+            d.setCreatetime(cr);
+            d.setId(id);
+            doc.save(d);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return "ok";
     }
 
     //条件查询
@@ -489,5 +569,17 @@ public class XxkgController {
             }
         }
         return "";
+    }
+
+    //随机码
+    public String randNum(Integer len){
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuffer str = new StringBuffer();
+        for (int i = 0; i < len; i++) {
+            int number = random.nextInt(base.length());
+            str.append(base.charAt(number));
+        }
+        return str.toString();
     }
 }
