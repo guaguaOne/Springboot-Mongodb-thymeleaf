@@ -16,6 +16,7 @@ public class DocBean {
     Date createtime;
     Long id;
     String url;
+    String content;
     public String getDocname(){return docname;}
     public void setDocname(String docname){this.docname=docname;}
     public Date getCreatetime(){return createtime;}
@@ -24,4 +25,6 @@ public class DocBean {
     public void setId(Long id){this.id=id;}
     public String getUrl(){return url;}
     public void setUrl(String url){this.url=url;}
+    public String getContent(){return content;}
+    public void setContent(String content){this.content=content;}
 }

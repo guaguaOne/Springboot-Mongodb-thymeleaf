@@ -172,11 +172,11 @@
                                     <div class="init-box">
                                         <ul class="list-group">
                                             <li class="list-group-item" th:each="do : ${doc}">
-                                                <div class="col-xs-4" th:text="${do.docname}">123.doc</div>
+                                                <div class="col-xs-4 docname" th:text="${do.docname}">123.doc</div>
                                                 <div class="col-xs-4" th:text="${#dates.format(do.createtime,'yyyy-MM-dd')}">2017-1-4</div>
                                                 <div class="col-xs-4">
                                                     <span class="delete" th:alt="${do.id}">删除</span>/<span class="download"><a
-                                                        th:href="${do.url}">下载</a></span></div>
+                                                        th:href="@{/download?id=}+${do.id}+'&amp;name='+${do.docname}">下载</a></span></div>
                                                 <div class="clear"></div>
                                             </li>
                                         </ul>

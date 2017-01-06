@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface DocBeanRepository extends MongoRepository<DocBean,Long>{
     List<DocBean> findAll();
+    DocBean findById(Long id);
 }

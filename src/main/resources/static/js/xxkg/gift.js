@@ -211,7 +211,7 @@ $(document).ready(function(){
                 for(var i=0;i<len;i++){
                     temp.push(msg[i]);
                 }
-                var str=temp.join(",");
+                var str=temp.join("\r\n");
                 var to=today();
                 $.ajax({
                     type:'post',
@@ -229,6 +229,41 @@ $(document).ready(function(){
             }
         })
     });
+    //初始化删除文档
+    $('#gift .init-gift span.delete').each(function(index,elem){
+        $(this).click(function(){
+            var id=$(elem).attr('alt');
+            var name=$(elem).parent().parent().find('div.docname').text();
+            $.ajax({
+                type:'post',
+                url:"/doc/delete",
+                data:{
+                    id:id,
+                    name:name
+                },
+                success:function(msg){
+                    // console.log(msg);
+                    $(elem).parent().parent("li.list-group-item").remove();
+                }
+            })
+        })
+    })
+    //初始化下载文档
+    // $('#gift .init-gift span.download a').each(function(index,elem){
+    //     $(this).click(function(){
+    //         var id=$(elem).attr('alt');
+    //         $.ajax({
+    //             type:'get',
+    //             url:'/download',
+    //             data:{
+    //                 id:id
+    //             },
+    //             success:function(msg){
+    //                 console.log(msg);
+    //             }
+    //         })
+    //     })
+    // })
     //普通礼包确认
     $('#normal-awards .modal-footer button.ok').click(function(index,elem){
         var str="";

@@ -6,22 +6,28 @@ import com.tumei.xxkg.model.tmconf.GoodsBean;
 import com.tumei.xxkg.model.tmconf.GoodsBeanRepository;
 import com.tumei.xxkg.model.tmconf.HerosBean;
 import com.tumei.xxkg.model.tmconf.HerosBeanRepository;
-import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
+import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.io.*;
 import java.net.URLDecoder;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -187,8 +193,8 @@ public class XxkgController {
         m.put("level",1);
         m.put("vip",1);
         m.put("vipexp","120");
-        m.put("createtime","2016-12-12");
-        m.put("logtime","2016-12-12");
+        m.put("createtime","Fri Dec 23 10:52:42 CST 2016");
+        m.put("logtime","Thu Dec 29 14:38:57 CST 2016");
         m.put("totaltime","100");
         m.put("icon",34);
         m.put("skin",12);
@@ -493,41 +499,58 @@ public class XxkgController {
     @ResponseBody
     @RequestMapping(value = "/doc",method = RequestMethod.POST)
     public String doc(@RequestParam String code,String name,String createtime,Long id){
-        System.out.println("code^_^="+code);
-        String[] aw=code.split(",");
-        String dir=System.getProperty("user.dir")+"\\doctemp\\"+name+".txt";
-        System.out.println("dir="+dir);
-        File f=new File(dir);
-        if(!f.getParentFile().exists()){
-            f.getParentFile().mkdirs();
-        }
+//        System.out.println("code^_^="+code);
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
             Date cr = sdf.parse(createtime);
-            FileWriter fw=new FileWriter(f,true);
-            BufferedWriter bw=new BufferedWriter(fw);
-            Integer len=aw.length;
-            for(Integer j=0;j<len;j++){
-                bw.write(aw[j]+"\n");
-                bw.flush();
-            }
-            bw.close();
-            fw.close();
             DocBean d=new DocBean();
             d.setDocname(name+".txt");
-            d.setUrl(dir);
+            d.setContent(code);
             d.setCreatetime(cr);
             d.setId(id);
             doc.save(d);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
         return "ok";
     }
 
+    //下载文档
+    @ResponseBody
+    @RequestMapping(value = "/download",method = RequestMethod.GET)
+    public String download(@RequestParam Long id,String name,HttpServletResponse response){
+        DocBean bean=doc.findById(id);
+        String con=bean.getContent();
+//        System.out.println("con="+con);
+        response.setContentType("text/plain");
+        response.setHeader("Content-Disposition","attachment;filename="+name);
+        BufferedOutputStream buff=null;
+        StringBuffer write=new StringBuffer();
+        ServletOutputStream out=null;
+        try {
+            out=response.getOutputStream();
+            buff=new BufferedOutputStream(out);
+            write.append(con);
+            buff.write(write.toString().getBytes("UTF-8"));
+            buff.flush();
+            buff.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "ok";
+    }
+    //删除文档
+    @ResponseBody
+    @RequestMapping(value = "/doc/delete",method = RequestMethod.POST)
+    public String docdelete(@RequestParam Long id,String name){
+        DocBean bean=doc.findById(id);
+        doc.delete(bean);
+        String dir=System.getProperty("user.dir")+"\\doctemp\\"+name;
+        File f=new File(dir);
+        f.delete();
+        return "ok";
+    }
     //条件查询
     @RequestMapping(value = "/xxkg/limite", method = RequestMethod.GET)
     public String xxkglimite(@RequestParam String account, ModelMap map) {
