@@ -22,6 +22,7 @@ public class RoleBean {
     public Integer icon;
     public Integer skin;
     public String newbie;
+    public Integer totalcharge;
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
@@ -47,5 +48,6 @@ public class RoleBean {
     public void setSkin(Integer skin){this.skin=skin;}
     public String getNewbie(){return newbie;}
     public void setNewbie(String newbie){this.newbie=newbie;}
-    public RoleBean(){}
+    public Integer getTotalcharge(){return totalcharge;}
+    public void setTotalcharge(Integer totalcharge){this.totalcharge=totalcharge;}
 }

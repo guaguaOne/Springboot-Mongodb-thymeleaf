@@ -93,7 +93,7 @@ textarea{
 	border-bottom:1px dashed #ccc;
 }
 #xxkg .right button{
-	margin-top:10px;
+	/*margin-top:10px;*/
 }
 #add .modal-dialog{
 	width:700px;
@@ -411,8 +411,6 @@ textarea{
 	margin-top:8px;
 }
 #init-awards .modal-body>div,#bug-awards .modal-body>div,#normal-awards .modal-body>div{
-	/*border:1px solid red;*/
-	/*text-align: center;*/
 	margin:3px 0;
 	color: #333;
 }
@@ -441,6 +439,21 @@ textarea{
 	height:auto;
 }
 /*条件查询*/
+#limite ul li{
+	line-height:30px;
+}
+#limite ul li form>input{
+	border:none;
+	width:60px;
+	border-bottom: 1px solid #999;
+}
+#limite ul li form>small{
+	color: #ccc;
+}
+#limite .lim-result .panel-body{
+	height:340px;
+	overflow-y: scroll;
+}
 
 
 

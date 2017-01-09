@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>兔美游戏后台权限管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/xxkg/index.css}"/>
+    <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#xxkg .left .list-group-item').eq(9).addClass('active');
+        })
+    </script>
+</head>
+<body>
+<div th:replace="xxkg/nav :: nav"></div>
+<div id="xxkg">
+    <div th:replace="xxkg/header :: header"></div>
+    <div class="right">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
+            <li>条件查询</li>
+        </ol>
+        <div id="limite">
+            <div class="lim-condition">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <form th:action="@{/limitevip}" method="get">
+                            V I P ：<input name="left" type="number" class="vip-left" th:value="${left}"/>
+                            &lt; V I P &lt;
+                            <input name="right" type="number" class="vip-right" th:value="${right}"/>
+                            <input type="hidden" name="account" th:value="${name}"/>
+                            <small></small>
+                            <button class="btn btn-primary pull-right" type="submit">发送</button>
+                        </form>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <form th:action="@{/limitelevel}" method="get">
+                            LEVEL：<input name="left" type="number" class="level-left" th:value="${left2}"/>
+                            &lt; LEVEL &lt;
+                            <input type="hidden" name="account" th:value="${name}"/>
+                            <input name="right" type="number" class="level-right" th:value="${right2}"/>
+                            <small></small>
+                            <button class="btn btn-primary pull-right" type="submit">发送</button>
+                        </form>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="list-group-item">
+                        <form th:action="@{/limitecharge}" method="get">
+                            充值：<input name="left" type="number" class="charge-left" th:value="${left3}"/>
+                            &lt; 充值 &lt;
+                            <input name="right" type="number" class="charge-right" th:value="${right3}"/>
+                            <input type="hidden" name="account" th:value="${name}"/>
+                            <small></small>
+                            <button class="btn btn-primary pull-right" type="submit">发送</button>
+                        </form>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="lim-result">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        查询结果
+                        <a href="#" class="pull-right">123.xlxs 文件下载</a>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="vip : ${vip}">
+                                名字:<span th:text="${vip.nickname}">名字</span> ;
+                                等级:<span th:text="${vip.level}">等级</span> ;
+                                VIP:<span th:text="${vip.vip}"></span> ;
+                                VIPEXP:<span th:text="${vip.vipexp}"></span>
+                                创建日期:<span th:text="${{vip.createtime}}"></span> ;
+                                上次登录:<span th:text="${#dates.format(vip.logtime,'yyyy-MM-dd HH:mm:ss')}"></span> ;
+                                总游戏时间:<span th:text="${vip.totaltime}"></span> ;
+                                ICON:<span th:text="${vip.icon}"></span> ;
+                                皮肤:<span th:text="${vip.skin}"></span> ;
+                                新手步骤:<span th:text="${vip.newbie}"></span> ;
+                                充值总数:<span th:text="${vip.totalcharge}"></span> ;
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/xxkg/limite.js}"></script>
+</body>
+</html>

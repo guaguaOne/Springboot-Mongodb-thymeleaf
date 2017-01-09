@@ -12,13 +12,9 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +23,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
 import java.net.URLDecoder;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
  * Created by niannian on 2016/12/27.
@@ -56,7 +54,6 @@ public class XxkgController {
     public GiftsBeanRepository gift;
     @Autowired
     public DocBeanRepository doc;
-
     //小小矿工首页
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
     public String xxkg(@RequestParam String account, ModelMap map) {
@@ -557,7 +554,36 @@ public class XxkgController {
         map.addAttribute("name", account);
         return "xxkg/limite";
     }
-
+    //vip查询
+    @RequestMapping(value = "/limitevip",method = RequestMethod.GET)
+    public String limitevip(@RequestParam Integer left,Integer right,String account,ModelMap map){
+        List<RoleBean> bean=role.findByVip(left,right);
+        map.addAttribute("vip",bean);
+        map.addAttribute("name",account);
+        map.addAttribute("left",left);
+        map.addAttribute("right",right);
+        return "xxkg/limite";
+    }
+    //level查询
+    @RequestMapping(value = "/limitelevel",method = RequestMethod.GET)
+    public String limitelevel(@RequestParam Integer left,Integer right,String account,ModelMap map){
+        List<RoleBean> bean=role.findByLevel(left,right);
+        map.addAttribute("vip",bean);
+        map.addAttribute("name",account);
+        map.addAttribute("left2",left);
+        map.addAttribute("right2",right);
+        return "xxkg/limite";
+    }
+    //充值查询
+    @RequestMapping(value = "/limitecharge",method = RequestMethod.GET)
+    public String limitecharge(@RequestParam Integer left,Integer right,String account,ModelMap map){
+        List<RoleBean> bean=role.findByCharge(left,right);
+        map.addAttribute("vip",bean);
+        map.addAttribute("name",account);
+        map.addAttribute("left3",left);
+        map.addAttribute("right3",right);
+        return "xxkg/limite";
+    }
     public String doGet(String url) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {

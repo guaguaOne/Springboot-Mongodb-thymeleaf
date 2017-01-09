@@ -1,6 +1,7 @@
 package com.tumei.xxkg;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.tumei.xxkg.model.tm3", mongoTemplateRef = "xxkgtm3MongoTemplate")
-public class Tm3XxkgDBRepos {
+public class Tm3XxkgDBRepos{
 }

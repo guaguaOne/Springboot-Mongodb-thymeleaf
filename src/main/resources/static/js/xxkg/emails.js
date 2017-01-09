@@ -62,17 +62,6 @@ $(document).ready(function(){
                 var key=$(elem).attr("alt");
                 var award=$('<span class="item"><span class="good-name" alt="'+key+'">'+name+'</span><span class="good-number" contenteditable="true">12</span></span>');
                 $('#xxkg .right .write .col-xs-8 .awards .form-control').append(award);
-                // var arr=[];
-                // var awards='';
-                // $('#xxkg .right .write .col-xs-8 .awards .form-control span.item span').each(function(index,elem){
-                //     if($(this).attr("alt")){
-                //         arr.push($(this).attr("alt"));
-                //     }else{
-                //         arr.push($(this).text());
-                //     }
-                //     awards=arr.join(",");
-                // })
-                // $('#xxkg .right .write .col-xs-8 .awards input.awards').val(awards);
                 $('#xxkg .right .write .col-xs-8 .awards .form-control span.good-name').each(function(index,elem){
                     $(this).click(function(){
                         $(this).parent(".item").remove();

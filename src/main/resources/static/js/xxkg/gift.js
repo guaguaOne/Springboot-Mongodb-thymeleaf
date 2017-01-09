@@ -248,23 +248,6 @@ $(document).ready(function(){
             })
         })
     })
-    //初始化下载文档
-    // $('#gift .init-gift span.download a').each(function(index,elem){
-    //     $(this).click(function(){
-    //         var id=$(elem).attr('alt');
-    //         $.ajax({
-    //             type:'get',
-    //             url:'/download',
-    //             data:{
-    //                 id:id
-    //             },
-    //             success:function(msg){
-    //                 console.log(msg);
-    //             }
-    //         })
-    //     })
-    // })
-    //普通礼包确认
     $('#normal-awards .modal-footer button.ok').click(function(index,elem){
         var str="";
         var temp=[];
