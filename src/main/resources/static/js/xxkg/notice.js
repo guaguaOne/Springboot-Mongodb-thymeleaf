@@ -15,10 +15,10 @@ $(document).ready(function(){
         content=content.replace(/"/g,"");
         // console.log(content);
         content=content.replace(/<color=#[0-9A-Za-z]{6}><\/color>/g,"");
-        content=content.replace(/#/g,"%23");
-        content=content.replace(/\//g,"%2F");
-        content=encodeURIComponent(content);
-        // console.log(content);
+        // content=content.replace(/#/g,"%23");
+        // content=content.replace(/\//g,"%2F");
+        // content=encodeURIComponent(content);
+        console.log(content);
         $.ajax({
             type:"get",
             url:"/xxkg/notice",

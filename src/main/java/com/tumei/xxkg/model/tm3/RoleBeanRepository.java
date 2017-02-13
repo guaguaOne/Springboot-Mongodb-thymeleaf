@@ -12,14 +12,6 @@ import static org.springframework.data.mongodb.core.query.Query.query;
 /**
  * Created by niannian on 2016/12/28.
  */
-//public interface RoleBeanRepository extends MongoRepository<RoleBean,Long>{
-//    RoleBean findById(Long id);
-//    RoleBean findByNickname(String nickname);
-//    List<RoleBean> findByVip(Integer vip);
-//    List<RoleBean> findAll();
-//
-////    List<RoleBean> find(Query vip);
-//}
 @Repository
 public class RoleBeanRepository{
     @Qualifier("xxkgtm3MongoTemplate")

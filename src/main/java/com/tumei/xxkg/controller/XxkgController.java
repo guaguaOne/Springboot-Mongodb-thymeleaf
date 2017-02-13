@@ -8,19 +8,26 @@ import com.tumei.xxkg.model.tmconf.HerosBean;
 import com.tumei.xxkg.model.tmconf.HerosBeanRepository;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.swing.text.html.parser.Entity;
 import java.io.*;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -28,8 +35,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.bouncycastle.crypto.tls.ConnectionEnd.client;
 
 /**
  * Created by niannian on 2016/12/27.
@@ -55,6 +61,7 @@ public class XxkgController {
     @Autowired
     public DocBeanRepository doc;
     //小小矿工首页
+    @PreAuthorize("hasAnyAuthority('ADMIN','XXKG','OWNER')")
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
     public String xxkg(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
@@ -64,6 +71,7 @@ public class XxkgController {
     }
 
     //服务器录入
+    @PreAuthorize("hasAnyAuthority('ADMIN','XXKG','OWNER')")
     @RequestMapping(value = "/xxkg/inputserver", method = RequestMethod.POST)
     public String xxkginput(@RequestParam Integer id, String gm, String account, String pass, Integer type, ModelMap map) {
         ServerBean bean = server.findBySerId(id);
@@ -107,32 +115,37 @@ public class XxkgController {
     @RequestMapping(value = "/xxkg/notice", method = RequestMethod.GET)
     public String xxkgnotice(@RequestParam String account,String content, ModelMap map) {
         map.addAttribute("name", account);
+        System.out.println("xxxx="+content);
         List<ServerBean> bean=server.findByType(2);//中心服务器
         map.addAttribute("zx",bean);
         String url=bean.get(0).gm;
 //        String url="http://192.168.1.222:12003/getdeclare/";
+//        String url="http://192.168.1.222:10002";
         String para=content;
         if(para==null){//获得
-            url+="/getdeclare/";
+            url+="/getDeclare/";
             String re=doGet(url);
-            re= URLDecoder.decode(re);
-            re=re.substring(1,re.length()-1);
+//            re= URLDecoder.decode(re);
+//            re=re.substring(1,re.length()-1);
             //匹配\\n
-            String regex2 = "\\\\\\\\n";
+            String regex2 = "\n";//8
             Pattern pat2 = Pattern.compile(regex2);
             Matcher matcher2 = pat2.matcher(re);
             while (matcher2.find()) {
                 re = re.replaceAll(regex2,"<br>");
             }
             //匹配\
-            String regex = "\\\\";
-            Pattern pat = Pattern.compile(regex);
-            Matcher matcher = pat.matcher(re);
-            while (matcher.find()) {
-                re = re.replaceAll(regex,"");
-            }
-            JSONObject val=new JSONObject(re);
-            String html=val.getString("val");
+//            String regex = "\\\\";
+//            Pattern pat = Pattern.compile(regex);
+//            Matcher matcher = pat.matcher(re);
+//            while (matcher.find()) {
+//                re = re.replaceAll(regex,"");
+//            }
+//            System.out.println("re="+re);
+
+//            JSONObject val=new JSONObject(re);
+//            String html=val.getString("val");
+            String html=re;
             //匹配<color=
             String regex3 = "<color=";
             Pattern pat3 = Pattern.compile(regex3);
@@ -149,10 +162,14 @@ public class XxkgController {
             }
             map.addAttribute("json",html);
         }else{//发送
-            url+="/moddeclare/"+para;
+            url+="/setDeclare/";
             System.out.println("--------------------------------------");
             System.out.println("url:"+url);
-            String re=doGet(url);
+            String re=doPost(url,para);
+            System.out.println("re="+re);
+//            ConfigsBean config=con.findByName("declare");
+//            config.setVal("hhh");
+//            con.save(config);
         }
         return "xxkg/notice";
     }
@@ -584,6 +601,7 @@ public class XxkgController {
         map.addAttribute("right3",right);
         return "xxkg/limite";
     }
+    //get请求
     public String doGet(String url) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -619,7 +637,27 @@ public class XxkgController {
         }
         return "";
     }
-
+    //post请求
+    public String doPost(String url,String para){
+        StringBuffer rep=new StringBuffer();
+        HttpPost hp=new HttpPost(url);
+//        List<NameValuePair> nvps=new ArrayList<NameValuePair>();
+//        nvps.add(new BasicNameValuePair("","哈哈哈"));
+//        UrlEncodedFormEntity u=new UrlEncodedFormEntity(nvps,Consts.UTF_8);
+        StringEntity se=new StringEntity(para, ContentType.create("application/json", HTTP.UTF_8));
+        hp.setEntity(se);
+        hp.setHeader("Content-type", "application/json");
+        hp.setHeader("Accept", "*/*");
+        try {
+            DefaultHttpClient httpclient = new DefaultHttpClient();
+            CloseableHttpResponse repose = httpclient.execute(hp);
+            String repo=repose.toString();
+            return repo;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     //随机码
     public String randNum(Integer len){
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";

@@ -4,33 +4,29 @@
     <meta charset="UTF-8"/>
     <title>兔美游戏后台权限管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/xxkg/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/yxwd/index.css}"/>
     <link rel="stylesheet" th:href="@{/css/common/nav.css}"/>
     <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
     <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <script>
         $(document).ready(function(){
-            $('#xxkg .left .list-group-item').eq(5).addClass('active');
+            $('#yxwd .left .list-group-item').eq(4).addClass('active');
         })
     </script>
 </head>
 <body>
-<div th:replace="xxkg/nav :: nav"></div>
-<div id="xxkg">
-    <div th:replace="xxkg/header :: header"></div>
+<div th:replace="yxwd/nav :: nav"></div>
+<div id="yxwd">
+    <div th:replace="yxwd/header :: header"></div>
     <div class="right">
         <ol class="breadcrumb">
             <li><a th:href="@{/}">首页</a></li>
-            <li><a th:href="@{/xxkg?account=}+${name}">小小矿工</a></li>
-            <li>指令记录</li>
+            <li><a th:href="@{/yxwd?account=}+${name}">英雄无敌</a></li>
+            <li>用户查询</li>
         </ol>
-        <div class="about-xxkg">
-            <div class="write">
-                123
-            </div>
-        </div>
+        用户查询
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/xxkg/write.js}"></script>
+<script type="text/javascript" th:src="@{/js/yxwd/index.js}"></script>
 </body>
 </html>

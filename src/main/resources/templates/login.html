@@ -5,12 +5,12 @@
     <title>兔美游戏后台权限管理</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin/style.css}"/>
-    <script src="js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 
 </head>
 <body>
-<div id="admin">
+<div id="admin" th:style="'background:url('+@{/image/3.png}+');'" style="background: url('../static/image/3.png');">
     <fieldset>
         <legend><b>登录</b></legend>
         <form  class="form-horizontal" role="form" th:action="@{/login}" method="post">

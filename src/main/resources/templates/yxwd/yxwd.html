@@ -5,8 +5,16 @@
     <title>兔美游戏后台权限管理</title>
 </head>
 <body>
-<div th:fragment="yxwd">
-    英雄无敌
+<div class="panel panel-default" th:fragment="yxwd">
+    <div class="panel-heading">
+        <a th:href="@{/yxwd?account=}+${name}">英雄无敌</a>
+    </div>
+    <div class="panel-body">
+        <h4 style="text-indent: 2em;line-height: 26px;">
+        《魔法门之英雄无敌Ⅲ》（Heroes of Might and Magic III: The Restoration of Erathia。通称英雄无敌3，英文缩写HoMM3）是1999年由New World Computing在Windows平台上开发的回合制策略魔幻游戏，其出版商是3DO。稍后3DO和Loki Software分别推出了可在苹果机和Linux系统上运行的版本。
+        这是魔法门之英雄无敌系列的第三代。游戏情节参照第一次贯穿了《魔法门VI：天堂之令》，并且部分作为了《魔法门VII：血统与荣耀》的前传。玩家可以选择六个战役之中的一个来进行情节模式，也可以选择场景来进行与电脑或其他玩家的对抗。
+        </h4>
+    </div>
 </div>
 </body>
 </html>

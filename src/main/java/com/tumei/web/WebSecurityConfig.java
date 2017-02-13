@@ -1,9 +1,5 @@
 package com.tumei.web;
-
-import com.tumei.web.model.ROLE;
-import com.tumei.web.model.SecUserBean;
 import com.tumei.web.model.SecUserBeanRepository;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,18 +44,17 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         // 只对
 //        http.antMatcher("/yxwd");
         http.authorizeRequests() // 定义哪些url需要被保护，哪些不需要
-                .antMatchers( "/home", "/logon_any", "/login","/register").permitAll() // / 和 /home是可以直接访问的
-//                .antMatchers("/yxwd").hasAnyRole("YXWD", "ADMIN", "OWNER")
-//                .antMatchers("/xxkg").hasAnyAuthority("XXKG", "ADMIN", "OWNER")
-//                .antMatchers("/management").access("hasAnyRole('ADMIN', 'OWNER')")
-
-                .anyRequest().authenticated() // 其他都需要验证
-                .and()
-                .formLogin() .loginPage("/login")  // 需要用户登录的时候,路由到/login下
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+            .antMatchers("/login","/register").permitAll() // / 和 /home是可以直接访问的
+//            .antMatchers("/yxwd").hasAnyRole("YXWD", "ADMIN", "OWNER")
+//            .antMatchers("/xxkg").hasAnyAuthority("XXKG", "ADMIN", "OWNER")
+//            .antMatchers("/management").access("hasAnyRole('ADMIN', 'OWNER')")
+//            .anyRequest().authenticated() // 其他都需要验证
+            .and()
+            .formLogin().loginPage("/login") // 需要用户登录的时候,路由到/login下
+//            .permitAll()
+            .and()
+            .logout()
+            .permitAll();
     }
 
     @Autowired

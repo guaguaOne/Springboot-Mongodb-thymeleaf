@@ -1,0 +1,72 @@
+::-webkit-scrollbar{
+    width: 0;
+}
+nav{
+    padding:0 20px;
+    /*border:1px solid red;*/
+}
+nav .navbar-header h2{
+    /*border:1px solid #333;*/
+}
+nav ul.nav{
+    margin-top:5px;
+}
+nav ul.nav li{
+    width:52px;
+    height:52px;
+    /*border:1px solid green;*/
+}
+nav ul.nav li a{
+    line-height: 26px;
+}
+nav ul.nav li.face{
+    border-radius: 26px;
+    overflow: hidden;
+    border:1px solid #666;
+}
+nav ul.nav li.face a{
+    padding:0;
+}
+textarea{
+    resize: none;
+}
+.clear{
+    clear: both;
+}
+
+#xxkg,#yxwd{
+    position: relative;
+    /*margin-top:80px;*/
+}
+#xxkg nav ul.nav li.exit a,#yxwd nav ul.nav li.exit a{
+    padding:10px 0px;
+}
+#xxkg .left,#yxwd .left{
+    position: absolute;
+    width:260px;
+    top:80px;
+}
+#xxkg .left h3,#yxwd .left h3{
+    padding-left:30px;
+}
+#xxkg .left .list-group-item,#yxwd .left .list-group-item{
+    padding-left:30px;
+}
+#xxkg .left .list-group-item:not(:first-child):hover,#yxwd .left .list-group-item:not(:first-child):hover{
+    background:#428bca;
+}
+#xxkg .left .list-group-item:hover a,#yxwd .left .list-group-item:hover a{
+    color: #fff;
+}
+#xxkg .left li.active a,#yxwd .left li.active a{
+    color: #fff;
+}
+#xxkg .right,#yxwd .right{
+    position: absolute;
+    width:75%;
+    margin-left:270px;
+}
+#xxkg .right .breadcrumb,#yxwd .right .breadcrumb{
+    margin-top:80px;
+    border:1px solid #4d90b4;
+}

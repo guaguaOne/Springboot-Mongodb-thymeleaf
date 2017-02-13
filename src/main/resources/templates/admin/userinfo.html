@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin/welcome.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common/nav.css}"/>
     <script src="../../static/js/jquery-1.10.2.min.js" type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
     <script src="../../static/js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 
@@ -14,16 +15,27 @@
 <div th:replace="admin/nav :: nav"></div>
 <div id="user" th:if="${role.indexOf('ADMIN')>=0}"><!--ADMIN显示-->
     <div th:replace="admin/admin :: admin"></div>
-    <!--<div th:text="${role.indexOf('USER')}"  style="margin-top: 80px;"></div>-->
 </div>
 <div id="welcome" th:if="${role.indexOf('USER')>=0}"><!--USER显示-->
     <div th:replace="user/user :: user"></div>
 </div>
 <div id="xxkg" th:if="${role.indexOf('XXKG')>=0}"><!--小小矿工-->
-    <div th:replace="xxkg/xxkg :: xxkg"></div>
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <div th:replace="xxkg/xxkg :: xxkg"></div>
+        </div>
+        <div class="col-xs-2"></div>
+    </div>
 </div>
 <div id="yxwd" th:if="${role.indexOf('YXWD')}>=0"><!--英雄无敌-->
-    <div th:replace="yxwd/yxwd :: yxwd"></div>
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <div th:replace="yxwd/yxwd :: yxwd"></div>
+        </div>
+        <div class="col-xs-2"></div>
+    </div>
 </div>
 <div id="owner" th:if="${role.indexOf('OWNER')>=0}"><!--OWNER-->
     <div th:replace="owner/owner :: owner"></div>
