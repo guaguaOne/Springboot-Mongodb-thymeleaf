@@ -74,12 +74,19 @@ $(document).ready(function(){
                 },
                 success:function(msg){
                     // console.log(msg);
+                    $('#a_success').fadeIn(300,function(){
+                        $('#a_success').fadeOut(600);
+                    });
                     console.log("成功！");
+                },
+                error:function(){
+                    $('#a_fail').fadeIn(300,function(){
+                        $('#a_fail').fadeOut(600);
+                    });
                 }
             })
         })
     })
-
     //删除服务器
     $('#xxkg .right .box span.delete').each(function(index,elem){
         $(this).click(function(){

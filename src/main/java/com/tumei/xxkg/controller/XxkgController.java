@@ -1,5 +1,4 @@
 package com.tumei.xxkg.controller;
-
 import com.tumei.xxkg.model.center.*;
 import com.tumei.xxkg.model.tm3.*;
 import com.tumei.xxkg.model.tmconf.GoodsBean;
@@ -8,7 +7,6 @@ import com.tumei.xxkg.model.tmconf.HerosBean;
 import com.tumei.xxkg.model.tmconf.HerosBeanRepository;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -17,7 +15,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +24,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import javax.swing.text.html.parser.Entity;
 import java.io.*;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.bouncycastle.crypto.tls.ConnectionEnd.client;
 
 /**
  * Created by niannian on 2016/12/27.
@@ -61,7 +54,7 @@ public class XxkgController {
     @Autowired
     public DocBeanRepository doc;
     //小小矿工首页
-    @PreAuthorize("hasAnyAuthority('ADMIN','XXKG','OWNER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','XXKG','OWNER','XXKG,YXWD')")
     @RequestMapping(value = "/xxkg", method = RequestMethod.GET)
     public String xxkg(@RequestParam String account, ModelMap map) {
         map.addAttribute("name", account);
@@ -93,7 +86,7 @@ public class XxkgController {
 
     //服务器修改
     @RequestMapping(value = "/xxkg/changeserver", method = RequestMethod.POST)
-    public String xxkgchange(@RequestParam Integer id, String gm, String account, String pass, Integer type) {
+    public String xxkgchange(@RequestParam Integer id, String gm, String account, String pass, Integer type, ModelMap map) {
         ServerBean bean = server.findBySerId(id);
         bean.setGm(gm);
         bean.setAccount(account);
@@ -185,7 +178,7 @@ public class XxkgController {
     //邮件发送
     @ResponseBody
     @RequestMapping(value = "/sendemail",method = RequestMethod.POST)
-    public void sendemails(@RequestParam String id,String serverid,String title,String content,String awards){
+    public String sendemails(@RequestParam String id,String serverid,String title,String content,String awards){
         Integer serid=Integer.parseInt(serverid);
         ServerBean bean=server.findBySerId(serid);
         String url=bean.getGm();
@@ -196,6 +189,7 @@ public class XxkgController {
         String re=doGet(url);
         System.out.println("---------------------------------------------");
         System.out.println(re);
+        return re;
     }
     //信息查询
     @RequestMapping(value = "/xxkg/info", method = RequestMethod.GET)
@@ -229,9 +223,28 @@ public class XxkgController {
         try{
             Long id=Long.parseLong(nickname);
             RoleBean bean=role.findById(id);
-            map.addAttribute("ro",bean);
-            XxkgaccountBean acc=account.findById(id);
-            map.addAttribute("ac",acc);
+            if(bean==null){
+                Map m=new HashMap();
+                m.put("id",0);
+                m.put("nickname","并没有此人");
+                m.put("level",0);
+                m.put("vip",0);
+                m.put("vipexp","0");
+                m.put("createtime","Fri Dec 23 10:52:42 CST 2016");
+                m.put("logtime","Thu Dec 29 14:38:57 CST 2016");
+                m.put("totaltime","0");
+                m.put("icon",0);
+                m.put("skin",0);
+                m.put("newbie","0");
+                map.addAttribute("ro",m);
+                Map a=new HashMap();
+                a.put("account","xxx");
+                map.addAttribute("ac",a);
+            }else{
+                map.addAttribute("ro",bean);
+                XxkgaccountBean acc=account.findById(id);
+                map.addAttribute("ac",acc);
+            }
         }catch(Exception e){
             RoleBean bean=role.findByNickname(nickname);
             System.out.println("id:"+bean.id);
@@ -669,4 +682,5 @@ public class XxkgController {
         }
         return str.toString();
     }
+    //excel
 }

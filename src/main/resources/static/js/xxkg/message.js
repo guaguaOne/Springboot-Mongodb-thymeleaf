@@ -17,6 +17,14 @@ $(document).ready(function(){
             },
             success:function(msg){
                 console.log(msg);
+                $('#a_success').fadeIn(300,function(){
+                    $('#a_success').fadeOut(600);
+                });
+            },
+            error:function(msg){
+                $('#a_fail').fadeIn(300,function(){
+                    $('#a_fail').fadeOut(600);
+                });
             }
         })
     })
@@ -53,8 +61,8 @@ $(document).ready(function(){
                 today:d,
                 id:id
             },
-            success:function (info) {
-                console.log(info);
+            success:function(msg){
+                console.log(msg);
             }
         })
         var li=$("<li class='list-group-item'><div class='row'>" +

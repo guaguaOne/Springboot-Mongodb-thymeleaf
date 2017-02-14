@@ -27,7 +27,15 @@ $(document).ready(function(){
                 content:content
             },
             success:function(msg){
+                $('#a_success').fadeIn(300,function(){
+                    $('#a_success').fadeOut(600);
+                });
                 console.log("成功");
+            },
+            error:function(msg){
+                $('#a_fail').fadeIn(300,function(){
+                    $('#a_fail').fadeOut(600);
+                });
             }
         })
     })

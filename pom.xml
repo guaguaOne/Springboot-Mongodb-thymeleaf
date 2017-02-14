@@ -190,6 +190,12 @@
             <artifactId>json</artifactId>
         </dependency>
 
+        <!--excel-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.14</version>
+        </dependency>
         <!--hibernate 可以映射nosql mongo-->
         <!--<dependency>-->
             <!--<groupId>javax.cache</groupId>-->

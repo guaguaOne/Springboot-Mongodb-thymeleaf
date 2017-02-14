@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class YxwdController {
     //注册查询
     @RequestMapping(value = "/yxwd",method = RequestMethod.GET)
-    @PreAuthorize("hasAnyAuthority('ADMIN','YXWD','OWNER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','YXWD','OWNER','XXKG,YXWD')")
     public String yxwd(@RequestParam String account, ModelMap map){
         map.addAttribute("name",account);
         return "yxwd/index";
