@@ -1,5 +1,9 @@
-package com.tumei.yxwd1.controller;
+package com.tumei.yxwd.control;
 
+import com.tumei.yxwd.model.account.LoginerBean;
+import com.tumei.yxwd.model.account.LoginerBeanRepository;
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -7,16 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Created by niannian on 2017/1/9.
  */
 @Controller
 public class YxwdController {
+    @Autowired
+    public LoginerBeanRepository login;
     //注册查询
     @RequestMapping(value = "/yxwd",method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('ADMIN','YXWD','OWNER','XXKG,YXWD')")
-    public String yxwd(@RequestParam String account, ModelMap map){
+    public String yxwd(@RequestParam String account,ModelMap map){
         map.addAttribute("name",account);
+        map.addAttribute("start", DateTime.now());
+        map.addAttribute("end",DateTime.now());
+        return "yxwd/index";
+    }
+    @RequestMapping(value = "/regsearch",method = RequestMethod.POST)
+    public String regsearch(@RequestParam String account, String start, String end, ModelMap map){
+        map.addAttribute("name",account);
+        map.addAttribute("start",start);
+        map.addAttribute("end",end);
+        String acc="123456";
+        List<LoginerBean> bean=login.findByCreatetime();
+        System.out.println("<><><>="+bean.size());
         return "yxwd/index";
     }
     //充值查询

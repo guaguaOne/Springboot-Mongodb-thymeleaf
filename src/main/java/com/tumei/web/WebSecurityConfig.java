@@ -44,7 +44,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         // 只对
 //        http.antMatcher("/yxwd");
         http.authorizeRequests() // 定义哪些url需要被保护，哪些不需要
-            .antMatchers("/login","/register","/image/face.png","/image/3.png","/newuser").permitAll() // / 和 /home是可以直接访问的
+            .antMatchers("/login","/register","/image/*","/newuser","/css/*","/js/*","/css/admin/*").permitAll() // / 和 /home是可以直接访问的
 //            .antMatchers("/yxwd").hasAnyRole("YXWD", "ADMIN", "OWNER")
 //            .antMatchers("/xxkg").hasAnyAuthority("XXKG", "ADMIN", "OWNER")
 //            .antMatchers("/management").access("hasAnyRole('ADMIN', 'OWNER')")

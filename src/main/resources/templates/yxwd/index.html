@@ -23,6 +23,29 @@
 			<li><a th:href="@{/}">首页</a></li>
 			<li>英雄无敌</li>
 		</ol>
+		<div class="row">
+			<div class="col-xs-6">
+				<form th:action="@{/regsearch}" class="from-horizontal" role="form" method="post">
+					<div class="form-group">
+						<label class="col-sm-4 control-lable">开始时间：</label>
+						<div class="col-sm-8">
+							<input type="date" name="start" class="form-control" placeholder="点击选择时间"/>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-lable">结束时间：</label>
+						<div class="col-sm-8">
+							<input type="date" name="end" class="form-control" placeholder="点击选择时间"/>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<input type="hidden" name="account" th:value="${name}"/>
+					<button class="btn btn-primary pull-right" style="margin-right: 18px;">查找</button>
+				</form>
+			</div>
+		</div>
+		<p style="margin-top: 12px;margin-left: 47px;"><span style="color: #a94442" th:text="${{start}}">2017-12-13</span> 到 <span style="color: #a94442" th:text="${{end}}">2018-2-4</span> 的注册人数为<span style="color: #a94442">116</span></p>
 	</div>
 </div>
 <script type="text/javascript" th:src="@{/js/yxwd/index.js}"></script>

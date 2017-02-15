@@ -53,6 +53,8 @@ db:
     xxkgcenterdb: center
     xxkgtm3url: mongodb://192.168.1.109
     xxkgtm3db: tm3
+    yxwdaccounturl: mongodb://192.168.1.109
+    yxwdaccountdb: account
 dao:
     initdelay: 10
     delay: 10

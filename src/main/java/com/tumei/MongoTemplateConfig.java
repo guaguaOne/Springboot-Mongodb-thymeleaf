@@ -44,6 +44,12 @@ public class MongoTemplateConfig {
     private String xxkgtm3url;
     private String xxkgtm3db;
 
+    /**
+     * 英雄无敌account
+     */
+    private String yxwdaccounturl;
+    private String yxwdaccountdb;
+
     public String getCenterurl() {
         return centerurl;
     }
@@ -124,6 +130,22 @@ public class MongoTemplateConfig {
         return xxkgtm3db;
     }
     //    -------------------------
+    public void setYxwdaccountdb(String yxwdaccountdb) {
+        this.yxwdaccountdb = yxwdaccountdb;
+    }
+
+    public String getYxwdaccounturl() {
+        return yxwdaccounturl;
+    }
+
+    public void setYxwdaccounturl(String yxwdaccounturl) {
+        this.yxwdaccounturl = yxwdaccounturl;
+    }
+    public String getYxwdaccountdb() {
+        return yxwdaccountdb;
+    }
+    //  -----------------------------------
+
     @Bean(autowire = Autowire.BY_NAME, name = "xxkgtmconfMongoTemplate")
     public MongoTemplate XxkgtmconfMongoTemplate() throws Exception {
         MongoURI uri = new MongoURI(xxkgconfurl);
@@ -161,6 +183,14 @@ public class MongoTemplateConfig {
         MongoURI uri = new MongoURI(xxkgtm3url);
         Mongo mongo = new Mongo(uri);
         SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, xxkgtm3db);
+        return new MongoTemplate(factory);
+    }
+
+    @Bean(autowire = Autowire.BY_NAME, name = "yxwdaccountMongoTemplate")
+    public MongoTemplate YxwdAccountMongoTemplate() throws Exception {
+        MongoURI uri = new MongoURI(yxwdaccounturl);
+        Mongo mongo = new Mongo(uri);
+        SimpleMongoDbFactory factory = new SimpleMongoDbFactory(mongo, yxwdaccountdb);
         return new MongoTemplate(factory);
     }
 }
