@@ -3,7 +3,6 @@ package com.tumei.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tumei.io.protocol.BaseProtocol;
 
 import java.io.IOException;
 
@@ -25,14 +24,7 @@ public class JsonUtil {
         return mapper;
     }
 
-    /**
-     * 将协议序列化成字节数组
-     * @param protocol
-     * @return
-     */
-    public static byte[] Marshal(BaseProtocol protocol) throws JsonProcessingException {
-        return mapper.writeValueAsBytes(protocol);
-    }
+
 
 
     public static <T> T Unmarshal(byte[] data, Class<T> cls) throws IOException {
