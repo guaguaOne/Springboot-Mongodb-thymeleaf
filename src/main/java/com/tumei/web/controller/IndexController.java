@@ -62,7 +62,6 @@ public class IndexController {
         return "admin/userinfo";
     }
 
-
     //删除已注册用户
     @ResponseBody
     @RequestMapping(value = "/deleteuser",method = RequestMethod.GET)
