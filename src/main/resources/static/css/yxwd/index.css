@@ -14,3 +14,15 @@
 #yxwd .form-group>div{
     /*border:1px solid blue;*/
 }
+/*充值查询*/
+#charge-result{
+    text-align: center;
+}
+#charge-result .panel-body{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+#charge-result .panel-body .row{
+    border-bottom:1px dashed #ccc;
+    line-height: 35px;
+}

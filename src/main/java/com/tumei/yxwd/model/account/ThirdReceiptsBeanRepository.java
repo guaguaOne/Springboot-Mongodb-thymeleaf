@@ -1,16 +1,10 @@
 package com.tumei.yxwd.model.account;
-import javafx.util.converter.DateStringConverter;
-import org.apache.http.client.utils.DateUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.mongodb.core.MongoDataIntegrityViolationException;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,31 +15,29 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
- * Created by niannian on 2017/2/15.
+ * Created by niannian on 2017/2/16.
  */
-//public interface LoginerBeanRepository extends MongoRepository<LoginerBean,Long>{
-//    LoginerBean findByAccount(String account);
-//    List<LoginerBean> findAll();
-////    LoginerBean findById(Integer id);
-//    LoginerBean findByDigest(String digest);
-//}
 @Repository
-public class LoginerBeanRepository {
+public class ThirdReceiptsBeanRepository {
     @Qualifier("yxwdaccountMongoTemplate")
     @Autowired
     public MongoTemplate mt;
-    public List<LoginerBean> findByCreatetime(String start,String end) {
+    public List<ThirdReceiptsBean> findByCon(String start, String end,Integer zone) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
             Date date=sdf.parse(start);
             Date date2=sdf.parse(end);
-            List<LoginerBean> re = mt.find(query(where("createtime").gt(date).lt(date2)), LoginerBean.class);
-            return re;
+            if(zone==0){//全部
+                List<ThirdReceiptsBean> re = mt.find(query(where("time").gt(date).lt(date2)), ThirdReceiptsBean.class);
+                return re;
+            }else {
+                List<ThirdReceiptsBean> re = mt.find(query(where("time").gt(date).lt(date2).and("zone").is(zone)), ThirdReceiptsBean.class);
+                return re;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
     }
 }
-

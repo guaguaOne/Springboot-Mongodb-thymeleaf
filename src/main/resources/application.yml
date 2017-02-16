@@ -43,18 +43,21 @@ game:
     version: 1.0.0
 
 db:
-    centerurl: mongodb://leon:Fuckyou1@115.159.205.176
+    centerurl: mongodb://localhost
     centerdb: center
-    gameurl: mongodb://leon:Fuckyou1@115.159.205.176
+    gameurl: mongodb://localhost
     gamedb: y3
-    xxkgconfurl: mongodb://192.168.1.109
+    xxkgconfurl: mongodb://localhost
     xxkgconfdb: tmconf
-    xxkgcenterurl: mongodb://192.168.1.109
+    xxkgcenterurl: mongodb://localhost
     xxkgcenterdb: center
-    xxkgtm3url: mongodb://192.168.1.109
+    xxkgtm3url: mongodb://localhost
     xxkgtm3db: tm3
-    yxwdaccounturl: mongodb://192.168.1.109
+    yxwdaccounturl: mongodb://localhost
     yxwdaccountdb: account
 dao:
     initdelay: 10
     delay: 10
+servers:
+    ip: 192.168.1.222:8889,mm,yy,vv,pp,ii,ee,ff
+
